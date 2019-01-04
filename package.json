@@ -1,0 +1,20 @@
+{
+  "name": "air-supply",
+  "version": "0.0.1",
+  "description": "You need data; Air Supply will get it to you.",
+  "main": "index.js",
+  "module": "index.mjs",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Alan Palazzolo",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.11.1",
+    "esm": "^3.0.84",
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
