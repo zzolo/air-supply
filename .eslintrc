@@ -19,11 +19,13 @@
         "allow": ["warn", "error"]
       }
     ],
-    "brace-style": ["warn", "stroustrup"]
+    "brace-style": ["warn", "stroustrup"],
+    "no-global-assign": ["warn"]
   },
   "globals": {
     "describe": true,
     "test": true,
-    "expect": true
+    "expect": true,
+    "afterAll": true
   }
 }

@@ -21,7 +21,7 @@ class AirSupply {
   constructor(options = {}) {
     this.options = merge(
       {
-        ttl: 60,
+        ttl: 60 * 1000,
         cachePath: join(process.cwd(), '.air-supply')
       },
       options

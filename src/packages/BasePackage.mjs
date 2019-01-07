@@ -10,6 +10,8 @@ import pick from 'lodash/pick';
 import isArray from 'lodash/pick';
 import isObject from 'lodash/pick';
 import kebabCase from 'lodash/kebabCase';
+import isFunction from 'lodash/isFunction';
+import bind from 'lodash/bind';
 import * as fsWrapper from 'fs-extra';
 import * as objectHashWrapper from 'object-hash';
 import * as debugWrapper from 'debug';
@@ -49,6 +51,17 @@ class BasePackage {
     // Cache points
     this.cachePoints = ['fetch', 'post-fetch', 'post-all'];
 
+    // Make sure cachePoint is valid
+    if (!~this.cachePoints.indexOf(this.options.cachePoint)) {
+      throw new Error(
+        `Cache point "${
+          this.options.cachePoint
+        }" is not a valid cache point; options: ${json.stringify(
+          this.cachePoints
+        )}`
+      );
+    }
+
     // Create id based on options
     this.createId();
 
@@ -58,11 +71,41 @@ class BasePackage {
     return this;
   }
 
+  // Default post fetch method.  This can be called immiedately after
+  // a fetch.
+  postFetch() {
+    // Cache fetch data
+    if (this.data.fetch && this.option('cachePoint') === 'fetch') {
+      this.setCache('fetch');
+    }
+
+    // Do any post fetch processing
+    if (this.data.fetch && isFunction(this.options.postFetch)) {
+      this.data['post-fetch'] = bind(this.options.postFetch, this)(
+        this.data.fetch
+      );
+    }
+
+    // Cache post fetch
+    if (this.data['post-fetch'] && this.option('cachePoint') === 'post-fetch') {
+      this.setCache('post-fetch');
+    }
+  }
+
+  // Wrapper to get option from options to support functions
+  option(o) {
+    if (isFunction(this.options[o])) {
+      return bind(this.options[o], this)();
+    }
+
+    return this.options[o];
+  }
+
   // Create an id from specific options
   createId() {
     // Can provide a specific id if needed
-    if (this.options.id) {
-      this.id = this.options.id;
+    if (this.option('id')) {
+      this.id = this.option('id');
       return;
     }
 
@@ -76,19 +119,19 @@ class BasePackage {
   setupCache() {
     // Cache paths
     this.cachePath = join(
-      this.options.cachePath,
+      this.option('cachePath'),
       'packages',
       kebabCase(this.options.type),
       this.id
     );
 
-    // Cache files based on when/hooks
+    // Cache files based on cachePoints
     this.cacheFiles = {
-      fetch: join(this.cachePath, 'data.fetch'),
-      'post-fetch': join(this.cachePath, 'data.post-fetch'),
-      'post-all': join(this.cachePath, 'data.post-all'),
       meta: join(this.cachePath, 'meta.json')
     };
+    this.cachePoints.forEach(p => {
+      this.cacheFiles[p] = join(this.cachePath, `data.${p}`);
+    });
 
     // Make sure directory is there
     try {
@@ -104,7 +147,17 @@ class BasePackage {
     }
 
     // Setup cache data
-    this.cacheData = {};
+    this.cacheData = {
+      options: this.options
+    };
+
+    // Setup data
+    this.data = {};
+
+    // Get cache data
+    // TODO: Is there any reason to get all data, or should
+    // we only get the cachePoint data
+    this.getCache(this.options.cachePoint);
 
     return this;
   }
@@ -125,13 +178,13 @@ class BasePackage {
 
     // Update cache data
     this.cacheData[cachePoint] = {
-      options: this.options,
       created: new Date().toUTCString(),
+      file: this.cacheFiles[cachePoint],
       format
     };
 
     // Format data for saving
-    let formatted = format === 'json' ? json.parse(d) : d.toString();
+    let formatted = format === 'json' ? json.stringify(d) : d.toString();
 
     // Save data
     try {
@@ -146,7 +199,7 @@ class BasePackage {
 
     // Save meta
     try {
-      fs.writeFileSync(this.cacheFiles.meta, json.format(this.cacheData));
+      fs.writeFileSync(this.cacheFiles.meta, json.stringify(this.cacheData));
     }
     catch (e) {
       debug(e);
@@ -156,6 +209,51 @@ class BasePackage {
         }".  Use DEBUG=airsupply:* to see more information.`
       );
     }
+
+    return this;
+  }
+
+  // Get cache
+  getCache(cachePoint) {
+    // Get meta data
+    try {
+      fs.statSync(this.cacheFiles.meta);
+      this.cacheData = json.parse(
+        fs.readFileSync(this.cacheFiles.meta, 'utf-8')
+      );
+    }
+    catch (e) {
+      debug(e);
+      return;
+    }
+
+    // Allow to not define cachePoint and get all
+    (cachePoint ? [cachePoint] : this.cachePoints).forEach(c => {
+      // Only get data that we have meta data for
+      if (this.cacheData[c]) {
+        try {
+          fs.statSync(this.cacheFiles[c]);
+        }
+        catch (e) {
+          debug(e);
+          this.data[c] == false;
+          return;
+        }
+
+        // Check times
+        let now = new Date();
+        let then = new Date(this.cacheData[c].created);
+        if (now - then >= this.options.ttl) {
+          this.data[c] == false;
+          return;
+        }
+
+        // Read
+        // TODO: Abstract out and handle different file types (specifically binary)
+        let parser = this.cacheData[c].format === 'json' ? json.parse : d => d;
+        this.data[c] = parser(fs.readFileSync(this.cacheFiles[c], 'utf-8'));
+      }
+    });
 
     return this;
   }

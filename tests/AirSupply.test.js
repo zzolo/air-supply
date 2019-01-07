@@ -6,6 +6,7 @@
 require = require('esm')(module);
 
 // Dependencies for testing
+// NOTE: there is a problem if you use the same require here and in the ESM module
 const path = require('path');
 
 // Get module
@@ -14,7 +15,9 @@ const { AirSupply, airSupply } = require('../index.mjs').default;
 // AirSupply
 describe('AirSupply class', () => {
   test('can instantiate without options', () => {
-    new AirSupply({});
+    expect(() => {
+      new AirSupply({});
+    }).not.toThrow();
   });
 
   test('can override defaults', () => {
@@ -26,7 +29,9 @@ describe('AirSupply class', () => {
 // airSupply
 describe('airSupply function', () => {
   test('can run without options', () => {
-    airSupply({});
+    expect(() => {
+      airSupply({});
+    }).not.toThrow();
   });
 
   test('can override defaults', () => {
