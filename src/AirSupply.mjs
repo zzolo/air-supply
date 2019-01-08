@@ -11,7 +11,10 @@ import size from 'lodash/size';
 import isString from 'lodash/isString';
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
+import upperFirst from 'lodash/upperFirst';
+import camelCase from 'lodash/camelCase';
 import * as debugWrapper from 'debug';
+import * as packageTypes from './packages';
 
 // Debug
 const debug = (debugWrapper.default || debugWrapper)('airsupply');
@@ -48,14 +51,29 @@ class AirSupply {
       );
     }
 
-    // Setup supply packages object for final
+    // Setup objects to collect data and packages
     this.supplyPackages = {};
+    this.packages = {};
 
     // Go through packages
     for (let si in packages) {
       if (packages.hasOwnProperty(si)) {
         packages[si].key = si;
-        this.supplyPackage[si] = await this.package(packages[si]);
+
+        // Create instance
+        this.packages[si] = await this.package(packages[si]);
+
+        // Do fetch
+        this.supplyPackages[si] = await this.packages[si].fetch();
+      }
+    }
+
+    // Do any post-all process
+    for (let si in packages) {
+      if (packages.hasOwnProperty(si)) {
+        this.supplyPackages[si] = await this.packages[si].postAll(
+          this.supplyPackages
+        );
       }
     }
 
@@ -92,6 +110,25 @@ class AirSupply {
     if (!config.type) {
       config = this.guessPackageType(config);
     }
+
+    // Try to match up a string type
+    if (
+      isString(config.type) &&
+      packageTypes[upperFirst(camelCase(config.type))]
+    ) {
+      config.type = packageTypes[upperFirst(camelCase(config.type))];
+    }
+
+    // Look for type. Not a real way to test for Classes
+    if (!isFunction(config.type)) {
+      throw new Error(
+        `AirSupply package "${
+          config.key
+        }" does not have a known "type" or is not provided a package Class.`
+      );
+    }
+
+    return new config.type(config, this);
   }
 
   // Try to guess the package type

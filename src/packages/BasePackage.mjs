@@ -90,6 +90,30 @@ class BasePackage {
     if (this.data['post-fetch'] && this.option('cachePoint') === 'post-fetch') {
       this.setCache('post-fetch');
     }
+
+    return this.data['post-fetch'] || this.data.fetch;
+  }
+
+  // Post all function.  This gets called after all fetches and shoudl be passed the full
+  // supply package
+  postAll(supplyPackage) {
+    // Do any post all processing
+    if (
+      (this.data.fetch || this.data['post-fetch']) &&
+      isFunction(this.options.postAll)
+    ) {
+      this.data['post-all'] = bind(this.options.postAll, this)(
+        this.data['post-fetch'] || this.data.fetch,
+        supplyPackage
+      );
+    }
+
+    // Cache post all
+    if (this.data['post-all'] && this.option('cachePoint') === 'post-all') {
+      this.setCache('post-all');
+    }
+
+    return this.data['post-all'] || this.data['post-fetch'] || this.data.fetch;
   }
 
   // Wrapper to get option from options to support functions
@@ -164,6 +188,11 @@ class BasePackage {
 
   // Set cache
   setCache(cachePoint) {
+    // If no cache, ignore
+    if (this.options.noCache) {
+      return;
+    }
+
     // If we don't have data, then no reason to do anything
     if (!this.data || !this.data[cachePoint]) {
       return;
@@ -215,6 +244,11 @@ class BasePackage {
 
   // Get cache
   getCache(cachePoint) {
+    // If no cache, ignore
+    if (this.options.noCache) {
+      return;
+    }
+
     // Get meta data
     try {
       fs.statSync(this.cacheFiles.meta);

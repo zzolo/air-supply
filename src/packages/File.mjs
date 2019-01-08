@@ -4,7 +4,7 @@
 
 // Depenencies
 import BasePackage from './BasePackage';
-import { readDataSync } from 'indian-ocean';
+import * as ioWrapper from 'indian-ocean';
 import * as fsWrapper from 'fs-extra';
 import * as debugWrapper from 'debug';
 
@@ -13,6 +13,7 @@ const debug = (debugWrapper.default || debugWrapper)('airsupply:file');
 
 // Deal with import defaults
 const fs = fsWrapper.default || fsWrapper;
+const io = ioWrapper.default || ioWrapper;
 
 // Main class
 class File extends BasePackage {
@@ -35,16 +36,16 @@ class File extends BasePackage {
     catch (e) {
       debug(e);
       throw new Error(
-        `Unable to find or read file from package "${this.options.key}": ${
-          this.options.source
-        }`
+        `Unable to find or read file from package "${
+          this.options.key
+        }": ${this.option('source')}`
       );
     }
 
     // Read file or directory
     this.data.fetch = stat.isDirectory()
-      ? stat.readdirFilterSync(source, this.options.fetchOptions)
-      : readDataSync(source, this.options.fetchOptions);
+      ? io.readdirFilterSync(source, this.options.fetchOptions)
+      : io.readDataSync(source, this.options.fetchOptions);
 
     // Do post fetch process
     this.postFetch();
