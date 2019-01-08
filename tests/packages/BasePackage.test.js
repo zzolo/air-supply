@@ -56,8 +56,8 @@ describe('BasePackage class', () => {
       cachePath: defaultCachePath
     });
     expect(b.cacheFiles).toHaveProperty('fetch');
-    expect(b.cacheFiles).toHaveProperty('post-fetch');
-    expect(b.cacheFiles).toHaveProperty('post-all');
+    expect(b.cacheFiles).toHaveProperty('transform');
+    expect(b.cacheFiles).toHaveProperty('bundle');
   });
 
   test('creates cache directory', () => {
@@ -78,11 +78,11 @@ describe('setCache method', () => {
     });
     b.data = {
       fetch: { thing: 1 },
-      'post-fetch': { thing: 2 },
-      'post-all': { thing: 3 }
+      transform: { thing: 2 },
+      bundle: { thing: 3 }
     };
 
-    ['fetch', 'post-fetch', 'post-all'].forEach((p, pi) => {
+    ['fetch', 'transform', 'bundle'].forEach((p, pi) => {
       b.setCache(p);
       expect(() => {
         statSync(b.cacheFiles[p]);
@@ -100,11 +100,11 @@ describe('setCache method', () => {
     });
     b.data = {
       fetch: { thing: 1 },
-      'post-fetch': { thing: 2 },
-      'post-all': { thing: 3 }
+      transform: { thing: 2 },
+      bundle: { thing: 3 }
     };
 
-    ['fetch', 'post-fetch', 'post-all'].forEach(p => {
+    ['fetch', 'transform', 'bundle'].forEach(p => {
       b.setCache(p);
     });
 
@@ -114,8 +114,8 @@ describe('setCache method', () => {
 
     let m = jsonParse(readFileSync(b.cacheFiles.meta, 'utf-8'));
     expect(m).toHaveProperty('fetch');
-    expect(m).toHaveProperty('post-fetch');
-    expect(m).toHaveProperty('post-all');
+    expect(m).toHaveProperty('transform');
+    expect(m).toHaveProperty('bundle');
     expect(m.fetch.format).toBe('json');
   });
 });
@@ -142,7 +142,7 @@ describe('removeCache method', () => {
 });
 
 describe('getCache method', () => {
-  test('getCache gets fetch by default', () => {
+  test('gets fetch by default', () => {
     let options = {
       cachePath: defaultCachePath,
       id: 'test-get-cache-fetch',
@@ -161,23 +161,93 @@ describe('getCache method', () => {
     expect(c.data.fetch).toEqual({ thing: 1 });
   });
 
-  test('getCache gets post-fetch if provided', () => {
+  test('gets transform if provided', () => {
     let options = {
       cachePath: defaultCachePath,
-      cachePoint: 'post-fetch',
-      id: 'test-get-cache-post-fetch',
+      cachePoint: 'transform',
+      id: 'test-get-cache-transform',
       ttl: 60 * 60 * 1000
     };
 
     let b = new BasePackage(options);
     b.data = {
-      'post-fetch': { thing: 2 }
+      transform: { thing: 2 }
     };
-    b.setCache('post-fetch');
+    b.setCache('transform');
 
     let c = new BasePackage(options);
 
-    expect(c.data).toHaveProperty('post-fetch');
-    expect(c.data['post-fetch']).toEqual({ thing: 2 });
+    expect(c.data).toHaveProperty('transform');
+    expect(c.data['transform']).toEqual({ thing: 2 });
+  });
+});
+
+describe('cachedFetch method', () => {
+  test('should throw', () => {
+    let options = {
+      cachePath: defaultCachePath,
+      id: 'test-cached-fetch'
+    };
+
+    let b = new BasePackage(options);
+    expect(() => {
+      b.cachedFetch();
+    }).toThrow();
+  });
+});
+
+describe('transform method', () => {
+  test('should not change fetch', () => {
+    let options = {
+      cachePath: defaultCachePath,
+      id: 'test-transform-co-change'
+    };
+
+    let b = new BasePackage(options);
+    b.data.fetch = { thing: 1 };
+    b.transform();
+    expect(b.data.fetch).toEqual({ thing: 1 });
+  });
+
+  test('should not have transform', () => {
+    let options = {
+      cachePath: defaultCachePath,
+      id: 'test-no-transform-no-post'
+    };
+
+    let b = new BasePackage(options);
+    b.data.fetch = { thing: 1 };
+    b.transform();
+    expect(b.data['transform']).toEqual(undefined);
+  });
+
+  test('should update data', () => {
+    let options = {
+      cachePath: defaultCachePath,
+      id: 'test-no-transform-update',
+      transform: () => {
+        return { thing: 2 };
+      }
+    };
+
+    let b = new BasePackage(options);
+    b.data.fetch = { thing: 1 };
+    b.transform();
+    expect(b.data.fetch).toEqual({ thing: 1 });
+    expect(b.data['transform']).toEqual({ thing: 2 });
+  });
+
+  test('should throw if no transform provided and cachePoint set', () => {
+    let options = {
+      cachePath: defaultCachePath,
+      id: 'test-no-transform-no-transform',
+      cachePoint: 'transform'
+    };
+
+    let b = new BasePackage(options);
+    b.data.fetch = { thing: 1 };
+    expect(() => {
+      b.transform();
+    }).toThrow();
   });
 });

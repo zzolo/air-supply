@@ -33,15 +33,16 @@ class BasePackage {
     // 3. The actual options sent through
     this.options = merge(
       airSupply ? omit(airSupply.options, ['packages']) : {},
-      packageDefaults || {
+      {
         // What properties in the options to use as the key
         // for caching
         keyIdentifiers: ['key', 'source'],
-        // When to cache: [fetch, post-fetch, post-all]
+        // When to cache: ['fetch', 'transform', 'bundle']
         cachePoint: 'fetch',
         // To make sure it's defined
         type: 'base-no-fetch'
       },
+      packageDefaults || {},
       options
     );
 
@@ -49,7 +50,7 @@ class BasePackage {
     this.airSupply = airSupply;
 
     // Cache points
-    this.cachePoints = ['fetch', 'post-fetch', 'post-all'];
+    this.cachePoints = ['fetch', 'transform', 'bundle'];
 
     // Make sure cachePoint is valid
     if (!~this.cachePoints.indexOf(this.options.cachePoint)) {
@@ -71,49 +72,98 @@ class BasePackage {
     return this;
   }
 
-  // Default post fetch method.  This can be called immiedately after
-  // a fetch.
-  postFetch() {
-    // Cache fetch data
-    if (this.data.fetch && this.option('cachePoint') === 'fetch') {
-      this.setCache('fetch');
-    }
-
-    // Do any post fetch processing
-    if (this.data.fetch && isFunction(this.options.postFetch)) {
-      this.data['post-fetch'] = bind(this.options.postFetch, this)(
-        this.data.fetch
+  // Wrapper around fetch to do transform and cache
+  cachedFetch() {
+    if (!isFunction(this.fetch)) {
+      throw new Error(
+        `Package "${
+          this.options.key
+        }" does not have a "fetch" method implemented.`
       );
     }
 
-    // Cache post fetch
-    if (this.data['post-fetch'] && this.option('cachePoint') === 'post-fetch') {
-      this.setCache('post-fetch');
+    // If we don't have fetch data, do fetch
+    if (!this.data.fetch) {
+      this.data.fetch = this.fetch();
+
+      // Cache fetch data
+      if (this.data.fetch && this.option('cachePoint') === 'fetch') {
+        this.setCache('fetch');
+      }
     }
 
-    return this.data['post-fetch'] || this.data.fetch;
+    // Do transform process
+    this.transform();
+
+    return this.data.fetch;
   }
 
-  // Post all function.  This gets called after all fetches and shoudl be passed the full
-  // supply package
-  postAll(supplyPackage) {
-    // Do any post all processing
+  // Transform data after fetch
+  transform() {
+    // If cache point is set to transform, but there
+    // is no transform hook
     if (
-      (this.data.fetch || this.data['post-fetch']) &&
-      isFunction(this.options.postAll)
+      this.option('cachePoint') === 'transform' &&
+      !isFunction(this.options.transform)
     ) {
-      this.data['post-all'] = bind(this.options.postAll, this)(
-        this.data['post-fetch'] || this.data.fetch,
+      throw new Error(
+        `Package "${
+          this.options.key
+        }" has cachePoint set to "transform" but there is no "transform" function set.`
+      );
+    }
+
+    // If we don't transform data from cache
+    if (!this.data.transform) {
+      // Do any transform processing
+      if (this.data.fetch && isFunction(this.options.transform)) {
+        this.data.transform = bind(this.options.transform, this)(
+          this.data.fetch
+        );
+      }
+
+      // Cache transform
+      if (this.data.transform && this.option('cachePoint') === 'transform') {
+        this.setCache('transform');
+      }
+    }
+
+    return this.data.transform || this.data.fetch;
+  }
+
+  // Transform after all packages have been fetched and transformed.  This should be passed the full
+  // supply package
+  bundle(supplyPackage) {
+    // If cache point is set to transform, but there
+    // is no transform hook
+    if (
+      this.option('cachePoint') === 'bundle' &&
+      !isFunction(this.options.bundle)
+    ) {
+      throw new Error(
+        `Package "${
+          this.options.key
+        }" has cachePoint set to "bundle" but there is no "bundle" function set.`
+      );
+    }
+
+    // Do any bundle processing
+    if (
+      (this.data.fetch || this.data.transform) &&
+      isFunction(this.options.bundle)
+    ) {
+      this.data.bundle = bind(this.options.bundle, this)(
+        this.data.transform || this.data.fetch,
         supplyPackage
       );
     }
 
-    // Cache post all
-    if (this.data['post-all'] && this.option('cachePoint') === 'post-all') {
-      this.setCache('post-all');
+    // Cache bundle
+    if (this.data.bundle && this.option('cachePoint') === 'bundle') {
+      this.setCache('bundle');
     }
 
-    return this.data['post-all'] || this.data['post-fetch'] || this.data.fetch;
+    return this.data.bundle || this.data.transform || this.data.fetch;
   }
 
   // Wrapper to get option from options to support functions

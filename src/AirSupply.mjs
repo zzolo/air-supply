@@ -63,22 +63,22 @@ class AirSupply {
         // Create instance
         this.packages[si] = await this.package(packages[si]);
 
-        // Do fetch
-        this.supplyPackages[si] = await this.packages[si].fetch();
+        // Do fetch (wtih transform)
+        this.supplyPackages[si] = await this.packages[si].cachedFetched();
       }
     }
 
-    // Do any post-all process
+    // Do any bundle processing
     for (let si in packages) {
       if (packages.hasOwnProperty(si)) {
-        this.supplyPackages[si] = await this.packages[si].postAll(
+        this.supplyPackages[si] = await this.packages[si].bundle(
           this.supplyPackages
         );
       }
     }
 
     // Return supply package
-    return this.supplyPackage;
+    return this.supplyPackages;
   }
 
   // Get a specific package

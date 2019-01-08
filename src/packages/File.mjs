@@ -4,6 +4,7 @@
 
 // Depenencies
 import BasePackage from './BasePackage';
+import merge from 'lodash/merge';
 import * as ioWrapper from 'indian-ocean';
 import * as fsWrapper from 'fs-extra';
 import * as debugWrapper from 'debug';
@@ -25,8 +26,10 @@ class File extends BasePackage {
   }
 
   // Main fetch
-  fetch() {
+  async fetch() {
     let stat;
+    // Get the source.  Source can be a function, so, use the
+    // this.option method.
     let source = this.option('source');
 
     // Check for source
@@ -43,14 +46,15 @@ class File extends BasePackage {
     }
 
     // Read file or directory
-    this.data.fetch = stat.isDirectory()
-      ? io.readdirFilterSync(source, this.options.fetchOptions)
-      : io.readDataSync(source, this.options.fetchOptions);
-
-    // Do post fetch process
-    this.postFetch();
-
-    return this;
+    // TODO: The directory read doesn't pass options to readData
+    return stat.isDirectory()
+      ? io
+        .readdirFilterSync(
+          source,
+          merge({ fullPath: true }, this.options.fetchOptions || {})
+        )
+        .map(io.readDataSync)
+      : io.readDataSync(source, this.options.fetchOptions || {});
   }
 }
 
