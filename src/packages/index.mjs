@@ -1,4 +1,5 @@
 /**
+ * @ignore
  * Wrapper to collect packages
  */
 

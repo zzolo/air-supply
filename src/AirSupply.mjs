@@ -1,5 +1,11 @@
 /**
- * Main AirSupply class
+ * @ignore
+ * AirSupply class module.  Can be used directly if needed.
+ *
+ * @module air-supply/src/AirSupply
+ *
+ * @example
+ * import AirSupply from 'air-supply/src/AirSupply';
  */
 
 // Dependencies
@@ -19,23 +25,52 @@ import * as packageTypes from './packages';
 // Debug
 const debug = (debugWrapper.default || debugWrapper)('airsupply');
 
-// AirSupply class
-class AirSupply {
+/**
+ * AirSupply class.  The AirSupply class is the main way
+ * of collecting data via AirSupply.
+ *
+ * Any options given to AirSupply will be provided to packages
+ * as defaults before their own default or your specific options.
+ *
+ * @export
+ * @class AirSupply
+ * @param {Object?} options Options object.
+ * @param {Number} options.ttl The global length of cache in milliseconds
+ * @param {String} options.cachePath The location of the cache data, defaults
+ *   to the .air-supply/ directory in the current working path.
+ * @param {Object} options.packages The object describing each package, in format:
+ *
+ * @return {<AirSupply>} The new AirSupply object.
+ */
+export default class AirSupply {
+  // Constructor
   constructor(options = {}) {
     this.options = merge(
       {
         ttl: 60 * 1000,
         cachePath: join(process.cwd(), '.air-supply')
       },
-      options
+      options || {}
     );
+
+    return this;
   }
 
-  // Main function get data
+  /**
+   * Bundles all the package data.  This will use the options.packages provided to AirSupply
+   * as well as any provided options.
+   *
+   * @async
+   * @param {Object?} packages An object describing packages. This is the same
+   *   as the constructor option, but will not get attached to the AirSupply object
+   *   for future reference.
+   *
+   * @return {Promise<Object>} The compiled data.
+   */
   async supply(packages = {}) {
     // Combine instance packages with method packages
     try {
-      packages = merge({}, this.options.packages || {}, packages);
+      packages = merge({}, this.options.packages || {}, packages || {});
     }
     catch (e) {
       debug(e);
@@ -61,10 +96,13 @@ class AirSupply {
         packages[si].key = si;
 
         // Create instance
-        this.packages[si] = await this.package(packages[si]);
+        this.packages[si] = this.package(packages[si]);
 
-        // Do fetch (wtih transform)
+        // Do fetch
         this.supplyPackages[si] = await this.packages[si].cachedFetched();
+
+        // Do transform
+        this.supplyPackages[si] = await this.packages[si].transform();
       }
     }
 
@@ -81,8 +119,19 @@ class AirSupply {
     return this.supplyPackages;
   }
 
-  // Get a specific package
-  async package(config) {
+  /**
+   * Given a config, gets a package instance.
+   *
+   * @param {Object!} config An object for defining the package.  This will be the options
+   *   passed to the package object, plus the following necessary properties.
+   * @param {String|Function!} config.type This is either the package class name as a string,
+   *   or directly passed the package class.
+   * @param {String!} config.key The package key that helps assign the package to the
+   *   bundled supply package.
+   *
+   * @return {Object} The instantiated package.
+   */
+  package(config) {
     // Check that the config is an object or string
     if (!isString(config) || !isPlainObject(config)) {
       throw new Error(
@@ -131,8 +180,14 @@ class AirSupply {
     return new config.type(config, this);
   }
 
-  // Try to guess the package type
-  guessPackageType(config) {
+  /**
+   * Given a pcakage config, guess what the type is.
+   *
+   * @param {Object!} config A package config.
+   *
+   * @return {Object} The altered package config.
+   */
+  guessPackageType(config = {}) {
     // If function, then we can't guess
     if (isFunction(config.source)) {
       throw new Error(
@@ -183,6 +238,3 @@ class AirSupply {
     return config;
   }
 }
-
-// Export
-export default AirSupply;

@@ -1,5 +1,15 @@
 /**
- * BasePackage type.  This should only be extended
+ * @ignore
+ * BasePackage class module.  The BasePackage is used to be extended
+ * and not used directly.
+ *
+ * @module air-supply/src/packages/BasePackage
+ *
+ * @example
+ * import BasePackage from 'air-supply/src/packages/BasePackage';
+ * class CustomPackage extends BasePackage {
+ *   // ...
+ * }
  */
 
 // Dependencies
@@ -25,8 +35,34 @@ const objectHash = objectHashWrapper.default || objectHashWrapper;
 const json = jsonWrapper.default || jsonWrapper;
 const fs = fsWrapper.default || fsWrapper;
 
-// Class
-class BasePackage {
+/**
+ * The base package class that is meant to be extended
+ * for each package type class.
+ *
+ * Do not use this class directly.
+ *
+ * @export
+ * @class BasePackage
+ *
+ * @param {Object?} options Options object to define options for this
+ *   specific package adn override any defaults.  See the global AirSupply
+ *   options, as well as the specific package type options.
+ * @param {Array!} [options.keyIdentifiers=['key', 'source']] An array of properties in the options
+ *   that will get used to create the cache key
+ * @param {String!} [options.cachePoint='fetch'] A string the defines when caching will happen;
+ *   the options are:
+ *     - fetch: Caching happens after fetch
+ *     - transform: Caching happens after the transform function is performed
+ *     - bundle: Caching happens after bundle function is preformed
+ * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
+ *   referencial purposes.
+ * @param {Object?} packageDefaults This is used for classes that extend this class, so
+ *   that they can provid default options.
+ *
+ * @return {<BasePackage>} The new BasePackage object.
+ */
+export default class BasePackage {
+  // Constructor
   constructor(options = {}, airSupply, packageDefaults) {
     // 1. AirSupply class default options,
     // 2. Default options for package, and
@@ -72,8 +108,14 @@ class BasePackage {
     return this;
   }
 
-  // Wrapper around fetch to do transform and cache
-  cachedFetch() {
+  /**
+   * Wrapper around the implemented fetch method.  This will cache the result
+   * if needed, and perform the transform method if needed as well.
+   *
+   * @async
+   * @return {Object} The fetched data.
+   */
+  async cachedFetch() {
     if (!isFunction(this.fetch)) {
       throw new Error(
         `Package "${
@@ -84,7 +126,7 @@ class BasePackage {
 
     // If we don't have fetch data, do fetch
     if (!this.data.fetch) {
-      this.data.fetch = this.fetch();
+      this.data.fetch = await this.fetch();
 
       // Cache fetch data
       if (this.data.fetch && this.option('cachePoint') === 'fetch') {
@@ -92,13 +134,14 @@ class BasePackage {
       }
     }
 
-    // Do transform process
-    this.transform();
-
     return this.data.fetch;
   }
 
-  // Transform data after fetch
+  /**
+   * Transform fetch data.
+   *
+   * @return {Object} The transformed (or fetched if no transform) data.
+   */
   transform() {
     // If cache point is set to transform, but there
     // is no transform hook
@@ -131,8 +174,14 @@ class BasePackage {
     return this.data.transform || this.data.fetch;
   }
 
-  // Transform after all packages have been fetched and transformed.  This should be passed the full
-  // supply package
+  /**
+   * Transform after all packages have been fetched and transformed.  This should
+   * be passed the full supply package
+   *
+   * @param {Object} supplyPackage The full supply package object of transformed
+   *   packages.
+   * @return {Object} The bundled (or fetched or transformed) data.
+   */
   bundle(supplyPackage) {
     // If cache point is set to transform, but there
     // is no transform hook
@@ -361,6 +410,3 @@ class BasePackage {
     return this;
   }
 }
-
-// Export
-export default BasePackage;
