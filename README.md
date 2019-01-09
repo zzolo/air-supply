@@ -67,7 +67,6 @@ _TODO_
 #### Table of Contents
 
 - [AirSupply](#airsupply)
-- [AirSupply](#airsupply-1)
   - [Parameters](#parameters)
   - [supply](#supply)
     - [Parameters](#parameters-1)
@@ -88,9 +87,9 @@ _TODO_
 
 ### AirSupply
 
-### AirSupply
+[src/AirSupply.mjs:45-240](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/AirSupply.mjs#L45-L240 "Source code on GitHub")
 
-AirSupply class. The AirSupply class is the main way
+The AirSupply class is the main way
 of collecting data via AirSupply.
 
 Any options given to AirSupply will be provided to packages
@@ -106,6 +105,8 @@ as defaults before their own default or your specific options.
 
 #### supply
 
+[src/AirSupply.mjs:70-120](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/AirSupply.mjs#L70-L120 "Source code on GitHub")
+
 Bundles all the package data. This will use the options.packages provided to AirSupply
 as well as any provided options.
 
@@ -118,6 +119,8 @@ as well as any provided options.
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** The compiled data.
 
 #### package
+
+[src/AirSupply.mjs:134-181](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/AirSupply.mjs#L134-L181 "Source code on GitHub")
 
 Given a config, gets a package instance.
 
@@ -134,6 +137,8 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 #### guessPackageType
 
+[src/AirSupply.mjs:190-239](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/AirSupply.mjs#L190-L239 "Source code on GitHub")
+
 Given a pcakage config, guess what the type is.
 
 ##### Parameters
@@ -145,6 +150,8 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 ### Packages
 
 ### File
+
+[src/packages/File.mjs:47-92](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/File.mjs#L47-L92 "Source code on GitHub")
 
 **Extends BasePackage**
 
@@ -164,12 +171,16 @@ to read multiple types of files and directories.
 
 #### fetch
 
+[src/packages/File.mjs:62-91](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/File.mjs#L62-L91 "Source code on GitHub")
+
 Fetch implementation. Utilizes [indian-ocean](https://mhkeller.github.io/indian-ocean/)
 to read multiple types of files and directories.
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The fetched data.
 
 ### BasePackage
+
+[src/packages/BasePackage.mjs:64-412](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/BasePackage.mjs#L64-L412 "Source code on GitHub")
 
 The base package class that is meant to be extended
 for each package type class.
@@ -195,6 +206,8 @@ Do not use this class directly.
 
 #### cachedFetch
 
+[src/packages/BasePackage.mjs:118-138](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/BasePackage.mjs#L118-L138 "Source code on GitHub")
+
 Wrapper around the implemented fetch method. This will cache the result
 if needed, and perform the transform method if needed as well.
 
@@ -202,11 +215,15 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 #### transform
 
+[src/packages/BasePackage.mjs:145-175](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/BasePackage.mjs#L145-L175 "Source code on GitHub")
+
 Transform fetch data.
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The transformed (or fetched if no transform) data.
 
 #### bundle
+
+[src/packages/BasePackage.mjs:185-216](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/BasePackage.mjs#L185-L216 "Source code on GitHub")
 
 Transform after all packages have been fetched and transformed. This should
 be passed the full supply package
@@ -220,6 +237,6 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ## Contribute
 
-## Test
+### Test
 
 Run tests with: `npm run test`
