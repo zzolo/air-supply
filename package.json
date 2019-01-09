@@ -2,17 +2,22 @@
   "name": "air-supply",
   "version": "0.0.1",
   "description": "You need data; Air Supply will get it to you.",
-  "main": "index.js",
-  "module": "index.mjs",
+  "main": "dist/air-supply.js",
+  "umd:main": "dist/air-supply.umd.js",
+  "module": "dist/air-supply.mjs",
+  "source": "index.mjs",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "microbundle -o dist -i index.mjs",
+    "prepublishOnly": "npm run build"
   },
   "author": "Alan Palazzolo",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^5.11.1",
     "esm": "^3.0.84",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "microbundle": "^0.9.0"
   },
   "dependencies": {
     "debug": "^4.1.1",

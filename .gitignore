@@ -1,5 +1,6 @@
 # Caches
 .*cache*
+dist
 
 # Common
 .vscode
