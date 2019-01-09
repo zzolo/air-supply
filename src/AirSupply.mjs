@@ -26,7 +26,7 @@ import * as packageTypes from './packages';
 const debug = (debugWrapper.default || debugWrapper)('airsupply');
 
 /**
- * AirSupply class.  The AirSupply class is the main way
+ * The AirSupply class is the main way
  * of collecting data via AirSupply.
  *
  * Any options given to AirSupply will be provided to packages
