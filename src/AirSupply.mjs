@@ -10,7 +10,7 @@
 
 // Dependencies
 import { statSync } from 'fs';
-import { join } from 'path';
+import { join, dirname } from 'path';
 import { parse as parseUrl } from 'url';
 import merge from 'lodash/merge';
 import size from 'lodash/size';
@@ -20,10 +20,16 @@ import isPlainObject from 'lodash/isPlainObject';
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
 import * as debugWrapper from 'debug';
-import * as packageTypes from './packages';
+import * as cosmiconfigWrapper from 'cosmiconfig';
+import * as jsonWrapper from 'json5';
+import packageTypes from './packages';
 
 // Debug
 const debug = (debugWrapper.default || debugWrapper)('airsupply');
+
+// ESM wrapper
+const cosmiconfig = cosmiconfigWrapper.default || cosmiconfigWrapper;
+const json = jsonWrapper.default || jsonWrapper;
 
 /**
  * The AirSupply class is the main way
@@ -45,11 +51,16 @@ const debug = (debugWrapper.default || debugWrapper)('airsupply');
 export default class AirSupply {
   // Constructor
   constructor(options = {}) {
+    // Get configuration from a config file
+    let config = this.loadConfig(options);
+
+    // Compile options
     this.options = merge(
       {
         ttl: 60 * 1000,
         cachePath: join(process.cwd(), '.air-supply')
       },
+      config || {},
       options || {}
     );
 
@@ -93,10 +104,8 @@ export default class AirSupply {
     // Go through packages
     for (let si in packages) {
       if (packages.hasOwnProperty(si)) {
-        packages[si].key = si;
-
         // Create instance
-        this.packages[si] = this.package(packages[si]);
+        this.packages[si] = this.package(packages[si], si);
 
         // Do fetch
         this.supplyPackages[si] = await this.packages[si].cachedFetched();
@@ -131,11 +140,11 @@ export default class AirSupply {
    *
    * @return {Object} The instantiated package.
    */
-  package(config) {
+  package(config, key) {
     // Check that the config is an object or string
-    if (!isString(config) || !isPlainObject(config)) {
+    if (!isString(config) && !isPlainObject(config)) {
       throw new Error(
-        `AirSupply package "${config.key}" provided was not a string or object.`
+        `AirSupply package "${key}" provided was not a string or object.`
       );
     }
 
@@ -145,6 +154,9 @@ export default class AirSupply {
         source: config
       };
     }
+
+    // Add key to config
+    config.key = key;
 
     // Make sure we have a source
     if (config.source !== 0 && !config.source) {
@@ -236,5 +248,56 @@ export default class AirSupply {
     }
 
     return config;
+  }
+
+  /**
+   * Load config via [cosmiconfig]().
+   *
+   * @param {Object?} options Options passed into AirSupply, specifically using the
+   *   following properties
+   * @param {String} options.config Path to specific file to load for config.
+   * @param {Boolean} options.noConfig Use true to skip the config check.
+   */
+  loadConfig(options = {}) {
+    // If there's noConfig, stop
+    if (options && options.noConfig === true) {
+      return;
+    }
+
+    // Setup cosmiconfig
+    let moduleName = 'air-supply';
+    let c = cosmiconfig(moduleName, {
+      // Update search places to allow for JSON5
+      searchPlaces: [
+        'package.json',
+        `.${moduleName}rc`,
+        `.${moduleName}rc.json`,
+        `.${moduleName}rc.json5`,
+        `.${moduleName}rc.yaml`,
+        `.${moduleName}rc.yml`,
+        `.${moduleName}rc.js`,
+        `${moduleName}.config.js`
+      ],
+      loaders: {
+        '.json5': (filePath, content) => {
+          return json.parse(content);
+        }
+      }
+    });
+
+    // If we were given a specific file
+    let config;
+    if (options.config) {
+      config = c.loadSync(options.config);
+    }
+    else {
+      config = c.searchSync();
+    }
+
+    // If we found a config, we will update cwd
+    if (config && config.filepath) {
+      process.chdir(dirname(config.filepath));
+      return config.config;
+    }
   }
 }
