@@ -281,6 +281,9 @@ export default class AirSupply {
       loaders: {
         '.json5': (filePath, content) => {
           return json.parse(content);
+        },
+        '.json': (filePath, content) => {
+          return json.parse(content);
         }
       }
     });

@@ -215,16 +215,29 @@ export default class BasePackage {
     return this.data.bundle || this.data.transform || this.data.fetch;
   }
 
-  // Wrapper to get option from options to support functions
-  option(o) {
-    if (isFunction(this.options[o])) {
-      return bind(this.options[o], this)();
+  /**
+   * Wrapper to get an option, and if a function, calling that
+   * with context of this instance.
+   *
+   * @param {String} optionName The name of the option in the options property.
+   * @return The option as is or if a function, then the output of
+   *   that function.
+   */
+  option(optionName) {
+    if (isFunction(this.options[optionName])) {
+      return bind(this.options[optionName], this)();
     }
 
-    return this.options[o];
+    return this.options[optionName];
   }
 
-  // Create an id from specific options
+  /**
+   * Get an ID for this package based on the `options.id` or a set
+   * of properties in the `options` as defined by
+   * `options.keyIdentifiers`.
+   *
+   * @return {Object} This instance.
+   */
   createId() {
     // Can provide a specific id if needed
     if (this.option('id')) {
@@ -238,7 +251,16 @@ export default class BasePackage {
     return this;
   }
 
-  // Setup cache
+  /**
+   * Setup the cache.  Will create the cache directory and setup places
+   * for each cache point.  Should be run in constructor.  Will create
+   * the followig properties:
+   *   - `this.cachePath`
+   *   - `this.cacheFiles`
+   *   - `this.cacheData`
+   *
+   * @return {Object} This instance.
+   */
   setupCache() {
     // Cache paths
     this.cachePath = join(
@@ -289,7 +311,14 @@ export default class BasePackage {
     return this;
   }
 
-  // Set cache
+  /**
+   * Sets cache data to `this.cacheData` then saves the data in the file
+   * defined in `this.cacheFiles`.
+   *
+   * @param {String} cachePoint The name of the cache point.  Should be one of
+   *   `fetch`, `transform`, or `bundle`
+   * @return {Object} This instance.
+   */
   setCache(cachePoint) {
     // If no cache, ignore
     if (this.options.noCache) {
@@ -345,7 +374,14 @@ export default class BasePackage {
     return this;
   }
 
-  // Get cache
+  /**
+   * Gets cache for a specific cache point.  Specifically sets data
+   * in `this.cacheData` if the cache data is still valid.
+   *
+   * @param {String} cachePoint The name of the cache point.  Should be one of
+   *   `fetch`, `transform`, or `bundle`
+   * @return {Object} This instance.
+   */
   getCache(cachePoint) {
     // If no cache, ignore
     if (this.options.noCache) {
@@ -395,7 +431,13 @@ export default class BasePackage {
     return this;
   }
 
-  // Remove cache (deletes directory and contents)
+  /**
+   * Deletes specific cache directory for this package.  Probably unnecessary
+   * to call this directly.
+   *
+   * @param {Boolean} silent Whether to throw an error when there was a problem.
+   * @return {Object} This instance.
+   */
   removeCache(silent = false) {
     try {
       fs.removeSync(this.cachePath);
