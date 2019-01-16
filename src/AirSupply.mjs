@@ -108,7 +108,7 @@ export default class AirSupply {
         this.packages[si] = this.package(packages[si], si);
 
         // Do fetch
-        this.supplyPackages[si] = await this.packages[si].cachedFetched();
+        this.supplyPackages[si] = await this.packages[si].cachedFetch();
 
         // Do transform
         this.supplyPackages[si] = await this.packages[si].transform();

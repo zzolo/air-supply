@@ -244,7 +244,11 @@ export default class BasePackage {
     this.cachePath = join(
       this.option('cachePath'),
       'packages',
-      kebabCase(this.options.type),
+      kebabCase(
+        isFunction(this.options.type) && this.options.type.name
+          ? this.options.type.name
+          : this.options.type
+      ),
       this.id
     );
 
