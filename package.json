@@ -17,6 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "documentation": "^9.1.1",
+    "dotenv": "^6.2.0",
     "eslint": "^5.11.1",
     "esm": "^3.0.84",
     "jest": "^23.6.0",
@@ -24,6 +25,7 @@
     "prettier": "^1.15.3"
   },
   "dependencies": {
+    "airtable": "^0.5.8",
     "cosmiconfig": "^5.0.7",
     "csv-parse": "^4.3.1",
     "debug": "^4.1.1",

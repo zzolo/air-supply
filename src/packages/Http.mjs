@@ -10,7 +10,7 @@
  * let data = f.cachedFetch();
  */
 
-// Depenencies
+// Dependencies
 import BasePackage from './BasePackage';
 import * as fetchWrapper from 'node-fetch';
 import * as debugWrapper from 'debug';

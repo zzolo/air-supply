@@ -4,6 +4,8 @@ toc:
   - Http
   - File
   - Data
+  - Airtable
+  - Https
   - BasePackage
   - name: "Parsers"
   - "parserConfigs"

@@ -26,6 +26,7 @@
     "describe": true,
     "test": true,
     "expect": true,
-    "afterAll": true
+    "afterAll": true,
+    "beforeAll": true
   }
 }

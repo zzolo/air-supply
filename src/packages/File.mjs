@@ -11,7 +11,7 @@
  * let data = f.cachedFetch();
  */
 
-// Depenencies
+// Dependencies
 import BasePackage from './BasePackage';
 import * as fsWrapper from 'fs-extra';
 import * as debugWrapper from 'debug';
