@@ -12,6 +12,7 @@
 import jsonParser from './json';
 import csvParser from './csv';
 import yamlParser from './yaml';
+import archiemlParser from './archieml';
 
 /**
  * Parsers are simple functions that transform input used for parsing data
@@ -60,5 +61,9 @@ export default {
   yaml: {
     match: /(yml|yaml)$/i,
     parser: yamlParser
+  },
+  archieml: {
+    match: /aml$/i,
+    parser: archiemlParser
   }
 };
