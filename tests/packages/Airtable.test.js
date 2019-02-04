@@ -12,7 +12,6 @@ const path = require('path');
 
 // Get module
 const Airtable = require('../../src/packages/Airtable.mjs').default;
-const parsers = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
