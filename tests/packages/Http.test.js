@@ -1,5 +1,5 @@
 /**
- * Test Data class
+ * Test Http class
  */
 
 // Allow ESM support
@@ -11,12 +11,13 @@ const { removeSync } = require('fs-extra/lib/remove');
 const path = require('path');
 
 // Get module
-const Data = require('../../src/packages/Data.mjs').default;
+const Http = require('../../src/packages/Http.mjs').default;
+const parsers = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
   __dirname,
-  './.test-data-package-air-supply-cache'
+  './.test-http-package-air-supply-cache'
 );
 
 // After all are done, remove directory
@@ -24,11 +25,11 @@ afterAll(() => {
   removeSync(defaultCachePath);
 });
 
-// Data package
-describe('Data class', () => {
+// Http package
+describe('Http class', () => {
   test('can instantiate', () => {
     expect(() => {
-      new Data({
+      new Http({
         cachePath: defaultCachePath
       });
     }).not.toThrow();
@@ -36,25 +37,37 @@ describe('Data class', () => {
 });
 
 describe('fetch method', () => {
-  test('can fetch data', async () => {
-    let f = new Data({
+  test('can fetch a URL', async () => {
+    let f = new Http({
       cachePath: defaultCachePath,
-      source: [1, 2, 3]
+      source: 'http://example.com'
     });
 
     let data = await f.fetch();
-    expect(data).toEqual([1, 2, 3]);
+    expect(data).toMatch(/html/i);
+  });
+
+  test('throws on bad domain', async () => {
+    let f = new Http({
+      cachePath: defaultCachePath,
+      source: 'http://invalid.domain'
+    });
+
+    expect(async () => {
+      await f.fetch();
+    }).toThrow;
   });
 });
 
 describe('cachedFetch method', () => {
-  test('can fetch data', async () => {
-    let f = new Data({
+  test('can fetch a URL', async () => {
+    let f = new Http({
       cachePath: defaultCachePath,
-      source: 123
+      source: 'https://httpbin.org/json',
+      parsers
     });
 
     let data = await f.cachedFetch();
-    expect(data).toEqual(123);
+    expect(typeof data).toBe('object');
   });
 });

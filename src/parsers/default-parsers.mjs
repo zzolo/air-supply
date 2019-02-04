@@ -49,11 +49,11 @@ import csvParser from './csv';
 // Export default
 export default {
   json: {
-    match: /.json5?$/i,
+    match: /json5?$/i,
     parser: jsonParser
   },
   csv: {
-    match: /.csv$/i,
+    match: /csv$/i,
     parser: csvParser
   }
 };

@@ -12,20 +12,17 @@
 
 // Depenencies
 import BasePackage from './BasePackage';
-import merge from 'lodash/merge';
-import * as ioWrapper from 'indian-ocean';
-import * as fsWrapper from 'fs-extra';
+import * as fetchWrapper from 'node-fetch';
 import * as debugWrapper from 'debug';
 
 // Debug
 const debug = (debugWrapper.default || debugWrapper)('airsupply:http');
 
 // Deal with import defaults
-const fs = fsWrapper.default || fsWrapper;
-const io = ioWrapper.default || ioWrapper;
+const fetch = fetchWrapper.default || fetchWrapper;
 
 /**
- * Http package type.  Gets data from a .
+ * Http package type.  Gets data from n http:// source via [node-fetch](https://www.npmjs.com/package/node-fetch).
  *
  * @export
  * @class Http
@@ -51,5 +48,30 @@ export default class Http extends BasePackage {
    * @async
    * @return {Object} The fetched data.
    */
-  async fetch() {}
+  async fetch() {
+    let source = this.option('source');
+    let r;
+
+    try {
+      r = await fetch(source, this.option('fetchOptions'));
+    }
+    catch (e) {
+      debug(e);
+      throw new Error(
+        `Issue fetching resource "${
+          this.options.key
+        }" with source "${source}".  Use the DEBUG option to see more info.`
+      );
+    }
+
+    if (!r.ok) {
+      throw new Error(
+        `Status "${r.status}" not OK when fetching resource "${
+          this.options.key
+        }" with source "${source}".`
+      );
+    }
+
+    return await r.text();
+  }
 }

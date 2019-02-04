@@ -47,6 +47,6 @@ export default class Data extends BasePackage {
    * @return {Object} The source data.
    */
   async fetch() {
-    return this.option('source');
+    return await this.option('source');
   }
 }

@@ -69,7 +69,7 @@ export default class File extends BasePackage {
       throw new Error(
         `Unable to find or read file from package "${
           this.options.key
-        }": ${source}`
+        }": ${source} (use the DEBUG option to see more info)`
       );
     }
 
