@@ -2,7 +2,7 @@
  * @ignore
  * HTTP package class module.  Gets data from an http source.
  *
- * @module air-supply/src/packages/File
+ * @module air-supply/src/packages/Http
  *
  * @example
  * import Http from 'air-supply/src/packages/Http';
@@ -22,7 +22,7 @@ const debug = (debugWrapper.default || debugWrapper)('airsupply:http');
 const fetch = fetchWrapper.default || fetchWrapper;
 
 /**
- * Http package type.  Gets data from n http:// source via [node-fetch](https://www.npmjs.com/package/node-fetch).
+ * Http package type.  Gets data from an "http://" source via [node-fetch](https://www.npmjs.com/package/node-fetch).
  *
  * @export
  * @class Http
