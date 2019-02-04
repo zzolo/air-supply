@@ -54,21 +54,21 @@ describe('guessPackageType method', () => {
     }).toThrow();
   });
 
-  test('guesses raw-data', () => {
+  test('guesses data', () => {
     expect(a.guessPackageType({ source: 0 })).toMatchObject({
-      type: 'raw-data'
+      type: 'data'
     });
     expect(a.guessPackageType({ source: 1 })).toMatchObject({
-      type: 'raw-data'
+      type: 'data'
     });
     expect(a.guessPackageType({ source: null })).toMatchObject({
-      type: 'raw-data'
+      type: 'data'
     });
     expect(a.guessPackageType({ source: [1, 2] })).toMatchObject({
-      type: 'raw-data'
+      type: 'data'
     });
     expect(a.guessPackageType({ source: { a: 1 } })).toMatchObject({
-      type: 'raw-data'
+      type: 'data'
     });
   });
 

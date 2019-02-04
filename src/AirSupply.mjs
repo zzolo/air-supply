@@ -213,7 +213,7 @@ export default class AirSupply {
 
     // If source is not a string or a function, then assume raw data
     if (!isString(config.source)) {
-      config.type = 'raw-data';
+      config.type = 'data';
       return config;
     }
 

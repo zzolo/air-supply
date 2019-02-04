@@ -11,13 +11,12 @@ const { removeSync } = require('fs-extra/lib/remove');
 const path = require('path');
 
 // Get module
-const File = require('../../src/packages/File.mjs').default;
-const parsers = require('../../src/parsers/default-parsers.mjs').default;
+const Data = require('../../src/packages/Data.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
   __dirname,
-  './.test-file-package-air-supply-cache'
+  './.test-data-package-air-supply-cache'
 );
 
 // After all are done, remove directory
@@ -25,11 +24,11 @@ afterAll(() => {
   removeSync(defaultCachePath);
 });
 
-// File package
-describe('File class', () => {
+// Data package
+describe('Data class', () => {
   test('can instantiate', () => {
     expect(() => {
-      new File({
+      new Data({
         cachePath: defaultCachePath
       });
     }).not.toThrow();
@@ -37,35 +36,25 @@ describe('File class', () => {
 });
 
 describe('fetch method', () => {
-  test('will throw on no file', async () => {
-    let f = new File({
+  test('can fetch data', async () => {
+    let f = new Data({
       cachePath: defaultCachePath,
-      source: path.join(__dirname, 'no-file-exists')
-    });
-
-    await expect(f.fetch()).rejects.toBeTruthy();
-  });
-
-  test('can fetch a file', async () => {
-    let f = new File({
-      cachePath: defaultCachePath,
-      source: path.join(__dirname, '../_test-files/data-simple.json')
+      source: [1, 2, 3]
     });
 
     let data = await f.fetch();
-    expect(JSON.parse(data)).toEqual({ thing: 1 });
+    expect(data).toEqual([1, 2, 3]);
   });
 });
 
 describe('cachedFetch method', () => {
-  test('can fetch a file', async () => {
-    let f = new File({
+  test('can fetch data', async () => {
+    let f = new Data({
       cachePath: defaultCachePath,
-      source: path.join(__dirname, '../_test-files/data-simple.json'),
-      parsers
+      source: 123
     });
 
     let data = await f.cachedFetch();
-    expect(data).toEqual({ thing: 1 });
+    expect(data).toEqual(123);
   });
 });
