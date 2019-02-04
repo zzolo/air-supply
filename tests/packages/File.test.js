@@ -68,4 +68,15 @@ describe('cachedFetch method', () => {
     let data = await f.cachedFetch();
     expect(data).toEqual({ thing: 1 });
   });
+
+  test('can fetch a file (yml)', async () => {
+    let f = new File({
+      cachePath: defaultCachePath,
+      source: path.join(__dirname, '../_test-files/data-simple.yml'),
+      parsers
+    });
+
+    let data = await f.cachedFetch();
+    expect(data).toEqual({ nested: [{ thing1: 2 }, { thing2: 3 }], thing: 1 });
+  });
 });

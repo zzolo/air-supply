@@ -11,6 +11,7 @@
 // Get parsers
 import jsonParser from './json';
 import csvParser from './csv';
+import yamlParser from './yaml';
 
 /**
  * Parsers are simple functions that transform input used for parsing data
@@ -55,5 +56,9 @@ export default {
   csv: {
     match: /csv$/i,
     parser: csvParser
+  },
+  yaml: {
+    match: /(yml|yaml)$/i,
+    parser: yamlParser
   }
 };
