@@ -5,8 +5,10 @@
 
 import BasePackage from './BasePackage';
 import File from './File';
+import Http from './Http';
 
 export default {
   BasePackage,
-  File
+  File,
+  Http
 };

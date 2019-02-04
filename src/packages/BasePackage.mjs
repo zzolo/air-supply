@@ -17,9 +17,11 @@ import { join } from 'path';
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import pick from 'lodash/pick';
-import isArray from 'lodash/pick';
-import isObject from 'lodash/pick';
+import find from 'lodash/find';
 import kebabCase from 'lodash/kebabCase';
+import isArray from 'lodash/isArray';
+import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
 import isFunction from 'lodash/isFunction';
 import bind from 'lodash/bind';
 import * as fsWrapper from 'fs-extra';
@@ -113,7 +115,7 @@ export default class BasePackage {
    * if needed, and perform the transform method if needed as well.
    *
    * @async
-   * @return {Object} The fetched data.
+   * @return The fetched data.
    */
   async cachedFetch() {
     if (!isFunction(this.fetch)) {
@@ -128,6 +130,9 @@ export default class BasePackage {
     if (!this.data.fetch) {
       this.data.fetch = await this.fetch();
 
+      // Parse data
+      this.data.fetch = this.parse();
+
       // Cache fetch data
       if (this.data.fetch && this.option('cachePoint') === 'fetch') {
         this.setCache('fetch');
@@ -135,6 +140,78 @@ export default class BasePackage {
     }
 
     return this.data.fetch;
+  }
+
+  /**
+   * Parse fetch data.  Uses the parser option, which can be
+   * a specific parser to use in the form of a string, false,
+   * for no parsing, or a function.
+   *
+   * @return The parsed data.
+   */
+  parse() {
+    if (!this.data.fetch) {
+      // TODO: Should this be a warning or error?
+      return;
+    }
+
+    // No parsing
+    if (this.options.parser === false) {
+      return this.data.fetch;
+    }
+
+    // Make sure we have a parsers config
+    if (!this.options.parsers || !isObject(this.options.parsers)) {
+      throw new Error(
+        'Unable to find any "parsers" option; often this should be global and provided by default.'
+      );
+    }
+
+    // Get source
+    let source = this.option('source');
+
+    // For parser options, we will spread if an array
+    let options = isArray(this.options.parserOptions)
+      ? this.options.parserOptions
+      : [this.options.parserOptions];
+
+    // Specific parsing
+    if (
+      isString(this.options.parser) &&
+      this.options.parsers[this.options.parser]
+    ) {
+      return this.options.parsers[this.options.parser].parser(
+        this.data.fetch,
+        ...options
+      );
+    }
+    else if (
+      isString(this.options.parser) &&
+      !(this.options.parser in this.options.parsers)
+    ) {
+      throw new Error(
+        `The parser provided "${
+          this.options.parser
+        }" was not found in the "parsers" config option.`
+      );
+    }
+
+    // Function
+    if (isFunction(this.options.parse)) {
+      this.options.parse(this.data.fetch, ...options);
+    }
+
+    // Guess
+    let parser = find(this.options.parsers, p => {
+      return p.match && source && source.match(p.match);
+    });
+    if (!parser) {
+      throw new Error(
+        `Unable to match a parser with source: "${this.options.source}"`
+      );
+    }
+
+    return parser.parser(this.data.fetch, ...options);
   }
 
   /**

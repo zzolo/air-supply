@@ -12,6 +12,7 @@ const path = require('path');
 
 // Get module
 const File = require('../../src/packages/File.mjs').default;
+const parsers = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
@@ -24,7 +25,7 @@ afterAll(() => {
   removeSync(defaultCachePath);
 });
 
-// AirSupply
+// File package
 describe('File class', () => {
   test('can instantiate', () => {
     expect(() => {
@@ -52,16 +53,19 @@ describe('fetch method', () => {
     });
 
     let data = await f.fetch();
-    expect(data).toEqual({ thing: 1 });
+    expect(JSON.parse(data)).toEqual({ thing: 1 });
   });
+});
 
-  test('can fetch a directory', async () => {
+describe('cachedFetch method', () => {
+  test('can fetch a file', async () => {
     let f = new File({
       cachePath: defaultCachePath,
-      source: path.join(__dirname, '../_test-files/file-package-directory')
+      source: path.join(__dirname, '../_test-files/data-simple.json'),
+      parsers
     });
 
-    let data = await f.fetch();
-    expect(data).toEqual([{ data: 'json' }, { data: 'yml' }]);
+    let data = await f.cachedFetch();
+    expect(data).toEqual({ thing: 1 });
   });
 });

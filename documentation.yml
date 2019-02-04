@@ -1,5 +1,8 @@
 toc:
   - AirSupply
   - name: "Packages"
+  - Http
   - File
   - BasePackage
+  - name: "Parsers"
+  - "parserConfigs"

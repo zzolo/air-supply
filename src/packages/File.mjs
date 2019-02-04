@@ -14,7 +14,6 @@
 // Depenencies
 import BasePackage from './BasePackage';
 import merge from 'lodash/merge';
-import * as ioWrapper from 'indian-ocean';
 import * as fsWrapper from 'fs-extra';
 import * as debugWrapper from 'debug';
 
@@ -23,11 +22,9 @@ const debug = (debugWrapper.default || debugWrapper)('airsupply:file');
 
 // Deal with import defaults
 const fs = fsWrapper.default || fsWrapper;
-const io = ioWrapper.default || ioWrapper;
 
 /**
- * File package type.  Gets data from local files.  Utilizes [indian-ocean](https://mhkeller.github.io/indian-ocean/)
- * to read multiple types of files and directories.
+ * File package type.  Gets data from local files.
  *
  * @export
  * @class File
@@ -38,17 +35,17 @@ const io = ioWrapper.default || ioWrapper;
  *   options
  * @param {String!} options.source The path to the file or directory to read data from.
  * @param {Boolean?} [options.noCache=true] Turn caching off or leave on.
- * @param {Object?} options.fetchOptions Options object sent to [`re  adDataSync`](https://mhkeller.github.io/indian-ocean/#readDataSync) or [`readdirFilterSync`](https://mhkeller.github.io/indian-ocean/#readdirFilterSync) if a directory.
- * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
- *   referencial purposes.
+ * @param {Object?} [options.fetchOptions='utf-8'] Options given to [readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options)
  *
- * @return {<File>} The new BasePackage object.
+ * @return {<File>} The new File object.
  */
 export default class File extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       // Default to no caching.
-      noCache: true
+      noCache: true,
+      // Default, assume string data
+      fetchOptions: 'utf-8'
     });
   }
 
@@ -74,19 +71,11 @@ export default class File extends BasePackage {
       throw new Error(
         `Unable to find or read file from package "${
           this.options.key
-        }": ${this.option('source')}`
+        }": ${source}`
       );
     }
 
-    // Read file or directory
-    // TODO: The directory read doesn't pass options to readData
-    return stat.isDirectory()
-      ? io
-        .readdirFilterSync(
-          source,
-          merge({ fullPath: true }, this.options.fetchOptions || {})
-        )
-        .map(io.readDataSync)
-      : io.readDataSync(source, this.options.fetchOptions || {});
+    // Get file contents
+    return fs.readFileSync(source, this.options.fetchOptions);
   }
 }

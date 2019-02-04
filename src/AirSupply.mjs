@@ -12,6 +12,7 @@
 import { statSync } from 'fs';
 import { join, dirname } from 'path';
 import { parse as parseUrl } from 'url';
+import defaultParsers from './parsers/default-parsers';
 import merge from 'lodash/merge';
 import size from 'lodash/size';
 import isString from 'lodash/isString';
@@ -58,7 +59,8 @@ export default class AirSupply {
     this.options = merge(
       {
         ttl: 60 * 1000,
-        cachePath: join(process.cwd(), '.air-supply')
+        cachePath: join(process.cwd(), '.air-supply'),
+        parsers: defaultParsers
       },
       config || {},
       options || {}
