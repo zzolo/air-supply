@@ -13,7 +13,6 @@
 
 // Depenencies
 import BasePackage from './BasePackage';
-import merge from 'lodash/merge';
 import * as fsWrapper from 'fs-extra';
 import * as debugWrapper from 'debug';
 
@@ -57,14 +56,13 @@ export default class File extends BasePackage {
    * @return {Object} The fetched data.
    */
   async fetch() {
-    let stat;
     // Get the source.  Source can be a function, so, use the
     // this.option method.
     let source = this.option('source');
 
     // Check for source
     try {
-      stat = fs.statSync(source);
+      fs.statSync(source);
     }
     catch (e) {
       debug(e);
