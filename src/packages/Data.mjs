@@ -17,7 +17,7 @@ import BasePackage from './BasePackage';
  * Data package type.  Just passes through "source" property.
  *
  * @export
- * @class File
+ * @class Data
  * @extends BasePackage
  *
  * @param {Object!} options Options object to define options for this
@@ -30,7 +30,7 @@ import BasePackage from './BasePackage';
  *
  * @return {<Data>} The new File object.
  */
-export default class File extends BasePackage {
+export default class Data extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       // Default to no caching.
