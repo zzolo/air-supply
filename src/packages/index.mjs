@@ -10,6 +10,7 @@ import Http from './Http';
 import Https from './Https';
 import Data from './Data';
 import Airtable from './Airtable';
+import Ftp from './Ftp';
 
 export default {
   BasePackage,
@@ -17,6 +18,7 @@ export default {
   Directory,
   Http,
   Https,
+  Ftp,
   Data,
   Airtable
 };

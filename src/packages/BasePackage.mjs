@@ -71,6 +71,7 @@ export default class BasePackage {
     // 2. Default options for package, and
     // 3. The actual options sent through
     this.options = merge(
+      {},
       airSupply ? omit(airSupply.options, ['packages']) : {},
       {
         // What properties in the options to use as the key
@@ -163,7 +164,7 @@ export default class BasePackage {
     data = data || this.data.fetch;
     parser = parser || this.options.parser;
     parsers = parsers || this.options.parsers;
-    parserOptions = parsers || this.options.parserOptions;
+    parserOptions = parserOptions || this.options.parserOptions;
 
     if (!data) {
       // TODO: Should this be a warning or error?

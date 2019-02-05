@@ -24,11 +24,15 @@ import parse from 'csv-parse/lib/sync';
  * @return {Object} Parsed data.
  */
 export default (input, options = {}) => {
-  options = merge({}, options, {
-    cast: true,
-    columns: true,
-    trim: true
-  });
+  options = merge(
+    {},
+    {
+      cast: true,
+      columns: true,
+      trim: true
+    },
+    options
+  );
 
   return parse(input, options);
 };
