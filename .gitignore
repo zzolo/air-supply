@@ -1,3 +1,4 @@
+
 # Caches
 .*cache*
 dist
@@ -70,3 +71,6 @@ coverage
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Exceptions
+!tests/_test-files/zip-files.zip

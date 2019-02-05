@@ -13,6 +13,7 @@ import jsonParser from './json';
 import csvParser from './csv';
 import yamlParser from './yaml';
 import archiemlParser from './archieml';
+import zipParser from './zip';
 
 /**
  * @ignore
@@ -68,5 +69,9 @@ export default {
   archieml: {
     match: /aml$/i,
     parser: archiemlParser
+  },
+  zip: {
+    match: /zip$/i,
+    parser: zipParser
   }
 };
