@@ -219,8 +219,8 @@ export default class AirSupply {
 
     // Try file system
     try {
-      statSync(config.source);
-      config.type = 'file';
+      let stat = statSync(config.source);
+      config.type = stat.isDirectory() ? 'directory' : 'file';
     }
     catch (e) {
       // Keep going
