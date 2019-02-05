@@ -49,8 +49,7 @@ export default class File extends BasePackage {
   }
 
   /**
-   * Fetch implementation.  Utilizes [indian-ocean](https://mhkeller.github.io/indian-ocean/)
-   * to read multiple types of files and directories.
+   * Fetch implementation.  Utilizes readFileSync.
    *
    * @async
    * @return {Object} The fetched data.
