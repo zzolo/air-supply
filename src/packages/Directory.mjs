@@ -88,6 +88,9 @@ export default class Directory extends BasePackage {
       source,
       merge(
         {
+          // For some reason, the cwd handling is not consistent,
+          // at least in the tests
+          absolute: true,
           cwd
         },
         this.options.fetchOptions
@@ -109,22 +112,5 @@ export default class Directory extends BasePackage {
 
     // Return files
     return files;
-  }
-
-  // Override parse function to parse each file separately
-  parse() {
-    // Guess parser
-    const findParser = file => {
-      let parser = find(this.options.parsers, p => {
-        return p.match && file && file.match(p.match);
-      });
-
-      return parser ? parser.parser : d => d;
-    };
-
-    // Go through each file
-    return mapValues(this.data.fetch, (data, file) => {
-      return findParser(file)(data);
-    });
   }
 }

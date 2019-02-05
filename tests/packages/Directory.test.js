@@ -38,6 +38,8 @@ describe('Directory class', () => {
 
 describe('fetch method', () => {
   test('will throw on no file', async () => {
+    expect.assertions(1);
+
     let f = new Directory({
       cachePath: defaultCachePath,
       source: path.join(__dirname, 'no-file-exists')
@@ -47,6 +49,8 @@ describe('fetch method', () => {
   });
 
   test('can fetch a directory without glob', async () => {
+    expect.assertions(1);
+
     let f = new Directory({
       cachePath: defaultCachePath,
       source: path.join(__dirname, '../_test-files/directory-package')
@@ -58,7 +62,12 @@ describe('fetch method', () => {
 });
 
 describe('cachedFetch method', () => {
+  // For some reason, the cwd is not consistent
+  process.chdir(path.join(__dirname, '../../'));
+
   test('can fetch a directory and parse each file', async () => {
+    expect.assertions(1);
+
     let f = new Directory({
       cachePath: defaultCachePath,
       source: path.join(__dirname, '../_test-files/directory-package/**/*'),

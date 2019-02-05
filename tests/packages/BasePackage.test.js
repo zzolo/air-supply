@@ -14,6 +14,7 @@ const path = require('path');
 
 // Get module
 const BasePackage = require('../../src/packages/BasePackage.mjs').default;
+const parsers = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
@@ -67,6 +68,33 @@ describe('BasePackage class', () => {
     expect(() => {
       statSync(b.cachePath);
     }).not.toThrow();
+  });
+});
+
+describe('parse method', () => {
+  test('returns blank when empty', () => {
+    let b = new BasePackage({
+      cachePath: defaultCachePath
+    });
+
+    expect(b.parse(null)).toBe(undefined);
+  });
+
+  test('handle parser function', () => {
+    let b = new BasePackage({
+      cachePath: defaultCachePath
+    });
+
+    expect(b.parse('a', undefined, a => a + 'a')).toBe('aa');
+  });
+
+  test('handle match', () => {
+    let b = new BasePackage({
+      cachePath: defaultCachePath,
+      parsers
+    });
+
+    expect(b.parse('{ a: 1 }', 'file.json')).toEqual({ a: 1 });
   });
 });
 
