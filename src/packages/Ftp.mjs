@@ -33,14 +33,15 @@ const FtpClient = ftpWrapper.default || ftpWrapper;
  * @param {Object!} options Options object to define options for this
  *   specific package adn override any defaults.  See the global AirSupply
  *   options
- * @param {String!} options.source The URI to the file to read data from.
+ * @param {String!} options.source The URI to the file to read data from.  Something like
+ *   `ftp://username:pass@ftp.example.com/path/to/file.json`
  * @param {Object!} options.fetchOptions `ftp` options, overriding anything determined
  *   from the `source`.
  * @param {String!} options.fetchOptions.type Custom option to handle what kind of
  *   response we want from the fetch, can be either `buffer`
  *   or `string`; defaults to `string`.
  * @param {String!} options.fetchOptions.path Custom option for the path to get from
- *   the FTP server.
+ *   the FTP server, if not used in the `source`.
  * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
  *   referencial purposes.
  *
