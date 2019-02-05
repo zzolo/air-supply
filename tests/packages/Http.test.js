@@ -47,6 +47,19 @@ describe('fetch method', () => {
     expect(data).toMatch(/html/i);
   });
 
+  test('can fetch a URL as buffer', async () => {
+    let f = new Http({
+      cachePath: defaultCachePath,
+      source: 'http://example.com',
+      fetchOptions: {
+        type: 'buffer'
+      }
+    });
+
+    let data = await f.fetch();
+    expect(Buffer.isBuffer(data)).toBe(true);
+  });
+
   test('throws on bad domain', async () => {
     let f = new Http({
       cachePath: defaultCachePath,

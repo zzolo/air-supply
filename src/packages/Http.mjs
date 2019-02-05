@@ -32,8 +32,9 @@ const fetch = fetchWrapper.default || fetchWrapper;
  *   specific package adn override any defaults.  See the global AirSupply
  *   options
  * @param {String!} options.source The URI to the file to read data from.
- * @param {Object!} options.fetchOptions Options for fetching.
- * @param {String!} options.fetchOptions.type Type of fetch, either `buffer`, `json`,
+ * @param {Object!} options.fetchOptions `node-fetch` options.
+ * @param {String!} options.fetchOptions.type Custom option to handle what kind of
+ *   response we want from the fetch, can be either `buffer`, `json`,
  *   or `string`; defaults to `string`.
  * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
  *   referencial purposes.
@@ -54,10 +55,10 @@ export default class Http extends BasePackage {
   async fetch() {
     let source = this.option('source');
     let r;
-    this.options.fetchOptions = this.options.fetchOptions || {};
+    let options = this.option('fetchOptions') || {};
 
     try {
-      r = await fetch(source, this.option('fetchOptions'));
+      r = await fetch(source, options);
     }
     catch (e) {
       debug(e);
@@ -76,10 +77,10 @@ export default class Http extends BasePackage {
       );
     }
 
-    return (await this.options.fetchOptions.type) === 'buffer'
+    return await (options.type === 'buffer'
       ? r.buffer()
-      : this.options.fetchOptions.type === 'json'
+      : options.type === 'json'
         ? r.json()
-        : r.text();
+        : r.text());
   }
 }
