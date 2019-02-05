@@ -1,11 +1,12 @@
 toc:
   - AirSupply
   - name: "Packages"
-  - Http
   - File
+  - Directory
+  - Http
   - Data
   - Airtable
   - Https
   - BasePackage
   - name: "Parsers"
-  - "parserConfigs"
+  - archieml

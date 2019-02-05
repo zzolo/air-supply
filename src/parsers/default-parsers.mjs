@@ -15,6 +15,7 @@ import yamlParser from './yaml';
 import archiemlParser from './archieml';
 
 /**
+ * @ignore
  * Parsers are simple functions that transform input used for parsing data
  * in packages from source data.
  *
@@ -26,6 +27,7 @@ import archiemlParser from './archieml';
  */
 
 /**
+ * @ignore
  * Parser config is an object describing how to match and parse
  * specific types of data.
  *
@@ -35,6 +37,7 @@ import archiemlParser from './archieml';
  */
 
 /**
+ * @ignore
  * An index of parser configs, keyed by type for overridding.
  *
  * @typedef {Object.<String, parserConfig>} parserConfigs
