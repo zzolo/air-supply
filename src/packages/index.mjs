@@ -7,7 +7,6 @@ import BasePackage from './BasePackage';
 import File from './File';
 import Directory from './Directory';
 import Http from './Http';
-import Https from './Https';
 import Data from './Data';
 import Sql from './Sql';
 import Airtable from './Airtable';
@@ -18,7 +17,6 @@ export default {
   File,
   Directory,
   Http,
-  Https,
   Ftp,
   Data,
   Sql,

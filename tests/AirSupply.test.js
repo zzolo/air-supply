@@ -86,7 +86,15 @@ describe('guessPackageType method', () => {
     expect(
       a.guessPackageType({ source: 'http://example.com/path' })
     ).toMatchObject({
-      type: 'remote-http'
+      type: 'http'
+    });
+  });
+
+  test('guesses HTTPS URL', () => {
+    expect(
+      a.guessPackageType({ source: 'https://example.com/path' })
+    ).toMatchObject({
+      type: 'http'
     });
   });
 
@@ -94,7 +102,7 @@ describe('guessPackageType method', () => {
     expect(
       a.guessPackageType({ source: 'ftp://example.com/path' })
     ).toMatchObject({
-      type: 'remote-ftp'
+      type: 'ftp'
     });
   });
 

@@ -60,7 +60,16 @@ export default class AirSupply {
       {
         ttl: 60 * 1000,
         cachePath: join(process.cwd(), '.air-supply'),
-        parsers: defaultParsers
+        parsers: defaultParsers,
+        sharedProtocols: {
+          https: 'http',
+          mysql: 'sql',
+          mariadb: 'sql',
+          postgres: 'sql',
+          pg: 'sql',
+          mssql: 'sql',
+          sqlite: 'sql'
+        }
       },
       config || {},
       options || {}
@@ -231,7 +240,11 @@ export default class AirSupply {
       let p = parseUrl(config.source);
       if (p && p.protocol) {
         // The : comes through protocol parsing
-        config.type = `remote-${p.protocol.replace(/[^a-z-]/gi, '')}`;
+        let proto = p.protocol.replace(/[^a-z-]/gi, '');
+        proto = this.options.sharedProtocols[proto]
+          ? this.options.sharedProtocols[proto]
+          : proto;
+        config.type = proto;
       }
     }
     catch (e) {
