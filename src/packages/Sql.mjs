@@ -34,10 +34,10 @@ const Sequelize = sequelizeWrapper.default || sequelizeWrapper;
  *   - `postgres://username:@localhost:1234/my-database`
  *
  * Requires installing the database specific module.
- *   `npm install --save pg pg-hstore`
- *   `npm install --save mysql2`
- *   `npm install --save sqlite3`
- *   `npm install --save tedious`
+ *   - `npm install --save pg pg-hstore`
+ *   - `npm install --save mysql2`
+ *   - `npm install --save sqlite3`
+ *   - `npm install --save tedious`
  *
  * @export
  * @class Sql
@@ -48,7 +48,7 @@ const Sequelize = sequelizeWrapper.default || sequelizeWrapper;
  *   options
  * @param {String!} options.source The URI to the file to read data from.
  * @param {Boolean} [options.parser=false] Turn parsing off.
- * @param {Object!} options.fetchOptions `sequelize` connection options.
+ * @param {Object} [options.fetchOptions] `sequelize` connection options.
  *
  * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
  *   referencial purposes.
