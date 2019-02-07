@@ -33,8 +33,8 @@ const fetch = fetchWrapper.default || fetchWrapper;
  *   options
  * @param {String!} options.source The URI to the file to read data from.
  * @param {Object!} options.fetchOptions `node-fetch` options.
- * @param {String!} options.fetchOptions.type Custom option to handle what kind of
- *   response we want from the fetch, can be either `buffer`, `json`,
+ * @param {String!} options.fetchOptions.type Custom option to handle what
+ *   kind of response we want from the fetch, can be either `buffer`, `json`,
  *   or `string`; defaults to `string`.
  * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
  *   referencial purposes.
