@@ -14,6 +14,7 @@ import csvParser from './csv';
 import yamlParser from './yaml';
 import archiemlParser from './archieml';
 import zipParser from './zip';
+import xlsxParser from './xlsx';
 
 /**
  * @ignore
@@ -73,5 +74,9 @@ export default {
   zip: {
     match: /zip$/i,
     parser: zipParser
+  },
+  xlsx: {
+    match: /(xlsx|xls|dbf|ods)$/i,
+    parser: xlsxParser
   }
 };
