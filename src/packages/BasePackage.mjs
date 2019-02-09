@@ -22,6 +22,7 @@ import mapValues from 'lodash/mapValues';
 import kebabCase from 'lodash/kebabCase';
 import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
+import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import isFunction from 'lodash/isFunction';
 import bind from 'lodash/bind';
@@ -133,7 +134,19 @@ export default class BasePackage {
       this.data.fetch = await this.fetch();
 
       // Parse data
-      this.data.fetch = this.parse();
+      // Add source.  This seems off.  :/
+      if (isObject(this.options.parsers)) {
+        this.options.parsers.source =
+          this.options.parsers.source || this.options.source;
+      }
+      else if (
+        isArray(this.options.parsers) &&
+        isObject(this.options.parsers[0])
+      ) {
+        this.options.parsers[0].source =
+          this.options.parsers[0].source || this.options.source;
+      }
+      this.data.fetch = this.parse(this.data.fetch, this.options.parsers);
 
       // Cache fetch data
       if (this.data.fetch && this.option('cachePoint') === 'fetch') {
@@ -145,113 +158,117 @@ export default class BasePackage {
   }
 
   /**
-   * Parse fetch data.  Uses the parser option, which can be
-   * a specific parser to use in the form of a string, false,
-   * for no parsing, or a function.
-   *
-   * @param data The data to parse, defaults to `this.data.fetch`.
-   * @param source The source which helps in auto-matching, defaults to `this.options.source`.
-   * @param parser The parser to use specifically, defaults to
-   *   `this.options.parser`.
-   * @param parsers The parser config to use specifically, defaults to
-   *   `this.options.parsers`.
-   * @param parserOptions The options to pass to the parser, use an array
-   *   for multiple arguments to the function.
+   * Parse
    *
    * @return The parsed data.
    */
-  parse(data, source, parser, parserOptions, parsers) {
-    data = data || this.data.fetch;
-    parser = parser || this.options.parser;
-    parsers = parsers || this.options.parsers;
-    parserOptions = parserOptions || this.options.parserOptions;
+  parse(data, options) {
+    options = isArray(options) ? options : [options];
 
+    // Go through each parser
+    return options.reduce((parsed, p) => {
+      return this.parseData(parsed, p);
+    }, data);
+  }
+
+  /**
+   * Parse some data
+   *
+   * @return The parsed data.
+   */
+  parseData(data, options = {}) {
     if (!data) {
       // TODO: Should this be a warning or error?
       return;
     }
 
-    // If object, use parseObject
-    if (isObject(data)) {
-      return this.parseObject(data, parserOptions);
+    // Is string
+    if (!isPlainObject(options)) {
+      options = {
+        parser: options
+      };
     }
 
     // No parsing
-    if (parser === false) {
-      return this.data.fetch;
+    if (options.parser === false) {
+      return data;
+    }
+
+    // Treat as multiple file
+    if (options.multiSource) {
+      return this.parseObject(data, options);
     }
 
     // For parser options, we will spread if an array
-    let options = isArray(parserOptions) ? parserOptions : [parserOptions];
+    options.parserOptions = isArray(options.parserOptions)
+      ? options.parserOptions
+      : [options.parserOptions];
 
     // Function
-    if (isFunction(parser)) {
-      return parser(data, ...options);
+    if (isFunction(options.parser)) {
+      return options.parser(data, ...options.parserOptions);
     }
 
-    // Make sure we have a parsers config
-    if (!parsers || !isObject(parsers)) {
-      throw new Error(
-        'Unable to find any "parsers" option; often this should be global and provided by default.'
-      );
-    }
-
-    // Get source
-    source = source || this.option('source');
+    // Parser methods
+    let parserMethods = options.parserMethods || this.options.parserMethods;
 
     // Specific parsing
-    if (isString(parser) && parsers[parser]) {
-      return parsers[parser].parser(data, ...options);
+    if (isString(options.parser) && parserMethods[options.parser]) {
+      return parserMethods[options.parser].parser(
+        data,
+        ...options.parserOptions
+      );
     }
-    else if (isString(parser) && !(parser in parsers)) {
+    else if (isString(options.parser) && !(options.parser in parserMethods)) {
       throw new Error(
-        `The parser provided "${parser}" was not found in the "parsers" config option.`
+        `The parser provided "${
+          options.parser
+        }" was not found in the "parserMethods" config option.`
       );
     }
 
     // If no source
-    if (!source) {
+    if (!options.source) {
       // TODO: Should this error?
       return data;
     }
 
     // Guess
-    let matched = find(parsers, p => {
-      return p.match && source && source.match(p.match);
+    let matched = find(parserMethods, p => {
+      return p.match && options.source && options.source.match(p.match);
     });
     if (!matched) {
-      throw new Error(`Unable to match a parser with source: "${source}"`);
+      debug(
+        `Unable to match a parser with source: "${options.source}"`,
+        options
+      );
+    }
+    else {
+      return matched.parser(data, ...options.parserOptions);
     }
 
-    return matched.parser(data, ...options);
+    debug('Unable to determine how to parse.', options);
+    return data;
   }
 
   /**
    * Goes through an object and runs `this.parse` on each one, using the
    * key as the `source` property.
    *
-   * @param data The data to parse, defaults to `this.data.fetch`.
-   * @param {Object} parserOptions The options to pass to the each parser where the key
-   *   is the key from the data.
-   * @param parserOptions.KEY.parser Parser option to use for this item.
-   * @param parserOptions.KEY.parsers Set of parsers to use for this option.
-   * @param parserOptions.KEY.source Source to use for this option.
-   * @param parserOptions.KEY.parserOptions Parser option to use for this item.
-   *
    * @return The parsed data.
    */
-  parseObject(data, parserOptions) {
-    data = data || this.data.fetch;
-    parserOptions = parserOptions || this.options.parserOptions;
-
+  parseObject(data, options = {}) {
     // Check for object
     if (!isObject(data)) {
       throw new Error('Data passed to "parseObject" is not an object.');
     }
 
     return mapValues(data, (d, s) => {
-      let o = parserOptions && parserOptions[s] ? parserOptions[s] : {};
-      return this.parse(d, o.source || s, o.parser, o.parserOptions, o.parsers);
+      let o =
+        options && options[s]
+          ? merge(options[s], { source: s })
+          : { source: s };
+      return this.parse(d, o);
     });
   }
 

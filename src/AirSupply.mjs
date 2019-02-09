@@ -41,11 +41,18 @@ const json = jsonWrapper.default || jsonWrapper;
  *
  * @export
  * @class AirSupply
- * @param {Object?} options Options object.
- * @param {Number} options.ttl The global length of cache in milliseconds
- * @param {String} options.cachePath The location of the cache data, defaults
+ * @param {Object} options Options object.
+ * @param {Object} options.packages The object describing each package,
+ *   in format:
+ * @param {Number} [options.ttl] The global length of cache in milliseconds
+ * @param {String} [options.cachePath] The location of the cache data, defaults
  *   to the .air-supply/ directory in the current working path.
- * @param {Object} options.packages The object describing each package, in format:
+ * @param {Object} [options.parserMethods] The object describing available
+ *   parsers in format:
+ *   `{ parser: { match: /parser$/, parser: (data, options) => { ... }}}`
+ * @param {Object} [options.sharedProtocols] The object that will map
+ *   protocols to other protocols, similar to:
+ *   `{ https: 'http'}`
  *
  * @return {<AirSupply>} The new AirSupply object.
  */
@@ -58,9 +65,10 @@ export default class AirSupply {
     // Compile options
     this.options = merge(
       {
-        ttl: 60 * 1000,
+        ttl: 5 * 60 * 1000,
         cachePath: join(process.cwd(), '.air-supply'),
-        parsers: defaultParsers,
+        // This option name is :/
+        parserMethods: defaultParsers,
         sharedProtocols: {
           https: 'http',
           mysql: 'sql',
