@@ -12,7 +12,7 @@ const path = require('path');
 
 // Get module
 const Directory = require('../../src/packages/Directory.mjs').default;
-const parsers = require('../../src/parsers/default-parsers.mjs').default;
+const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
@@ -71,7 +71,7 @@ describe('cachedFetch method', () => {
     let f = new Directory({
       cachePath: defaultCachePath,
       source: path.join(__dirname, '../_test-files/directory-package/**/*'),
-      parsers
+      parserMethods
     });
 
     let data = await f.cachedFetch();

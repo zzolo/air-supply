@@ -4,25 +4,18 @@
  * directory.
  *
  * @module air-supply/src/packages/Directory
- *
- * @example
- * import Directory from 'air-supply/src/packages/Directory';
- * let f = new Directory({ source: 'directory/*.csv' });
- * let data = f.cachedFetch();
  */
 
 // Dependencies
 import BasePackage from './BasePackage';
-import mapValues from 'lodash/mapValues';
-import find from 'lodash/find';
 import merge from 'lodash/merge';
 import { statSync, readFileSync } from 'fs';
 import { relative } from 'path';
 import * as globWrapper from 'glob';
-import * as debugWrapper from 'debug';
+//import * as debugWrapper from 'debug';
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:directory');
+//const debug = (debugWrapper.default || debugWrapper)('airsupply:directory');
 
 // Deal with import defaults
 const glob = globWrapper.default || globWrapper;
@@ -35,14 +28,26 @@ const glob = globWrapper.default || globWrapper;
  * @class Directory
  * @extends BasePackage
  *
- * @param {Object!} options Options object to define options for this
- *   specific package adn override any defaults.  See the global AirSupply
- *   options
- * @param {String!} options.source The glob path to a directory; for instance to get
- *   all files in a directory: `directory/*.*`.
- * @param {Boolean?} [options.noCache=true] Defaults to no caching, since caching is done
- *   with local files.
- * @param {Object?} [options.fetchOptions] Options given to [glob](https://github.com/isaacs/node-glob#options)
+ * @example
+ * import Directory from 'air-supply/src/packages/Directory';
+ * let f = new Directory({ source: 'directory/*.csv' });
+ * let data = f.cachedFetch();
+ *
+ * @param {Object!} options Options for package that will override
+ *   any defaults from the <AirSupply> or <BasePackage>.
+ * @param {String!} options.source The glob path to a directory;
+ *   for instance to get all files in a directory: `directory/*.*`.
+ * @param {Boolean} [options.noCache=true] Defaults to no caching, since
+ *   caching is essentially the same.  Might be useful to turn on
+ *   if there is a lot of transforming.
+ * @param {Object} [options.parsers={ multiSource: true }] Parser
+ *   options to default to multiple sources.
+ * @param {Boolean} [options.parsers.multiSource=true] Defaults
+ *   to multiple sources as an object.
+ * @param {Object} [options.fetchOptions] Options given to
+ *   [glob](https://github.com/isaacs/node-glob#options)
+ * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
+ *   referencial purposes.
  *
  * @return {<Directory>} The new Directory object.
  */
@@ -50,7 +55,11 @@ export default class Directory extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       // Default to no caching.
-      noCache: true
+      noCache: true,
+      // Will be an multi-source object
+      parsers: {
+        multiSource: true
+      }
     });
   }
 

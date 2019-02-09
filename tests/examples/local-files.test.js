@@ -39,13 +39,18 @@ describe('AirSupply integration test with local files', () => {
         },
         zipData: {
           source: path.join(__dirname, '../_test-files/zip-files.zip'),
-          fetchOptions: null
+          fetchOptions: null,
+          parsers: ['zip', { multiSource: true }]
         }
       }
     });
 
     let data = await a.supply();
-    console.log(data);
     expect(a.options.packages).toBeTruthy();
+    expect(typeof data).toBe('object');
+    expect(typeof data.jsonData).toBe('object');
+    expect(typeof data.xlsData).toBe('object');
+    expect(typeof data.zipData).toBe('object');
+    expect(typeof data.zipData['data-json.json']).toBe('object');
   });
 });

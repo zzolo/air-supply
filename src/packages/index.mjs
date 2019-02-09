@@ -12,6 +12,7 @@ import Sql from './Sql';
 import Airtable from './Airtable';
 import Ftp from './Ftp';
 import GoogleDoc from './GoogleDoc';
+import GoogleSheet from './GoogleSheet';
 
 export default {
   BasePackage,
@@ -22,5 +23,6 @@ export default {
   Data,
   Sql,
   Airtable,
-  GoogleDoc
+  GoogleDoc,
+  GoogleSheet
 };

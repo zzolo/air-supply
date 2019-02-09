@@ -12,7 +12,7 @@ const path = require('path');
 
 // Get module
 const GoogleDoc = require('../../src/packages/GoogleDoc.mjs').default;
-const parsers = require('../../src/parsers/default-parsers.mjs').default;
+const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
@@ -89,7 +89,7 @@ describe('cachedFetch unauthenticated method', () => {
       cachePath: defaultCachePath,
       source:
         'https://docs.google.com/document/d/e/2PACX-1vQMzrElN1kUoqwErJpiQmoEBjGovZvBfv4Cnk1fE3OPtXw9MrbFe12Wvx-fgjwk8yckCgkmVqwqNL8a/pub',
-      parsers
+      parserMethods
     });
 
     let data = await f.cachedFetch();
@@ -112,7 +112,7 @@ describe('cachedFetch authenticated method', () => {
       let f = new GoogleDoc({
         cachePath: defaultCachePath,
         source: '1VgXHKKpykKSLF6adx9tRbkwX0hpdfZvtt9oPQHLpyrs',
-        parsers
+        parserMethods
       });
 
       let data = await f.cachedFetch();

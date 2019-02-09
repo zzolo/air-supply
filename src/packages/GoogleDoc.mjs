@@ -4,11 +4,6 @@
  * a Google Doc.
  *
  * @module air-supply/src/packages/GoogleDoc
- *
- * @example
- * import GoogleDoc from 'air-supply/src/packages/GoogleDoc';
- * let f = new GoogleDoc({ source: 'GOOGLE-DOC-ID' });
- * let data = f.cachedFetch();
  */
 
 // Dependencies
@@ -39,14 +34,18 @@ const { AllHtmlEntities } = htmlEntitiesWrapper.default || htmlEntitiesWrapper;
  * @class GoogleDoc
  * @extends BasePackage
  *
- * @param {Object!} options Options object to define options for this
- *   specific package adn override any defaults.  See the global AirSupply
- *   options
+ * @example
+ * import GoogleDoc from 'air-supply/src/packages/GoogleDoc';
+ * let f = new GoogleDoc({ source: 'GOOGLE-DOC-ID' });
+ * let data = f.cachedFetch();
+ *
+ * @param {Object!} options Options for package that will override
+ *   any defaults from the <AirSupply> or <BasePackage>.
  * @param {String!} options.source For authenticated requests, simply provide
  *   the Google Doc ID (can be found in the URL).  For un-authenticated requests
  *   via the "Published to the Web" version, provide the full URL.
- * @param {String!} [options.parser='archieml'] Defaults to use ArchieML parser.
- * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
+ * @param {String} [options.parsers='archieml'] Defaults to use ArchieML parser.
+ * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
  *
  * @return {<GoogleDoc>} The new GoogleDoc object.
@@ -54,12 +53,12 @@ const { AllHtmlEntities } = htmlEntitiesWrapper.default || htmlEntitiesWrapper;
 export default class GoogleDoc extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
-      parser: 'archieml'
+      parsers: 'archieml'
     });
   }
 
   /**
-   * Fetch implementation.
+   * Fetch implementation.  Uses [googleapis](https://www.npmjs.com/package/googleapis) module
    *
    * @async
    * @return {Object} The fetched data.

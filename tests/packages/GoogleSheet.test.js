@@ -12,7 +12,7 @@ const path = require('path');
 
 // Get module
 const GoogleSheet = require('../../src/packages/GoogleSheet.mjs').default;
-const parsers = require('../../src/parsers/default-parsers.mjs').default;
+//const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(

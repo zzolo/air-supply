@@ -12,7 +12,7 @@ const path = require('path');
 
 // Get module
 const Http = require('../../src/packages/Http.mjs').default;
-const parsers = require('../../src/parsers/default-parsers.mjs').default;
+const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
@@ -77,7 +77,7 @@ describe('cachedFetch method', () => {
     let f = new Http({
       cachePath: defaultCachePath,
       source: 'https://httpbin.org/json',
-      parsers
+      parserMethods
     });
 
     let data = await f.cachedFetch();

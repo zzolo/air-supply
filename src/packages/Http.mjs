@@ -3,11 +3,6 @@
  * HTTP package class module.  Gets data from an http source.
  *
  * @module air-supply/src/packages/Http
- *
- * @example
- * import Http from 'air-supply/src/packages/Http';
- * let f = new Http({ source: 'http://example.com/data.json' });
- * let data = f.cachedFetch();
  */
 
 // Dependencies
@@ -28,14 +23,18 @@ const fetch = fetchWrapper.default || fetchWrapper;
  * @class Http
  * @extends BasePackage
  *
- * @param {Object!} options Options object to define options for this
- *   specific package adn override any defaults.  See the global AirSupply
- *   options
+ * @example
+ * import Http from 'air-supply/src/packages/Http';
+ * let f = new Http({ source: 'http://example.com/data.json' });
+ * let data = f.cachedFetch();
+ *
+ * @param {Object!} options Options for package that will override
+ *   any defaults from the <AirSupply> or <BasePackage>.
  * @param {String!} options.source The URI to the file to read data from.
- * @param {Object!} options.fetchOptions `node-fetch` options.
- * @param {String!} options.fetchOptions.type Custom option to handle what
- *   kind of response we want from the fetch, can be either `buffer`, `json`,
- *   or `string`; defaults to `string`.
+ * @param {Object} [options.fetchOptions] `node-fetch` options.
+ * @param {String} [options.fetchOptions.type='string'] Custom option to
+ *   handle what kind of response we want from the fetch, can be
+ *   either `buffer`, `json`, or `string`; defaults to `string`.
  * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
  *   referencial purposes.
  *
@@ -47,7 +46,7 @@ export default class Http extends BasePackage {
   }
 
   /**
-   * Fetch implementation.
+   * Fetch implementation.  Utilizes [node-fetch](https://www.npmjs.com/package/node-fetch).
    *
    * @async
    * @return {Object} The fetched data.

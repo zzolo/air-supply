@@ -12,7 +12,7 @@ const path = require('path');
 
 // Get module
 const File = require('../../src/packages/File.mjs').default;
-const parsers = require('../../src/parsers/default-parsers.mjs').default;
+const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
@@ -62,7 +62,7 @@ describe('cachedFetch method', () => {
     let f = new File({
       cachePath: defaultCachePath,
       source: path.join(__dirname, '../_test-files/data-simple.json'),
-      parsers
+      parserMethods
     });
 
     let data = await f.cachedFetch();
@@ -73,7 +73,7 @@ describe('cachedFetch method', () => {
     let f = new File({
       cachePath: defaultCachePath,
       source: path.join(__dirname, '../_test-files/data-simple.yml'),
-      parsers
+      parserMethods
     });
 
     let data = await f.cachedFetch();

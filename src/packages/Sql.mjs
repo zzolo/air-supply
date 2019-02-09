@@ -3,14 +3,6 @@
  * SQL package class module.  Gets data from an SQL database.
  *
  * @module air-supply/src/packages/Sql
- *
- * @example
- * import Sql from 'air-supply/src/packages/Sql';
- * let f = new Sql({
- *   source: 'mysql://user:name@host/database',
- *   query: 'SELECT * FROM table'
- * });
- * let data = f.cachedFetch();
  */
 
 // Dependencies
@@ -43,12 +35,21 @@ const Sequelize = sequelizeWrapper.default || sequelizeWrapper;
  * @class Sql
  * @extends BasePackage
  *
- * @param {Object!} options Options object to define options for this
- *   specific package adn override any defaults.  See the global AirSupply
- *   options
- * @param {String!} options.source The URI to the file to read data from.
- * @param {Boolean} [options.parser=false] Turn parsing off.
+ * @example
+ * import Sql from 'air-supply/src/packages/Sql';
+ * let f = new Sql({
+ *   source: 'mysql://user:name@host/database',
+ *   query: 'SELECT * FROM table'
+ * });
+ * let data = f.cachedFetch();
+ *
+ * @param {Object!} options Options for package that will override
+ *   any defaults from the <AirSupply> or <BasePackage>.
+ * @param {String!} options.source The URI to the the database.
+ * @param {Boolean} [options.parsers=false] Turn parsing off by default.
  * @param {Object} [options.fetchOptions] `sequelize` connection options.
+ * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
+ *   referencial purposes.
  *
  * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
  *   referencial purposes.
@@ -59,7 +60,7 @@ export default class Sql extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       // Don't need parser
-      parser: false
+      parsers: false
     });
   }
 

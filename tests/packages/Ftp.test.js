@@ -12,7 +12,7 @@ const path = require('path');
 
 // Get module
 const Ftp = require('../../src/packages/Ftp.mjs').default;
-const parsers = require('../../src/parsers/default-parsers.mjs').default;
+const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
@@ -68,12 +68,14 @@ describe('cachedFetch method', () => {
       cachePath: defaultCachePath,
       source:
         'ftp://media:results@ftp.sos.state.mn.us/20180814/attorneygen.txt',
-      parsers,
-      parser: 'csv',
-      parserOptions: {
-        delimiter: ';',
-        columns: false,
-        cast: false
+      parserMethods,
+      parser: {
+        parser: 'csv',
+        parserOptions: {
+          delimiter: ';',
+          columns: false,
+          cast: false
+        }
       }
     });
 

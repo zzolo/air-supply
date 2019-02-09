@@ -146,6 +146,9 @@ export default class BasePackage {
         this.options.parsers[0].source =
           this.options.parsers[0].source || this.options.source;
       }
+      else if (!this.options.parsers) {
+        this.options.parsers = { source: this.options.source };
+      }
       this.data.fetch = this.parse(this.data.fetch, this.options.parsers);
 
       // Cache fetch data

@@ -3,11 +3,6 @@
  * FTP package class module.  Gets data from an ftp source.
  *
  * @module air-supply/src/packages/Ftp
- *
- * @example
- * import Ftp from 'air-supply/src/packages/Ftp';
- * let f = new Ftp({ source: 'ftp://example.com/data.json' });
- * let data = f.cachedFetch();
  */
 
 // Dependencies
@@ -15,34 +10,39 @@ import { parse as parseUrl } from 'url';
 import merge from 'lodash/merge';
 import BasePackage from './BasePackage';
 import * as ftpWrapper from 'ftp';
-import * as debugWrapper from 'debug';
+//import * as debugWrapper from 'debug';
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:ftp');
+//const debug = (debugWrapper.default || debugWrapper)('airsupply:ftp');
 
 // Deal with import defaults
 const FtpClient = ftpWrapper.default || ftpWrapper;
 
 /**
- * Ftp package type.  Gets data from an "ftp://" source via [fetch](https://www.npmjs.com/package/ftp) module.
+ * Ftp package type.  Gets data from an "ftp://" source via [ftp](https://www.npmjs.com/package/ftp) module.
  *
  * @export
  * @class Ftp
  * @extends BasePackage
  *
- * @param {Object!} options Options object to define options for this
- *   specific package adn override any defaults.  See the global AirSupply
- *   options
- * @param {String!} options.source The URI to the file to read data from.  Something like
+ * @example
+ * import Ftp from 'air-supply/src/packages/Ftp';
+ * let f = new Ftp({ source: 'ftp://example.com/data.json' });
+ * let data = f.cachedFetch();
+ *
+ * @param {Object!} options Options for package that will override
+ *   any defaults from the <AirSupply> or <BasePackage>.
+ * @param {String!} options.source The URI to the file to read data from.
+ *   Something like
  *   `ftp://username:pass@ftp.example.com/path/to/file.json`
- * @param {Object!} options.fetchOptions `ftp` options, overriding anything determined
- *   from the `source`.
- * @param {String!} options.fetchOptions.type Custom option to handle what kind of
- *   response we want from the fetch, can be either `buffer`
- *   or `string`; defaults to `string`.
- * @param {String!} options.fetchOptions.path Custom option for the path to get from
- *   the FTP server, if not used in the `source`.
- * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
+ * @param {Object} [options.fetchOptions] `ftp` connection options,
+ *   overriding anything determined from the `source`.
+ * @param {String} [options.fetchOptions.type='string'] Custom option to
+ *   handle what kind of response we want from the fetch, can be either
+ *   `buffer` or `string`; defaults to `string`.
+ * @param {String} [options.fetchOptions.path] Custom option for the
+ *   path to get from the FTP server, if not used in the `source` URI.
+ * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
  *
  * @return {<Ftp>} The new Ftp object.
@@ -53,7 +53,7 @@ export default class Ftp extends BasePackage {
   }
 
   /**
-   * Fetch implementation.
+   * Fetch implementation.  Utilizes the [ftp](https://www.npmjs.com/package/ftp) module
    *
    * @async
    * @return {Object} The fetched data.

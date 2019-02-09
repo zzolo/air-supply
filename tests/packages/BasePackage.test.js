@@ -146,14 +146,14 @@ describe('parse method', () => {
     expect(
       b.parse(
         {
-          json: '{ a: 1 }',
+          'file.json': '{ a: 1 }',
           csv: 'a,b\n1,2'
         },
         {
           multiSource: true
         }
       )
-    ).toEqual({ json: { a: 1 }, csv: [{ a: 1, b: 2 }] });
+    ).toEqual({ 'file.json': { a: 1 }, csv: [{ a: 1, b: 2 }] });
   });
 });
 

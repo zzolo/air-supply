@@ -3,14 +3,6 @@
  * Airtable package class module.  Gets data from Airtable.
  *
  * @module air-supply/src/packages/Airtable
- *
- * @example
- * import Airtable from 'air-supply/src/packages/Airtable';
- * let f = new Airtable({
- *   source: 'BASE-ID-XXXX',
- *   table: 'table-XXXX'
- * });
- * let data = f.cachedFetch();
  */
 
 // Dependencies
@@ -34,26 +26,37 @@ const AirtableApi = airtableWrapper.default || airtableWrapper;
  * @class Airtable
  * @extends BasePackage
  *
- * @param {Object!} options Options object to define options for this
- *   specific package adn override any defaults.  See the global AirSupply
- *   options
+ * @example
+ * import Airtable from 'air-supply/src/packages/Airtable';
+ * let f = new Airtable({
+ *   source: 'BASE-ID-XXXX',
+ *   table: 'table-XXXX'
+ * });
+ * let data = f.cachedFetch();
+ *
+ * @param {Object!} options Options for package that will override
+ *   any defaults from the <AirSupply> or <BasePackage>.
  * @param {String!} options.source The Airtable Base ID.
  * @param {String!} options.table The table ID in the Airtable Base.
- * @param {String?} [options.airtableKey=process.env.AIRTABLE_API_KEY] The Airtable
- *   API key found at [airtable.com/api](https://airtable.com/api).  Uses the environment
- *   variable AIRTABLE_API_KEY by default.
- * @param {Boolean?} [options.parser=false] Turns parsing off by default.
- * @param {Object?} [options.fetchOptions] Options that are passed to the `list` method
- *   of the Airtable NodeJS method.  Airtable does not make this linkable, but includes
- *   options such as: `fields`, `filterByFormula`, `maxRecords`, `pageSize`, `view`,
- *   `sort` (ex. `[{field: "ID", direction: "desc"}]`), `cellFormat` (ex. `json` or `string`)
+ * @param {String} [options.airtableKey=process.env.AIRTABLE_API_KEY] The
+ *   Airtable API key found at [airtable.com/api](https://airtable.com/api).
+ *   Uses the environment variable AIRTABLE_API_KEY by default.
+ * @param {Boolean} [options.parser=false] Turns parsing off by default.
+ * @param {Object} [options.fetchOptions] Options that are passed to the
+ *   `list` method of the Airtable NodeJS method.  Airtable does not
+ *   make this linkable, but includes options such as:
+ *   `fields`, `filterByFormula`, `maxRecords`, `pageSize`, `view`,
+ *   `sort` (ex. `[{field: "ID", direction: "desc"}]`), `cellFormat`
+ *   (ex. `json` or `string`)
+ * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
+ *   referencial purposes.
  *
- * @return {<Airtable>} The new File object.
+ * @return {<Airtable>} The new Airtable object.
  */
 export default class Airtable extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
-      parser: false
+      parsers: false
     });
   }
 
