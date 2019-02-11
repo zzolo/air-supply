@@ -14,14 +14,14 @@
 
 // Depenendencies
 import merge from 'lodash/merge';
-import * as debugWrapper from 'debug';
 import path from 'path';
 import os from 'os';
 import url from 'url';
 import http from 'http';
 import fsWrapper from 'fs-extra';
-import googleapisWrapper from 'googleapis';
-import opnWrapper from 'opn';
+import * as googleapisWrapper from 'googleapis';
+import * as opnWrapper from 'opn';
+import * as debugWrapper from 'debug';
 
 // Debug
 const debug = (debugWrapper.default || debugWrapper)('airsupply:auth:google');

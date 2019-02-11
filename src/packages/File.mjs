@@ -4,11 +4,6 @@
  * file system.
  *
  * @module air-supply/src/packages/File
- *
- * @example
- * import File from 'air-supply/src/packages/File';
- * let f = new File({ source: 'file.json' });
- * let data = f.cachedFetch();
  */
 
 // Dependencies
@@ -29,12 +24,21 @@ const fs = fsWrapper.default || fsWrapper;
  * @class File
  * @extends BasePackage
  *
- * @param {Object!} options Options object to define options for this
- *   specific package adn override any defaults.  See the global AirSupply
- *   options
- * @param {String!} options.source The path to the file or directory to read data from.
- * @param {Boolean?} [options.noCache=true] Turn caching off or leave on.
- * @param {Object?} [options.fetchOptions='utf-8'] Options given to [readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options)
+ * @example
+ * import File from 'air-supply/src/packages/File';
+ * let f = new File({ source: 'file.json' });
+ * let data = f.cachedFetch();
+ *
+ * @param {Object!} options Options for package that will override
+ *   any defaults from the <AirSupply> or <BasePackage>.
+ * @param {String!} options.source The path to the file.
+ * @param {Boolean} [options.noCache=true] Defaults to no caching, since
+ *   caching is essentially the same.  Might be useful to turn on
+ *   if there is a lot of transforming.
+ * @param {Object|String} [options.fetchOptions='utf-8'] Options given to
+ *   [readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options)
+ * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
+ *   referencial purposes.
  *
  * @return {<File>} The new File object.
  */

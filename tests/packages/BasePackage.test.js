@@ -14,7 +14,7 @@ const path = require('path');
 
 // Get module
 const BasePackage = require('../../src/packages/BasePackage.mjs').default;
-const parsers = require('../../src/parsers/default-parsers.mjs').default;
+const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
 
 // Default cache path
 const defaultCachePath = path.join(
@@ -85,16 +85,75 @@ describe('parse method', () => {
       cachePath: defaultCachePath
     });
 
-    expect(b.parse('a', undefined, a => a + 'a')).toBe('aa');
+    expect(b.parse('a', { parser: a => a + 'a' })).toBe('aa');
   });
 
   test('handle match', () => {
     let b = new BasePackage({
       cachePath: defaultCachePath,
-      parsers
+      parserMethods
     });
 
-    expect(b.parse('{ a: 1 }', 'file.json')).toEqual({ a: 1 });
+    expect(b.parse('{ a: 1 }', { source: 'file.json' })).toEqual({ a: 1 });
+  });
+
+  test('multi parse', () => {
+    let b = new BasePackage({
+      cachePath: defaultCachePath,
+      parserMethods
+    });
+
+    expect(
+      b.parse('{ a: 1 }', [{ parser: () => 'a' }, { parser: () => 'b' }])
+    ).toEqual('b');
+  });
+
+  test('specific parser', () => {
+    let b = new BasePackage({
+      cachePath: defaultCachePath,
+      parserMethods
+    });
+
+    expect(b.parse('{ a: 1 }', 'json')).toEqual({ a: 1 });
+  });
+
+  test('mixed', () => {
+    let b = new BasePackage({
+      cachePath: defaultCachePath,
+      parserMethods
+    });
+
+    expect(
+      b.parse('{ a: 1 }', [
+        'json',
+        undefined,
+        {
+          parser: a => {
+            a.a = 3;
+            return a;
+          }
+        }
+      ])
+    ).toEqual({ a: 3 });
+  });
+
+  test('multiSource', () => {
+    let b = new BasePackage({
+      cachePath: defaultCachePath,
+      parserMethods
+    });
+
+    expect(
+      b.parse(
+        {
+          'file.json': '{ a: 1 }',
+          csv: 'a,b\n1,2'
+        },
+        {
+          multiSource: true
+        }
+      )
+    ).toEqual({ 'file.json': { a: 1 }, csv: [{ a: 1, b: 2 }] });
   });
 });
 
