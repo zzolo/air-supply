@@ -19,6 +19,7 @@ import shapefileParser from './shapefile';
 import kmlParser from './kml';
 import gpxParser from './gpx';
 import topojsonParser from './topojson';
+import reprojectParser from './reproject';
 
 /**
  * @ignore
@@ -99,5 +100,11 @@ export default {
   topojson: {
     match: /geo.?json$/i,
     parser: topojsonParser
+  },
+  reproject: {
+    // This is not really a parse, and doesn't really have
+    // a file type match
+    match: /no-match----$/i,
+    parser: reprojectParser
   }
 };

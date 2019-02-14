@@ -28,6 +28,7 @@
     "expect": true,
     "afterAll": true,
     "beforeAll": true,
-    "jest": true
+    "jest": true,
+    "import": true
   }
 }

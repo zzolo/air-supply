@@ -10,7 +10,7 @@ import topojson from 'topojson';
 /**
  * Converts GeoJSON to TopoJSON.  Uses [topojson](https://github.com/topojson/topojson) module.
  *
- * @name kml
+ * @name topojson
  * @export
  *
  * @param {Object|String|Buffer!} input Geojson input.
