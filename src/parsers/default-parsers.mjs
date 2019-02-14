@@ -18,6 +18,7 @@ import xlsxParser from './xlsx';
 import shapefileParser from './shapefile';
 import kmlParser from './kml';
 import gpxParser from './gpx';
+import topojsonParser from './topojson';
 
 /**
  * @ignore
@@ -94,5 +95,9 @@ export default {
   gpx: {
     match: /gpx$/i,
     parser: gpxParser
+  },
+  topojson: {
+    match: /geo.?json$/i,
+    parser: topojsonParser
   }
 };
