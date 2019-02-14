@@ -17,6 +17,7 @@ import merge from 'lodash/merge';
 import path from 'path';
 import os from 'os';
 import fsWrapper from 'fs-extra';
+import find from 'lodash/find';
 import { fork } from 'child_process';
 import * as googleapisWrapper from 'googleapis';
 import * as debugWrapper from 'debug';
@@ -42,7 +43,7 @@ const { google } = googleapisWrapper.default || googleapisWrapper;
  * @param {String} [options.consumerSecret=process.env.GOOGLE_OAUTH_CONSUMER_SECRET] The
  *   Google auth consumer secret; defaults to the environment variable:
  *   `GOOGLE_OAUTH_CLIENT_ID`.
- * @param {Array} [options.consumerSecret=['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/spreadsheets']]
+ * @param {Array} [options.scope=['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/spreadsheets']]
  *   The scope of the autentication.
  * @param {Number} [options.localPort=48080] Port for local server.
  * @param {String} [options.tokenLocation=~/.air-supply/google-auth.json] Where
@@ -121,9 +122,10 @@ export default async function googleAuthenticate(options = {}) {
     let token = JSON.parse(fs.readFileSync(options.tokenLocation, 'utf-8'));
     auth.setCredentials(token);
 
-    // TODO: Check if valid still?
-
-    return auth;
+    // Check auth
+    if (await googleCheckAuthentication(auth, options)) {
+      return auth;
+    }
   }
 
   // Make sure the token location exists
@@ -161,4 +163,27 @@ export default async function googleAuthenticate(options = {}) {
       }
     });
   });
+}
+
+// Check authentication.
+// There does not seem to be a way to check the current
+// tokens we have, so we make a simple call to Drive.
+async function googleCheckAuthentication(auth, options = {}) {
+  if (!options.scope || !find(options.scope, s => s.match(/auth\/drive/i))) {
+    debug('Unable to find drive scope to check token.');
+    return true;
+  }
+
+  try {
+    let drive = google.drive('v3');
+    let result = await drive.about.get({
+      fields: ['user'],
+      auth
+    });
+
+    return result && result.data && result.data.user;
+  } catch (e) {
+    debug(e);
+    return false;
+  }
 }

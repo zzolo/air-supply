@@ -33,6 +33,8 @@ afterAll(() => {
 // File package
 describe('GoogleDoc class', () => {
   test('can instantiate', () => {
+    expect.assertions(1);
+
     expect(() => {
       new GoogleSheet({
         cachePath: defaultCachePath
@@ -52,6 +54,8 @@ describe('fetch authenticated method', () => {
     process.env.GOOGLE_OAUTH_CONSUMER_SECRET
   ) {
     test('will fetch', async () => {
+      expect.assertions(2);
+
       let f = new GoogleSheet({
         cachePath: defaultCachePath,
         source: '1by2j2MNyhKlAgULgysi413jptqitxWvCYZYgl-M1Ezo'
