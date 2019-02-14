@@ -33,6 +33,8 @@ afterAll(() => {
 // File package
 describe('GoogleDoc class', () => {
   test('can instantiate', () => {
+    expect.assertions(1);
+
     expect(() => {
       new GoogleDoc({
         cachePath: defaultCachePath
@@ -43,6 +45,8 @@ describe('GoogleDoc class', () => {
 
 describe('fetch unauthenticated method', () => {
   test('will fetch', async () => {
+    expect.assertions(2);
+
     let f = new GoogleDoc({
       cachePath: defaultCachePath,
       source:
@@ -66,6 +70,8 @@ describe('fetch authenticated method', () => {
     process.env.GOOGLE_OAUTH_CONSUMER_SECRET
   ) {
     test('will fetch', async () => {
+      expect.assertions(2);
+
       let f = new GoogleDoc({
         cachePath: defaultCachePath,
         source: '1VgXHKKpykKSLF6adx9tRbkwX0hpdfZvtt9oPQHLpyrs'
@@ -85,6 +91,8 @@ describe('fetch authenticated method', () => {
 
 describe('cachedFetch unauthenticated method', () => {
   test('will fetch', async () => {
+    expect.assertions(2);
+
     let f = new GoogleDoc({
       cachePath: defaultCachePath,
       source:
@@ -109,6 +117,8 @@ describe('cachedFetch authenticated method', () => {
     process.env.GOOGLE_OAUTH_CONSUMER_SECRET
   ) {
     test('will fetch', async () => {
+      expect.assertions(2);
+
       let f = new GoogleDoc({
         cachePath: defaultCachePath,
         source: '1VgXHKKpykKSLF6adx9tRbkwX0hpdfZvtt9oPQHLpyrs',

@@ -16,11 +16,9 @@
 import merge from 'lodash/merge';
 import path from 'path';
 import os from 'os';
-import url from 'url';
-import http from 'http';
 import fsWrapper from 'fs-extra';
+import { fork } from 'child_process';
 import * as googleapisWrapper from 'googleapis';
-import * as opnWrapper from 'opn';
 import * as debugWrapper from 'debug';
 
 // Debug
@@ -29,7 +27,6 @@ const debug = (debugWrapper.default || debugWrapper)('airsupply:auth:google');
 // Deal with import defaults
 const fs = fsWrapper.default || fsWrapper;
 const { google } = googleapisWrapper.default || googleapisWrapper;
-const opn = opnWrapper.default || opnWrapper;
 
 /**
  * Authenticate to Google's API via OAuth on the command line.  Will
@@ -55,6 +52,8 @@ const opn = opnWrapper.default || opnWrapper;
  * @param {Number} [options.timeout=300000] Timeout (currently doen't work)
  * @param {String} [options.authenticatedMessage='..[[[LOCATION]]]..'] The message
  *   to send to the browser when successfully authenticated.
+ * @param {Number} [options.openWait=1] Milliseconds to wait to open authentication
+ *   browser page.
  *
  * @return {Object} Authentication object from `googleapis` module.
  */
@@ -70,10 +69,16 @@ export default async function googleAuthenticate(options = {}) {
       'https://www.googleapis.com/auth/spreadsheets'
     ],
     localPort: 48080,
-    timeout: 1000 * 60 * 5,
+    timeout: 1000 * 60 * 2,
     authenticatedMessage:
       'Authenticated, saving token locally to: "[[[LOCATION]]]".  It is ok to close this window now.'
   });
+
+  // Weird mjs and __dirname thing
+  let dirName;
+  if (typeof __dirname === 'undefined') {
+    dirName = path.dirname(new URL(import.meta.url).pathname);
+  }
 
   // Local URL.  Note that it is important to leave off the trailing slash
   let localUrl = `http://localhost:${options.localPort}/authenticate`;
@@ -124,8 +129,7 @@ export default async function googleAuthenticate(options = {}) {
   // Make sure the token location exists
   try {
     fs.mkdirpSync(path.dirname(options.tokenLocation));
-  }
-  catch (e) {
+  } catch (e) {
     debug(e);
     throw new Error(
       `When trying to authenticate with Google, unable to create the directory for the token at: "${
@@ -134,128 +138,27 @@ export default async function googleAuthenticate(options = {}) {
     );
   }
 
-  // Get new tokens
+  // Async
   return new Promise((resolve, reject) => {
-    // Create auth Url
-    let authUrl = auth.generateAuthUrl({
-      access_type: 'offline',
-      scope: options.scope.join(' '),
-      prompt: 'consent'
-    });
-
-    // Weird way to close the local server "forcefully"
-    // https://stackoverflow.com/questions/14626636/how-do-i-shutdown-a-node-js-https-server-immediately
-    let sockets = {};
-
-    // Destroy sockets
-    function destroySockets() {
-      for (let s in sockets) {
-        sockets[s].destroy();
-      }
-    }
-
-    // Handle timeout
-    if (options.timeout) {
-      setTimeout(() => {
-        destroySockets();
-        reject(
-          new Error(
-            'Google authentication timeout reached; if this happens too quickly, update the "timeout" option.'
-          )
-        );
-      }, options.timeout);
-    }
-
-    // Local server
-    let localServer;
-
-    // Handle authentication response
-    const onAuthenticated = async (request, response) => {
-      // Parse out query paramters
-      let requestUrl =
-        request.url[0] == '/'
-          ? `localhost:${options.localPort}${request.url}`
-          : request.url;
-      let query = new url.URL(requestUrl).searchParams;
-      let code = query.get('code');
-
-      // No code.
-      // TODO: Is this an error-able thing?
-      if (!code) {
-        destroySockets();
-        return;
-      }
-
-      try {
-        // Get tokens
-        let token = await auth.getToken(code);
-        var tokens = token.tokens;
+    // Using sub process so that we can very-forcefully kill it when needed
+    let f = fork(path.join(dirName, 'google.subprocess.js'));
+    f.send(options);
+    f.on('message', m => {
+      if (m && m.error) {
+        reject(m.error);
+      } else if (m && m.tokens) {
+        // Update google auth
+        auth.setCredentials(m.tokens);
 
         // Write tokens
-        fs.writeFileSync(options.tokenLocation, JSON.stringify(tokens));
-        response.end(
-          options.authenticatedMessage.replace(
-            '[[[LOCATION]]]',
-            options.tokenLocation
-          )
-        );
+        fs.writeFileSync(options.tokenLocation, JSON.stringify(m.tokens));
 
-        // Close server, kind of hacky, but not better way
-        localServer.close(error => {
-          if (error) {
-            destroySockets();
-            return reject(error);
-          }
+        // Done
+        resolve(auth);
 
-          localServer.unref();
-          destroySockets();
-          process.nextTick(() => {
-            resolve(auth);
-          });
-        });
+        // Kill process
+        f.kill('SIGINT');
       }
-      catch (e) {
-        destroySockets();
-        response.end(e.message);
-        reject(e);
-      }
-    };
-
-    // Handle request of local server
-    const onRequest = (request, response) => {
-      response.setHeader('Connection', 'close');
-
-      if (request.url.indexOf('authenticate') > -1) {
-        return onAuthenticated(request, response);
-      }
-      else if (request.url.indexOf('authorize') > -1) {
-        response.setHeader('Location', authUrl);
-        response.writeHead(302);
-      }
-      else {
-        response.writeHead(404);
-      }
-
-      response.end();
-    };
-
-    // Start local server
-    localServer = http.createServer(onRequest);
-    localServer.listen(options.localPort, () =>
-      opn(`http://localhost:${options.localPort}/authorize`)
-    );
-
-    // Track sockets
-    let nextSocketId = 0;
-    localServer.on('connection', socket => {
-      // Add a newly connected socket
-      let thisSocketId = nextSocketId++;
-      sockets[thisSocketId] = socket;
-
-      // Remove the socket when it closes
-      socket.on('close', function() {
-        delete sockets[thisSocketId];
-      });
     });
   });
 }

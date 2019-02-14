@@ -49,6 +49,8 @@ const { google } = googleapisWrapper.default || googleapisWrapper;
  * @param {String} [options.fetchOptions.fieldType='userEnteredValue']
  *   The type of value to get from each field; can be `userEnteredValue`,
  *   `effectiveValue`, or `formattedValue`
+ * @param {Object} [options.authOptions] Options to pass to the Google authentication
+ *   function.
  * @param {String|Boolean} [options.parsers=false] Defaults to not use
  *   a parser.
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
@@ -77,9 +79,15 @@ export default class GoogleSheet extends BasePackage {
   async fetch() {
     let source = this.option('source');
     let options = this.option('fetchOptions') || {};
+    let authOptions = this.option('authOptions') || {};
 
     // Get basic grid
-    let grid = await this.getRawGrid(source, options.sheet, options.fieldType);
+    let grid = await this.getRawGrid(
+      source,
+      options.sheet,
+      options.fieldType,
+      authOptions
+    );
 
     // Filter empty
     if (options.filterEmpty) {
@@ -120,13 +128,18 @@ export default class GoogleSheet extends BasePackage {
    *
    * @return {Object} Sheet content.
    */
-  async getRawGrid(source, sheet = false, fieldType = 'userEnteredValue') {
+  async getRawGrid(
+    source,
+    sheet = false,
+    fieldType = 'userEnteredValue',
+    authOptions = {}
+  ) {
     if (!source) {
       throw new Error('Spreadsheet/file id not provided to getRawGrid method');
     }
 
     // Authenticate
-    let auth = await googleAuthenticate();
+    let auth = await googleAuthenticate(authOptions);
 
     // Get data
     let sheets = google.sheets('v4');

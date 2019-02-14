@@ -45,6 +45,8 @@ const { AllHtmlEntities } = htmlEntitiesWrapper.default || htmlEntitiesWrapper;
  *   the Google Doc ID (can be found in the URL).  For un-authenticated requests
  *   via the "Published to the Web" version, provide the full URL.
  * @param {String} [options.parsers='archieml'] Defaults to use ArchieML parser.
+ * @param {Object} [options.authOptions] Options to pass to the Google authentication
+ *   function.
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
  *
@@ -65,10 +67,10 @@ export default class GoogleDoc extends BasePackage {
    */
   async fetch() {
     let source = this.option('source');
-    //let options = this.option('fetchOptions') || {};
+    let authOptions = this.option('authOptions') || {};
 
     // Get the HTML content
-    let contents = await this.getHTMLContents(source);
+    let contents = await this.getHTMLContents(source, authOptions);
 
     // Parse HTML
     return await this.htmlParser(contents);
@@ -85,7 +87,7 @@ export default class GoogleDoc extends BasePackage {
    *
    * @return {String} HTML content.
    */
-  async getHTMLContents(source) {
+  async getHTMLContents(source, authOptions = {}) {
     if (!source) {
       throw new Error(
         'Document/file id not provided to getHTMLContents method in Google Docs package.'
@@ -98,7 +100,7 @@ export default class GoogleDoc extends BasePackage {
     }
 
     // Authenticate to Google
-    let auth = await googleAuthenticate();
+    let auth = await googleAuthenticate(authOptions);
 
     // Get file contests as HTML
     let drive = google.drive('v3');
@@ -124,7 +126,7 @@ export default class GoogleDoc extends BasePackage {
   async getPublishedToWebContent(url) {
     if (!url || !url.match(/^http/i)) {
       throw new Error(
-        'URL provided to getPublishedToWebContent method  in Google Docs package does not start with "http"'
+        'URL provided to getPublishedToWebContent method in Google Docs package does not start with "http"'
       );
     }
 
