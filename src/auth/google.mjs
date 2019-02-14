@@ -75,12 +75,6 @@ export default async function googleAuthenticate(options = {}) {
       'Authenticated, saving token locally to: "[[[LOCATION]]]".  It is ok to close this window now.'
   });
 
-  // Weird mjs and __dirname thing
-  let dirName;
-  if (typeof __dirname === 'undefined') {
-    dirName = path.dirname(new URL(import.meta.url).pathname);
-  }
-
   // Local URL.  Note that it is important to leave off the trailing slash
   let localUrl = `http://localhost:${options.localPort}/authenticate`;
   debug(
@@ -131,7 +125,8 @@ export default async function googleAuthenticate(options = {}) {
   // Make sure the token location exists
   try {
     fs.mkdirpSync(path.dirname(options.tokenLocation));
-  } catch (e) {
+  }
+  catch (e) {
     debug(e);
     throw new Error(
       `When trying to authenticate with Google, unable to create the directory for the token at: "${
@@ -143,12 +138,13 @@ export default async function googleAuthenticate(options = {}) {
   // Async
   return new Promise((resolve, reject) => {
     // Using sub process so that we can very-forcefully kill it when needed
-    let f = fork(path.join(dirName, 'google.subprocess.js'));
+    let f = fork('./google.subprocess.js');
     f.send(options);
     f.on('message', m => {
       if (m && m.error) {
         reject(m.error);
-      } else if (m && m.tokens) {
+      }
+      else if (m && m.tokens) {
         // Update google auth
         auth.setCredentials(m.tokens);
 
@@ -182,7 +178,8 @@ async function googleCheckAuthentication(auth, options = {}) {
     });
 
     return result && result.data && result.data.user;
-  } catch (e) {
+  }
+  catch (e) {
     debug(e);
     return false;
   }
