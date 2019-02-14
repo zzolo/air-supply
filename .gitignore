@@ -73,5 +73,5 @@ ehthumbs.db
 Thumbs.db
 
 # Exceptions
-!tests/_test-files/zip-files.zip
+!tests/_test-files/*.zip
 !tests/_test-files/simple.sqlite

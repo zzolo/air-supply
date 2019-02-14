@@ -15,6 +15,7 @@ import yamlParser from './yaml';
 import archiemlParser from './archieml';
 import zipParser from './zip';
 import xlsxParser from './xlsx';
+import shapefileParser from './shapefile';
 
 /**
  * @ignore
@@ -74,6 +75,11 @@ export default {
   zip: {
     match: /zip$/i,
     parser: zipParser
+  },
+  // Shapefiles are essentially zip
+  shapefile: {
+    match: /(shp.*zip|shp)$/i,
+    parser: shapefileParser
   },
   xlsx: {
     match: /(xlsx|xls|dbf|ods)$/i,
