@@ -26,6 +26,7 @@
     "sqlite3": "^4.0.6"
   },
   "dependencies": {
+    "@mapbox/togeojson": "^0.16.0",
     "adm-zip": "^0.4.13",
     "airtable": "^0.5.8",
     "archieml": "^0.4.2",
@@ -48,7 +49,8 @@
     "opn": "^5.4.0",
     "sequelize": "^4.42.0",
     "shpjs": "^3.4.3",
-    "xlsx": "^0.14.1"
+    "xlsx": "^0.14.1",
+    "xmldom": "^0.1.27"
   },
   "repository": {
     "type": "git",

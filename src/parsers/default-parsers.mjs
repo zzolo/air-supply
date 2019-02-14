@@ -16,6 +16,8 @@ import archiemlParser from './archieml';
 import zipParser from './zip';
 import xlsxParser from './xlsx';
 import shapefileParser from './shapefile';
+import kmlParser from './kml';
+import gpxParser from './gpx';
 
 /**
  * @ignore
@@ -84,5 +86,13 @@ export default {
   xlsx: {
     match: /(xlsx|xls|dbf|ods)$/i,
     parser: xlsxParser
+  },
+  kml: {
+    match: /kml$/i,
+    parser: kmlParser
+  },
+  gpx: {
+    match: /gpx$/i,
+    parser: gpxParser
   }
 };
