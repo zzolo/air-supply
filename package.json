@@ -12,8 +12,9 @@
   "scripts": {
     "test": "jest",
     "build": "microbundle -o dist -i index.mjs",
-    "docs": "documentation readme --readme-file README.md --section 'API' -c documentation.yml --github index.mjs && prettier --write README.md",
+    "docs": "mkdir -p docs && documentation build -f html -c documentation.yml --github -o docs index.mjs",
     "docs:preview": "documentation serve -c documentation.yml --github -w index.mjs",
+    "docs:publish": "npm run docs && gh-pages -d docs",
     "prepublishOnly": "npm run build"
   },
   "author": "Alan Palazzolo",
@@ -23,6 +24,7 @@
     "dotenv": "^6.2.0",
     "eslint": "^5.11.1",
     "esm": "^3.0.84",
+    "gh-pages": "^2.0.1",
     "jest": "^23.6.0",
     "microbundle": "^0.9.0",
     "prettier": "^1.15.3",

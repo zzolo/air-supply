@@ -5,7 +5,7 @@ _You need data; Air Supply will get it to you._
 Air Supply is a versatile library to handle getting data from multiple sources in a sane way to use in your application build, data analysis, or whatever else requires fetching some data.
 
 [![npm version](https://img.shields.io/npm/v/air-supply.svg?style=flat-square)](https://www.npmjs.com/package/air-supply)
-[![npm](https://img.shields.io/npm/dm/air-supply.svg?style=flat-square)](https://www.npmjs.com/package/air-supply)
+[![github](https://img.shields.io/github/stars/zzolo/air-supply.svg?style=social)](https://github.com/zzolo-air-supply)
 
 ## Why
 
@@ -208,12 +208,26 @@ The following parsers are available by default.
 
 Full API documentation can be found at [zzolo.org/air-supply](https://zzolo.org/air-supply).
 
-## Contribute
+## Develop
+
+### Documentation
+
+Use `npm run docs:preview` and open [localhost:4001](http://localhost:4001) in a browser.
 
 ### Test
 
 Run tests with: `npm run test`
 
-```
+## Publish
 
-```
+### NPM
+
+1. Bump version in `package.json` and run `npm install`
+1. Commit.
+1. Tag: `git tag X.X.X`
+1. Push up: `git push origin master --tags`
+1. Run `npm publish`
+
+### Docs
+
+Build and publish to Github Pages (after NPM publish): `npm run docs:publish`

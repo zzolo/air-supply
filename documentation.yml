@@ -2,7 +2,7 @@ toc:
   - name: "About"
     file: README.md
     children:
-      - ""
+      - name: "PLACEHOLDER see documentationjs/documentation/issues/1113"
   - name: API Reference
   - AirSupply
   - name: Packages
