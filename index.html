@@ -1,0 +1,6765 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>air-supply 0.0.1 | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+  <link href='assets/split.css' type='text/css' rel='stylesheet' />
+  <meta name='description' content='You need data; Air Supply will get it to you.'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>air-supply</h3>
+          <div class='mb1'><code>0.0.1</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#about'
+                  class="h5 bold black caps toggle-sibling">
+                  About
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  <ul class='list-reset py1-ul pl1'>
+                    <li class='h5'><span>Static members</span></li>
+                    
+                      <li><a
+                        href='#placeholder-see-documentationjsdocumentationissues1113'
+                        class='regular pre-open'>
+                        .PLACEHOLDER see documentationjs/documentation/issues/1113
+                      </a></li>
+                    
+                    </ul>
+                  
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#api-reference'
+                  class="h5 bold black caps">
+                  API Reference
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#airsupply'
+                  class=" toggle-sibling">
+                  AirSupply
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#airsupplysupply'
+                        class='regular pre-open'>
+                        #supply
+                      </a></li>
+                      
+                      <li><a
+                        href='#airsupplypackage'
+                        class='regular pre-open'>
+                        #package
+                      </a></li>
+                      
+                      <li><a
+                        href='#airsupplyguesspackagetype'
+                        class='regular pre-open'>
+                        #guessPackageType
+                      </a></li>
+                      
+                      <li><a
+                        href='#airsupplyloadconfig'
+                        class='regular pre-open'>
+                        #loadConfig
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#packages'
+                  class="h5 bold black caps">
+                  Packages
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#file'
+                  class=" toggle-sibling">
+                  File
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#filefetch'
+                        class='regular pre-open'>
+                        #fetch
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#directory'
+                  class=" toggle-sibling">
+                  Directory
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#directoryfetch'
+                        class='regular pre-open'>
+                        #fetch
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#http'
+                  class=" toggle-sibling">
+                  Http
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#httpfetch'
+                        class='regular pre-open'>
+                        #fetch
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#data'
+                  class=" toggle-sibling">
+                  Data
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#datafetch'
+                        class='regular pre-open'>
+                        #fetch
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#googledoc'
+                  class=" toggle-sibling">
+                  GoogleDoc
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#googledocfetch'
+                        class='regular pre-open'>
+                        #fetch
+                      </a></li>
+                      
+                      <li><a
+                        href='#googledocgethtmlcontents'
+                        class='regular pre-open'>
+                        #getHTMLContents
+                      </a></li>
+                      
+                      <li><a
+                        href='#googledocgetpublishedtowebcontent'
+                        class='regular pre-open'>
+                        #getPublishedToWebContent
+                      </a></li>
+                      
+                      <li><a
+                        href='#googledochtmlparser'
+                        class='regular pre-open'>
+                        #htmlParser
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#googlesheet'
+                  class=" toggle-sibling">
+                  GoogleSheet
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#googlesheetfetch'
+                        class='regular pre-open'>
+                        #fetch
+                      </a></li>
+                      
+                      <li><a
+                        href='#googlesheetgetrawgrid'
+                        class='regular pre-open'>
+                        #getRawGrid
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#airtable'
+                  class=" toggle-sibling">
+                  Airtable
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#airtablefetch'
+                        class='regular pre-open'>
+                        #fetch
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#sql'
+                  class=" toggle-sibling">
+                  Sql
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#sqlfetch'
+                        class='regular pre-open'>
+                        #fetch
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#ftp'
+                  class=" toggle-sibling">
+                  Ftp
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#ftpfetch'
+                        class='regular pre-open'>
+                        #fetch
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#basepackage'
+                  class=" toggle-sibling">
+                  BasePackage
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#basepackagecachedfetch'
+                        class='regular pre-open'>
+                        #cachedFetch
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackageparse'
+                        class='regular pre-open'>
+                        #parse
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackageparsedata'
+                        class='regular pre-open'>
+                        #parseData
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackageparseobject'
+                        class='regular pre-open'>
+                        #parseObject
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackagetransform'
+                        class='regular pre-open'>
+                        #transform
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackagebundle'
+                        class='regular pre-open'>
+                        #bundle
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackageoption'
+                        class='regular pre-open'>
+                        #option
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackagecreateid'
+                        class='regular pre-open'>
+                        #createId
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackagesetupcache'
+                        class='regular pre-open'>
+                        #setupCache
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackagesetcache'
+                        class='regular pre-open'>
+                        #setCache
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackagegetcache'
+                        class='regular pre-open'>
+                        #getCache
+                      </a></li>
+                      
+                      <li><a
+                        href='#basepackageremovecache'
+                        class='regular pre-open'>
+                        #removeCache
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#parsers'
+                  class="h5 bold black caps">
+                  Parsers
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#archieml'
+                  class="">
+                  archieml
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#csv'
+                  class="">
+                  csv
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#gpx'
+                  class="">
+                  gpx
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#json'
+                  class="">
+                  json
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#kml'
+                  class="">
+                  kml
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#reproject'
+                  class="">
+                  reproject
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#shapefile'
+                  class="">
+                  shapefile
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#topojson'
+                  class="">
+                  topojson
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#xlsx'
+                  class="">
+                  xlsx
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#yaml'
+                  class="">
+                  yaml
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#zip'
+                  class="">
+                  zip
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#other'
+                  class="h5 bold black caps">
+                  Other
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#googleauthenticate'
+                  class="">
+                  googleAuthenticate
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+            <div class='keyline-top-not py2'></div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='about'>
+      About
+    </h3>
+    
+    
+  </div>
+  
+
+  <h1>Air Supply</h1>
+<p><em>You need data; Air Supply will get it to you.</em></p>
+<p>Air Supply is a versatile library to handle getting data from multiple sources in a sane way to use in your application build, data analysis, or whatever else requires fetching some data.</p>
+<p><a href="https://www.npmjs.com/package/air-supply"><img src="https://img.shields.io/npm/v/air-supply.svg?style=flat-square" alt="npm version"></a>
+<a href="https://github.com/zzolo-air-supply"><img src="https://img.shields.io/github/stars/zzolo/air-supply.svg?style=social" alt="github"></a></p>
+<h2>Why</h2>
+<p>The main reason Air Supply was made to fill the need of having to bring in various data sources when making small, self-contained projects (in journalism). Air Supply is simply a way to bring together and make a consistent interface for lots of one-off code.</p>
+<h3>Pros</h3>
+<ul>
+<li>Can handle many sources of data, such as local files and directories, HTTP(S) sources, Google Docs and Sheets, many SQL sources, AirTable, and more.</li>
+<li>Can easily parse and transform data such as CSV-ish, MS Excel, YAML, Shapefiles, ArchieML, zip files, and more.</li>
+<li>Caches by default.</li>
+<li>Aimed at simple uses by just writing a JSON config, as well as more advanced transformations.</li>
+</ul>
+<h3>Cons</h3>
+<ul>
+<li>Not focused on performance (yet). The caching mitigates a lot of issues here, but the goal would be to use streams for everything where possible.</li>
+<li>The kitchen sink. Currently does not utilize peer dependencies, so an install of Air Supply brings a lot of things you might not use in your project.</li>
+</ul>
+<h3>Similar projects</h3>
+<p>These projects do roughly similar things, but not to the same degree:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/quaff">quaff</a></li>
+<li><a href="https://mhkeller.github.io/indian-ocean/">indian-ocean</a></li>
+</ul>
+<h2>Installation</h2>
+<pre class='hljs'>npm install air-supply --save</pre>
+<p>If you just want to use the command-line tool, install globally like: <code>npm install -g air-supply</code></p>
+<h2>Usage</h2>
+<h3>Basics</h3>
+<p>Basic usage in Node by defining the packages when using Air Supply.</p>
+<pre class='hljs'><span class="hljs-keyword">const</span> { AirSupply } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"air-supply"</span>);
+
+<span class="hljs-comment">// Create new AirSupply object and tell it about</span>
+<span class="hljs-comment">// the packages it needs</span>
+<span class="hljs-keyword">let</span> air = <span class="hljs-keyword">new</span> AirSupply({
+  <span class="hljs-attr">packages</span>: {
+    <span class="hljs-attr">remoteJSONData</span>: <span class="hljs-string">"http://example.com/data.json"</span>,
+    <span class="hljs-attr">googleSheetData</span>: {
+      <span class="hljs-attr">source</span>: <span class="hljs-string">"XXXXXXX"</span>,
+      <span class="hljs-attr">type</span>: <span class="hljs-string">"google-sheet"</span>
+    }
+  }
+});
+
+<span class="hljs-comment">// Get the data, caching will happen by default</span>
+<span class="hljs-keyword">let</span> data = <span class="hljs-keyword">await</span> air.supply();
+
+<span class="hljs-comment">// Data will look something like this</span>
+{
+  <span class="hljs-attr">remoteJSONData</span>: { ... },
+  <span class="hljs-attr">googleSheetData</span>: [
+    { <span class="hljs-attr">column1</span>: <span class="hljs-string">'abc'</span>, <span class="hljs-attr">column2</span>: <span class="hljs-number">234</span> },
+    ...
+  ]
+}</pre>
+<h3>Command line</h3>
+<p>Command line usage with a <code>air-supply.rc</code> file:</p>
+<pre class='hljs'>{
+  <span class="hljs-attr">"packages"</span>: {
+    <span class="hljs-attr">"cliData"</span>: <span class="hljs-string">"some-file.yml"</span>
+  }
+}</pre>
+<p>Then point the CLI tool to the config.</p>
+<pre class='hljs'>air-supply -c air-supply.rc &gt; data.json</pre>
+<h2>Examples</h2>
+<p><em>TODO</em></p>
+<h2>Configuration files</h2>
+<p>Air Supply will look for a config files based on <a href="https://www.npmjs.com/package/cosmiconfig">cosmiconfig</a> rules with a little customization. So, it will read the first of any of these files as it goes up the directory tree:</p>
+<pre class='hljs'>package.json <span class="hljs-comment"># An 'air-supply' property</span>
+.air-supply
+.air-supply.json
+.air-supply.json5
+.air-supply.yaml
+.air-supply.yml
+.air-supply.js
+air-supply.config.js</pre>
+<p>Note that any JSON will be read by the <a href="https://www.npmjs.com/package/json5">json5</a> module.</p>
+<h2>Packages</h2>
+<p>Packages are the methods that define how to get raw data from sources. The following are the available packages; see the full API documentation for all the specific options available.</p>
+<p>Packages will get passed any options from the AirSupply object that is using it, as well has some common options and usage.</p>
+<pre class='hljs'>AirSupply({
+  <span class="hljs-attr">ttl</span>: <span class="hljs-number">1000</span> * <span class="hljs-number">60</span> * <span class="hljs-number">10</span>,
+  <span class="hljs-attr">packages</span>: {
+    <span class="hljs-attr">things</span>: {
+      <span class="hljs-comment">// Type is the kebab case of the package class name, i.e.</span>
+      <span class="hljs-comment">// the package class name here would be PackageName.</span>
+      <span class="hljs-comment">//</span>
+      <span class="hljs-comment">// AirSupply will try to guess this given a source</span>
+      type: <span class="hljs-string">"package-name"</span>,
+      <span class="hljs-comment">// Almost all pcakages use the source option as it's</span>
+      <span class="hljs-comment">// main option to get data</span>
+      source: <span class="hljs-string">"the main source option for this package"</span>,
+      <span class="hljs-comment">// Depending on the package, any options for the</span>
+      <span class="hljs-comment">// fetching of data is ususally managed in fetchOptions</span>
+      fetchOptions: {
+        <span class="hljs-attr">fetchEverything</span>: <span class="hljs-literal">true</span>
+      },
+      <span class="hljs-comment">// Can override any defaults from the AirSupply object</span>
+      ttl: <span class="hljs-number">1000</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+      <span class="hljs-comment">// Parsers are simple functions to transform the raw data.</span>
+      <span class="hljs-comment">// This can be a string definign which parser to use,</span>
+      <span class="hljs-comment">// an object of configuration, or an array of either if</span>
+      <span class="hljs-comment">// you want to do multiple parsers.  The package</span>
+      <span class="hljs-comment">// will guess what kind of parser is needed based on the source.</span>
+      parsers: [<span class="hljs-string">"zip"</span>, { <span class="hljs-attr">multiSource</span>: <span class="hljs-literal">true</span> }],
+      <span class="hljs-comment">// Custom transform function that will happen after parsing.</span>
+      transform(data) {
+        <span class="hljs-keyword">return</span> expensiveAlterFunction(data);
+      },
+      <span class="hljs-comment">// Custom transform function that will happen after getting</span>
+      <span class="hljs-comment">// all packages.</span>
+      bundle(allPackages) {
+        <span class="hljs-keyword">return</span> alterPackages(data);
+      },
+      <span class="hljs-comment">// By default, caching will happen after fetching the raw data and</span>
+      <span class="hljs-comment">// any of the built-in parsing.  But, you can cache after the 'transform'</span>
+      <span class="hljs-comment">// or after the 'bundle'.</span>
+      <span class="hljs-comment">//</span>
+      <span class="hljs-comment">// Overall, this is only needed if you have expensive transformations</span>
+      cachePoint: <span class="hljs-string">"transform"</span>
+    }
+  }
+});</pre>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Description</th>
+<th>Docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AirTable</td>
+<td>Get data from an <a href="https://airtable.com/">AirTable</a> table.</td>
+<td><a href="https://zzolo.org/air-supply#airtable">API</a></td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Just pass JS data through.</td>
+<td><a href="https://zzolo.org/air-supply#data">API</a></td>
+</tr>
+<tr>
+<td>Directory</td>
+<td>Read files from a directory and parse each one if can.</td>
+<td><a href="https://zzolo.org/air-supply#directory">API</a></td>
+</tr>
+<tr>
+<td>File</td>
+<td>Read oen file from the filesystem.</td>
+<td><a href="https://zzolo.org/air-supply#file">API</a></td>
+</tr>
+<tr>
+<td>Ftp</td>
+<td>Get a file from an FTP source.</td>
+<td><a href="https://zzolo.org/air-supply#ftp">API</a></td>
+</tr>
+<tr>
+<td>GoogleDoc</td>
+<td>Get plain text version of a Google Doc and by default parse with ArchieML. Can be a publich "Published to the web" URL, or if given an ID will use Google's authentication.</td>
+<td><a href="https://zzolo.org/air-supply#googledoc">API</a></td>
+</tr>
+<tr>
+<td>GoogleSheet</td>
+<td>Get tabular data from a Google Sheet and assumes first row is headers by default. Uses Google's authentication; if you want to use a public "Published to the web" CSV, just use the Http package.</td>
+<td><a href="https://zzolo.org/air-supply#googlesheet">API</a></td>
+</tr>
+<tr>
+<td>Http</td>
+<td>Get data from an HTTP source.</td>
+<td><a href="https://zzolo.org/air-supply#http">API</a></td>
+</tr>
+<tr>
+<td>Sql</td>
+<td>Get data from SQL sources as that are supported by <a href="https://www.npmjs.com/package/sequelize">sequelize</a>.</td>
+<td><a href="https://zzolo.org/air-supply#sql">API</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Parsers</h2>
+<p>Parsers are simple functions to transform common data; mostly these are used to transform the raw data to more meaningful JSON data.</p>
+<p>The <code>parsers</code> options can be defined a few different ways:</p>
+<ul>
+<li>If it is <code>undefined</code>, the package will try to determine which parser to use by looking at the <code>source</code>.</li>
+<li>If it is <code>false</code>, then no parsing will happen.</li>
+<li>If it is a string, such as <code>'csv'</code>, then it will use that parser with any default options.</li>
+<li>If it is a function, then it will simply run the data through that function.</li>
+<li>If it is an object, it should have a <code>parser</code> key which is the is one of the above options, and optionally a <code>parserOptions</code> that will get passed the parser function. Or it can just be <code>{ multiSource: true }</code> which will assume the data coming in is an object where each key is a source.</li>
+<li>If it is an array, it is assume to be multiple parsers with the above options.</li>
+</ul>
+<p>The following parsers are available by default.</p>
+<table>
+<thead>
+<tr>
+<th>Parser</th>
+<th>Description</th>
+<th>Source match</th>
+<th>Docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>archieml</td>
+<td>Uses <a href="http://archieml.org/">archieml</a>.</td>
+<td><code>/aml$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#archieml">API</a></td>
+</tr>
+<tr>
+<td>csv</td>
+<td>Uses <a href="https://csv.js.org/parse/api/">csv-parse</a>. Can be used for any delimited data.</td>
+<td><code>/csv$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#csv">API</a></td>
+</tr>
+<tr>
+<td>gpx</td>
+<td>Uses <a href="https://github.com/mapbox/togeojson">togeojson</a>.</td>
+<td><code>/gpx$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#gpx">API</a></td>
+</tr>
+<tr>
+<td>json</td>
+<td>Uses <a href="https://www.npmjs.com/package/json5">json5</a>.</td>
+<td><code>/json5?$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#json">API</a></td>
+</tr>
+<tr>
+<td>kml</td>
+<td>Uses <a href="https://github.com/mapbox/togeojson">togeojson</a>.</td>
+<td><code>/kml$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#kml">API</a></td>
+</tr>
+<tr>
+<td>reproject</td>
+<td>Reprojects GeoJSON using <a href="https://www.npmjs.com/package/reproject">reproject</a>.</td>
+<td>NA</td>
+<td><a href="https://zzolo.org/air-supply#reproject">API</a></td>
+</tr>
+<tr>
+<td>shapefile</td>
+<td>Parsers a Shapefile (as a .zip or .shp file) using <a href="https://www.npmjs.com/package/shpjs">shpjs</a>.</td>
+<td><code>/(shp.*zip|shp)$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#shapefile">API</a></td>
+</tr>
+<tr>
+<td>topojson</td>
+<td>Transforms GeoJSON to TopoJSON using <a href="https://www.npmjs.com/package/topojson">topojson</a>.</td>
+<td><code>/geo.?json$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#topojson">API</a></td>
+</tr>
+<tr>
+<td>xlsx</td>
+<td>Parsers MS Excel and others (.xlsx, .xls, .dbf, .ods) using <a href="https://github.com/sheetjs/js-xlsx">xlsx</a>.</td>
+<td><code>/(xlsx|xls|dbf|ods)$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#xlsx">API</a></td>
+</tr>
+<tr>
+<td>yaml</td>
+<td>Uses <a href="https://www.npmjs.com/package/js-yaml">js-yaml</a>.</td>
+<td><code>/(yml|yaml)$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#yaml">API</a></td>
+</tr>
+<tr>
+<td>zip</td>
+<td>Uses <a href="https://www.npmjs.com/package/adm-zip">adm-zip</a>.</td>
+<td><code>/zip$/i</code></td>
+<td><a href="https://zzolo.org/air-supply#zip">API</a></td>
+</tr>
+</tbody>
+</table>
+<h2>API</h2>
+<p>Full API documentation can be found at <a href="https://zzolo.org/air-supply">zzolo.org/air-supply</a>.</p>
+<h2>Develop</h2>
+<h3>Documentation</h3>
+<p>Use <code>npm run docs:preview</code> and open <a href="http://localhost:4001">localhost:4001</a> in a browser.</p>
+<h3>Test</h3>
+<p>Run tests with: <code>npm run test</code></p>
+<h2>Publish</h2>
+<h3>Docs</h3>
+<p>Build and publish to Github Pages: <code>npm run docs:publish</code></p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Static Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='placeholder-see-documentationjsdocumentationissues1113'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>PLACEHOLDER see documentationjs/documentation/issues/1113</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
+
+    <h2 id='api-reference' class='mt0'>
+      API Reference
+    </h2>
+
+    
+      
+
+    
+  </section>
+</div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='api-reference'>
+      API Reference
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='airsupply'>
+      AirSupply
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L62-L335'>
+      <span>src/AirSupply.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>The AirSupply class is the main way
+of collecting data via AirSupply.</p>
+<p>Any options given to AirSupply will be provided to packages
+as defaults before their own default or your specific options.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new AirSupply(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    Options object.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.packages</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>
+  </td>
+  <td class='break-word'><span>The object describing each package,
+in format:
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.ttl</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>?</code>
+  </td>
+  <td class='break-word'><span>The global length of cache in milliseconds
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.cachePath</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?</code>
+  </td>
+  <td class='break-word'><span>The location of the cache data, defaults
+to the .air-supply/ directory in the current working path.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.config</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?</code>
+  </td>
+  <td class='break-word'><span>A specific configuration file
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.noConfig</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>If true, will ensure that
+AirSupply will not look for or load a config file.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.parserMethods</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span>The object describing available
+parsers in format:
+
+<code>{ parser: { match: /parser$/, parser: (data, options) => { ... }}}</code>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.sharedProtocols</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span>The object that will map
+protocols to other protocols, similar to:
+
+<code>{ https: 'http'}</code>
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='airsupplysupply'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>supply(packages)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L103-L151'>
+      <span>src/AirSupply.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Bundles all the package data.  This will use the options.packages provided to AirSupply
+as well as any provided options.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>supply(packages: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>packages</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?
+            = <code>{}</code>)</code>
+	    An object describing packages. This is the same
+as the constructor option, but will not get attached to the AirSupply object
+for future reference.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
+        The compiled data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='airsupplypackage'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>package(config, key)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L165-L215'>
+      <span>src/AirSupply.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Given a config, gets a package instance.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>package(config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, key: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    An object for defining the package.  This will be the options
+passed to the package object, plus the following necessary properties.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>!)</code>
+  </td>
+  <td class='break-word'><span>This is either the package class name as a string,
+or directly passed the package class.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.key</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The package key that helps assign the package to the
+bundled supply package.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>key</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The instantiated package.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='airsupplyguesspackagetype'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>guessPackageType(config)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L224-L277'>
+      <span>src/AirSupply.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Given a pcakage config, guess what the type is.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>guessPackageType(config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!
+            = <code>{}</code>)</code>
+	    A package config.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The altered package config.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='airsupplyloadconfig'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>loadConfig(options)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L287-L334'>
+      <span>src/AirSupply.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Load config via <a href="">cosmiconfig</a>.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>loadConfig(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?
+            = <code>{}</code>)</code>
+	    Options passed into AirSupply, specifically using the
+following properties
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.config</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  </td>
+  <td class='break-word'><span>Path to specific file to load for config.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.noConfig</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  </td>
+  <td class='break-word'><span>Use true to skip the config check.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
+
+    <h2 id='packages' class='mt0'>
+      Packages
+    </h2>
+
+    
+      <p>Packages define ways to get raw data.</p>
+
+    
+  </section>
+</div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='packages'>
+      Packages
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Packages define ways to get raw data.</p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='file'>
+      File
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/File.mjs#L45-L82'>
+      <span>src/packages/File.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>File package type.  Gets data from local files.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new File(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</div>
+   
+  
+  
+    <p>
+      Extends
+      
+        <a href="#basepackage">BasePackage</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    Options for package that will override
+any defaults from the 
+<AirSupply>
+ or 
+<BasePackage>
+.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.source</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The path to the file.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.noCache</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>Defaults to no caching, since
+caching is essentially the same.  Might be useful to turn on
+if there is a lot of transforming.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  
+    (default <code>&#39;utf-8&#39;</code>)
+  </td>
+  <td class='break-word'><span>Options given to
+
+<a href="https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options">readFileSync</a>
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> File <span class="hljs-keyword">from</span> <span class="hljs-string">'air-supply/src/packages/File'</span>;
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> File({ <span class="hljs-attr">source</span>: <span class="hljs-string">'file.json'</span> });
+<span class="hljs-keyword">let</span> data = f.cachedFetch();</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='filefetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/File.mjs#L61-L81'>
+      <span>src/packages/File.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Fetch implementation.  Utilizes readFileSync.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>fetch(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The fetched data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='directory'>
+      Directory
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Directory.mjs#L54-L125'>
+      <span>src/packages/Directory.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Directory package type.  Gets data from local files in a directory
+using <a href="https://github.com/isaacs/node-glob">glob</a>.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new Directory(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</div>
+   
+  
+  
+    <p>
+      Extends
+      
+        <a href="#basepackage">BasePackage</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    Options for package that will override
+any defaults from the 
+<AirSupply>
+ or 
+<BasePackage>
+.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.source</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The glob path to a directory;
+for instance to get all files in a directory: 
+<code>directory/*.*</code>
+.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.noCache</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>Defaults to no caching, since
+caching is essentially the same.  Might be useful to turn on
+if there is a lot of transforming.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.parsers</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>
+  
+    (default <code>{multiSource:true}</code>)
+  </td>
+  <td class='break-word'><span>Parser
+options to default to multiple sources.
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>options.parsers.multiSource</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>Defaults
+to multiple sources as an object.
+</span></td>
+</tr>
+
+
+  
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span>Options given to
+
+<a href="https://github.com/isaacs/node-glob#options">glob</a>
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Directory <span class="hljs-keyword">from</span> <span class="hljs-string">'air-supply/src/packages/Directory'</span>;
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> Directory({ <span class="hljs-attr">source</span>: <span class="hljs-string">'directory/*.csv'</span> });
+<span class="hljs-keyword">let</span> data = f.cachedFetch();</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='directoryfetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Directory.mjs#L73-L124'>
+      <span>src/packages/Directory.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Fetch implementation.  Utilizes <a href="https://github.com/isaacs/node-glob">glob</a>
+to search directory.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>fetch(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The fetched data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='http'>
+      Http
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Http.mjs#L43-L85'>
+      <span>src/packages/Http.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Http package type.  Gets data from an "http://" source via <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a>.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new Http(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</div>
+   
+  
+  
+    <p>
+      Extends
+      
+        <a href="#basepackage">BasePackage</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    Options for package that will override
+any defaults from the 
+<AirSupply>
+ or 
+<BasePackage>
+.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.source</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The URI to the file to read data from.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span><code>node-fetch</code>
+ options.
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions.type</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>&#39;string&#39;</code>)
+  </td>
+  <td class='break-word'><span>Custom option to
+handle what kind of response we want from the fetch, can be
+either 
+<code>buffer</code>
+, 
+<code>json</code>
+, or 
+<code>string</code>
+; defaults to 
+<code>string</code>
+.
+</span></td>
+</tr>
+
+
+  
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Http <span class="hljs-keyword">from</span> <span class="hljs-string">'air-supply/src/packages/Http'</span>;
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> Http({ <span class="hljs-attr">source</span>: <span class="hljs-string">'http://example.com/data.json'</span> });
+<span class="hljs-keyword">let</span> data = f.cachedFetch();</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='httpfetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Http.mjs#L54-L84'>
+      <span>src/packages/Http.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Fetch implementation.  Utilizes <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a>.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>fetch(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The fetched data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='data'>
+      Data
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Data.mjs#L33-L50'>
+      <span>src/packages/Data.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Data package type.  Just passes through "source" property.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new Data(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</div>
+   
+  
+  
+    <p>
+      Extends
+      
+        <a href="#basepackage">BasePackage</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    Options for package that will override
+any defaults from the 
+<AirSupply>
+ or 
+<BasePackage>
+.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.source</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The data that will come through.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.parsers</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>Explicitly turns parsing off by default.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Data <span class="hljs-keyword">from</span> <span class="hljs-string">'air-supply/src/packages/Data'</span>;
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> Data({ <span class="hljs-attr">source</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>] });
+<span class="hljs-keyword">let</span> data = f.cachedFetch();</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='datafetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Data.mjs#L47-L49'>
+      <span>src/packages/Data.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Fetch implementation.  Just passes source through.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>fetch(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The source data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='googledoc'>
+      GoogleDoc
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L55-L257'>
+      <span>src/packages/GoogleDoc.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>GoogleDoc package type.  Gets data from a Google Doc source via
+<a href="https://www.npmjs.com/package/googleapis">googleapis</a> module.
+Defaults parser to ArchieML, but if no parser, it will return HTML.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new GoogleDoc(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</div>
+   
+  
+  
+    <p>
+      Extends
+      
+        <a href="#basepackage">BasePackage</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    Options for package that will override
+any defaults from the 
+<AirSupply>
+ or 
+<BasePackage>
+.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.source</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>For authenticated requests, simply provide
+the Google Doc ID (can be found in the URL).  For un-authenticated requests
+via the "Published to the Web" version, provide the full URL.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.parsers</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>&#39;archieml&#39;</code>)
+  </td>
+  <td class='break-word'><span>Defaults to use ArchieML parser.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.authOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span>Options to pass to the Google authentication
+function.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> GoogleDoc <span class="hljs-keyword">from</span> <span class="hljs-string">'air-supply/src/packages/GoogleDoc'</span>;
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> GoogleDoc({ <span class="hljs-attr">source</span>: <span class="hljs-string">'GOOGLE-DOC-ID'</span> });
+<span class="hljs-keyword">let</span> data = f.cachedFetch();</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='googledocfetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L68-L77'>
+      <span>src/packages/GoogleDoc.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Fetch implementation.  Uses <a href="https://www.npmjs.com/package/googleapis">googleapis</a> module</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>fetch(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The fetched data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='googledocgethtmlcontents'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getHTMLContents(source, authOptions)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L90-L114'>
+      <span>src/packages/GoogleDoc.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Get raw HTML contents from a Google Doc.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>getHTMLContents(source: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, authOptions: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>source</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    Source can be a Google Doc ID if it needs
+to be an authenticated request, or a URL to a "Published to Web"
+version of a Google Doc.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>authOptions</span> <code class='quiet'>(any
+            = <code>{}</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        HTML content.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='googledocgetpublishedtowebcontent'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getPublishedToWebContent(url)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L126-L156'>
+      <span>src/packages/GoogleDoc.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Get contents via "Published to Web", which doesn't require
+any authentication.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>getPublishedToWebContent(url: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>url</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    URL to "Published to Web" Google Doc.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        HTML content.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='googledochtmlparser'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>htmlParser(text)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L168-L256'>
+      <span>src/packages/GoogleDoc.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>HTML parser
+From: <a href="https://github.com/bradoyler/googledoc-to-json/blob/master/index.js">https://github.com/bradoyler/googledoc-to-json/blob/master/index.js</a></p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>htmlParser(text: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>text</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    HTML test to parse
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        Parsed content.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='googlesheet'>
+      GoogleSheet
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleSheet.mjs#L61-L191'>
+      <span>src/packages/GoogleSheet.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>GoogleSheet package type.  Gets data from a Google Sheet source via
+<a href="https://www.npmjs.com/package/googleapis">googleapis</a> module.</p>
+<p>If you want to get the published CSV version, use the HTTP package
+with the CSV parser.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new GoogleSheet(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</div>
+   
+  
+  
+    <p>
+      Extends
+      
+        <a href="#basepackage">BasePackage</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    Options for package that will override
+any defaults from the 
+<AirSupply>
+ or 
+<BasePackage>
+.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.source</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The Google Doc ID (can be found in the URL).
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span>Options for getting sheet data.
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions.headers</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>Assumes
+first row is headers and converts data to object instead of array.
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions.filterEmpty</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>Filters
+any rows that are all empty (null or undefined).
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions.sheet</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>The ID of the
+specific sheet in the Google Sheet.  False to use the first/default.
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions.fieldType</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>&#39;userEnteredValue&#39;</code>)
+  </td>
+  <td class='break-word'><span>The type of value to get from each field; can be 
+<code>userEnteredValue</code>
+,
+
+<code>effectiveValue</code>
+, or 
+<code>formattedValue</code>
+</span></td>
+</tr>
+
+
+  
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.authOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span>Options to pass to the Google authentication
+function.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.parsers</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>Defaults to not use
+a parser.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> GoogleSheet <span class="hljs-keyword">from</span> <span class="hljs-string">'air-supply/src/packages/GoogleSheet'</span>;
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> GoogleSheet({ <span class="hljs-attr">source</span>: <span class="hljs-string">'GOOGLE-SHEET-ID'</span> });
+<span class="hljs-keyword">let</span> data = f.cachedFetch();</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='googlesheetfetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleSheet.mjs#L79-L115'>
+      <span>src/packages/GoogleSheet.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Fetch implementation.  Uses <a href="https://www.npmjs.com/package/googleapis">googleapis</a> module</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>fetch(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The fetched data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='googlesheetgetrawgrid'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getRawGrid(source, sheet, fieldType, authOptions)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleSheet.mjs#L131-L190'>
+      <span>src/packages/GoogleSheet.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Get the basic grid content from the sheet.
+Reference: <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#SheetProperties">https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#SheetProperties</a></p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>getRawGrid(source: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, sheet: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>), fieldType: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, authOptions: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>source</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    The Google Sheet ID.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>sheet</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)
+            = <code>false</code>)</code>
+	    The sheet ID, false for the default.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fieldType</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;userEnteredValue&#39;</code>)</code>
+	    The type of value to
+get from each field; can be 
+<code>userEnteredValue</code>
+, 
+<code>effectiveValue</code>
+,
+or 
+<code>formattedValue</code>
+.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>authOptions</span> <code class='quiet'>(any
+            = <code>{}</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Sheet content.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='airtable'>
+      Airtable
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Airtable.mjs#L56-L144'>
+      <span>src/packages/Airtable.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Airtable package type.  Gets data from Airtable.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new Airtable(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</div>
+   
+  
+  
+    <p>
+      Extends
+      
+        <a href="#basepackage">BasePackage</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    Options for package that will override
+any defaults from the 
+<AirSupply>
+ or 
+<BasePackage>
+.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.source</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The Airtable Base ID.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.table</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The table ID in the Airtable Base.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.airtableKey</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>process.env.AIRTABLE_API_KEY</code>)
+  </td>
+  <td class='break-word'><span>The
+Airtable API key found at 
+<a href="https://airtable.com/api">airtable.com/api</a>
+.
+Uses the environment variable AIRTABLE_API_KEY by default.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.parser</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>Turns parsing off by default.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span>Options that are passed to the
+
+<code>list</code>
+ method of the Airtable NodeJS method.  Airtable does not
+make this linkable, but includes options such as:
+
+<code>fields</code>
+, 
+<code>filterByFormula</code>
+, 
+<code>maxRecords</code>
+, 
+<code>pageSize</code>
+, 
+<code>view</code>
+,
+
+<code>sort</code>
+ (ex. 
+<code>[{field: "ID", direction: "desc"}]</code>
+), 
+<code>cellFormat</code>
+
+(ex. 
+<code>json</code>
+ or 
+<code>string</code>
+)
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Airtable <span class="hljs-keyword">from</span> <span class="hljs-string">'air-supply/src/packages/Airtable'</span>;
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> Airtable({
+  <span class="hljs-attr">source</span>: <span class="hljs-string">'BASE-ID-XXXX'</span>,
+  <span class="hljs-attr">table</span>: <span class="hljs-string">'table-XXXX'</span>
+});
+<span class="hljs-keyword">let</span> data = f.cachedFetch();</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='airtablefetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Airtable.mjs#L70-L143'>
+      <span>src/packages/Airtable.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Fetch implementation.  Utilizes the <a href="https://www.npmjs.com/package/airtable">Airtable NodeJS library</a>
+to read data from Airtable.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>fetch(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The fetched data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='sql'>
+      Sql
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Sql.mjs#L59-L112'>
+      <span>src/packages/Sql.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>SQL package type.  Gets data from an SQL database source via <a href="http://docs.sequelizejs.com/">sequelize</a>.</p>
+<p>Use an URI method to connect to a database.</p>
+<ul>
+<li><code>protocol://user:name@host:port/database</code></li>
+<li><code>sqlite://./my-new-db.sql</code></li>
+<li><code>mysql://username:password@localhost/my-database</code></li>
+<li><code>postgres://username:@localhost:1234/my-database</code></li>
+</ul>
+<p>Requires installing the database specific module.</p>
+<ul>
+<li><code>npm install --save pg pg-hstore</code></li>
+<li><code>npm install --save mysql2</code></li>
+<li><code>npm install --save sqlite3</code></li>
+<li><code>npm install --save tedious</code></li>
+</ul>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new Sql(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</div>
+   
+  
+  
+    <p>
+      Extends
+      
+        <a href="#basepackage">BasePackage</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    Options for package that will override
+any defaults from the 
+<AirSupply>
+ or 
+<BasePackage>
+.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.source</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The URI to the the database.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.parsers</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>Turn parsing off by default.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span><code>sequelize</code>
+ connection options.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Sql <span class="hljs-keyword">from</span> <span class="hljs-string">'air-supply/src/packages/Sql'</span>;
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> Sql({
+  <span class="hljs-attr">source</span>: <span class="hljs-string">'mysql://user:name@host/database'</span>,
+  <span class="hljs-attr">query</span>: <span class="hljs-string">'SELECT * FROM table'</span>
+});
+<span class="hljs-keyword">let</span> data = f.cachedFetch();</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='sqlfetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Sql.mjs#L73-L111'>
+      <span>src/packages/Sql.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Fetch implementation.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>fetch(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The fetched data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='ftp'>
+      Ftp
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Ftp.mjs#L50-L119'>
+      <span>src/packages/Ftp.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Ftp package type.  Gets data from an "ftp://" source via <a href="https://www.npmjs.com/package/ftp">ftp</a> module.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new Ftp(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</div>
+   
+  
+  
+    <p>
+      Extends
+      
+        <a href="#basepackage">BasePackage</a>
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>!)</code>
+	    Options for package that will override
+any defaults from the 
+<AirSupply>
+ or 
+<BasePackage>
+.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.source</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  </td>
+  <td class='break-word'><span>The URI to the file to read data from.
+Something like
+
+<code>ftp://username:pass@ftp.example.com/path/to/file.json</code>
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
+  </td>
+  <td class='break-word'><span><code>ftp</code>
+ connection options,
+overriding anything determined from the 
+<code>source</code>
+.
+</span></td>
+</tr>
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions.type</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>&#39;string&#39;</code>)
+  </td>
+  <td class='break-word'><span>Custom option to
+handle what kind of response we want from the fetch, can be either
+
+<code>buffer</code>
+ or 
+<code>string</code>
+; defaults to 
+<code>string</code>
+.
+</span></td>
+</tr>
+
+
+  
+    <tr>
+  <td class='break-word'><span class='code bold'>options.fetchOptions.path</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?</code>
+  </td>
+  <td class='break-word'><span>Custom option for the
+path to get from the FTP server, if not used in the 
+<code>source</code>
+ URI.
+</span></td>
+</tr>
+
+
+  
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Ftp <span class="hljs-keyword">from</span> <span class="hljs-string">'air-supply/src/packages/Ftp'</span>;
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> Ftp({ <span class="hljs-attr">source</span>: <span class="hljs-string">'ftp://example.com/data.json'</span> });
+<span class="hljs-keyword">let</span> data = f.cachedFetch();</pre>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='ftpfetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>fetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Ftp.mjs#L61-L118'>
+      <span>src/packages/Ftp.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Fetch implementation.  Utilizes the <a href="https://www.npmjs.com/package/ftp">ftp</a> module</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>fetch(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The fetched data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='basepackage'>
+      BasePackage
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L68-L596'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>The base package class that is meant to be extended
+for each package type class.</p>
+<p>Do not use this class directly.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new BasePackage(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?, airSupply: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?, packageDefaults: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    Options object to define options for this
+specific package adn override any defaults.  See the global AirSupply
+options, as well as the specific package type options.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.keyIdentifiers</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>!</code>
+  
+    (default <code>[&#39;key&#39;,&#39;source&#39;]</code>)
+  </td>
+  <td class='break-word'><span>An array of properties in the options
+that will get used to create the cache key
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.cachePoint</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>!</code>
+  
+    (default <code>&#39;fetch&#39;</code>)
+  </td>
+  <td class='break-word'><span>A string the defines when caching will happen;
+the options are:
+- fetch: Caching happens after fetch
+- transform: Caching happens after the transform function is performed
+- bundle: Caching happens after bundle function is preformed
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>airSupply</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="#airsupply">AirSupply</a>>?)</code>
+	    The AirSupply object useful for
+referencial purposes.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>packageDefaults</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    This is used for classes that extend this class, so
+that they can provid default options.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='basepackagecachedfetch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>cachedFetch()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L123-L161'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Wrapper around the implemented fetch method.  This will cache the result
+if needed, and perform the transform method if needed as well.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>cachedFetch(): any</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        The fetched data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackageparse'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>parse(data, options)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L168-L175'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Parse</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>parse(data: any, options: any): any</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        The parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackageparsedata'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>parseData(data, options)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L182-L255'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Parse some data</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>parseData(data: any, options: any): any</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(any
+            = <code>{}</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        The parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackageparseobject'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>parseObject(data, options)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L263-L276'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Goes through an object and runs <code>this.parse</code> on each one, using the
+key as the <code>source</code> property.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>parseObject(data: any, options: any): any</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(any
+            = <code>{}</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        The parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackagetransform'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>transform()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L283-L313'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Transform fetch data.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>transform(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The transformed (or fetched if no transform) data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackagebundle'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>bundle(supplyPackage)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L323-L354'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Transform after all packages have been fetched and transformed.  This should
+be passed the full supply package</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>bundle(supplyPackage: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>supplyPackage</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The full supply package object of transformed
+packages.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        The bundled (or fetched or transformed) data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackageoption'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>option(optionName)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L364-L370'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Wrapper to get an option, and if a function, calling that
+with context of this instance.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>option(optionName: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): any</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>optionName</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    The name of the option in the options property.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        The option as is or if a function, then the output of
+that function.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackagecreateid'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>createId()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L379-L390'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Get an ID for this package based on the <code>options.id</code> or a set
+of properties in the <code>options</code> as defined by
+<code>options.keyIdentifiers</code>.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>createId(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        This instance.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackagesetupcache'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>setupCache()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L402-L450'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Setup the cache.  Will create the cache directory and setup places
+for each cache point.  Should be run in constructor.  Will create
+the followig properties:</p>
+<ul>
+<li><code>this.cachePath</code></li>
+<li><code>this.cacheFiles</code></li>
+<li><code>this.cacheData</code></li>
+</ul>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>setupCache(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        This instance.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackagesetcache'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>setCache(cachePoint)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L460-L513'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Sets cache data to <code>this.cacheData</code> then saves the data in the file
+defined in <code>this.cacheFiles</code>.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>setCache(cachePoint: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>cachePoint</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    The name of the cache point.  Should be one of
+
+<code>fetch</code>
+, 
+<code>transform</code>
+, or 
+<code>bundle</code>
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        This instance.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackagegetcache'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getCache(cachePoint)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L523-L570'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Gets cache for a specific cache point.  Specifically sets data
+in <code>this.cacheData</code> if the cache data is still valid.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>getCache(cachePoint: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>cachePoint</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    The name of the cache point.  Should be one of
+
+<code>fetch</code>
+, 
+<code>transform</code>
+, or 
+<code>bundle</code>
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        This instance.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='basepackageremovecache'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>removeCache(silent)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L579-L595'>
+      <span>src/packages/BasePackage.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Deletes specific cache directory for this package.  Probably unnecessary
+to call this directly.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>removeCache(silent: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>silent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>
+            = <code>false</code>)</code>
+	    Whether to throw an error when there was a problem.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        This instance.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
+        
+          
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
+
+    <h2 id='parsers' class='mt0'>
+      Parsers
+    </h2>
+
+    
+      <p>Parsers define how to transfrom raw data.</p>
+
+    
+  </section>
+</div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='parsers'>
+      Parsers
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Parsers define how to transfrom raw data.</p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='archieml'>
+      archieml
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/archieml.mjs#L20-L23'>
+      <span>src/parsers/archieml.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>ArchieML parser.  Uses <a href="https://www.npmjs.com/package/archieml">archieml</a> module.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>archieml</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>))</code>
+	    Data to parse.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    Options, see 
+<a href="https://www.npmjs.com/package/archieml">archieml</a>
+ module for details.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='csv'>
+      csv
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/csv.mjs#L27-L42'>
+      <span>src/parsers/csv.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>CSV (or any delimiter) parser.  Uses <a href="https://www.npmjs.com/package/csv-parse">csv-parse</a> module,
+specifically the <code>sync</code> method.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>csv</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>))</code>
+	    Data to parse.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    Options, see 
+<a href="https://csv.js.org/parse/options/">csv-parse</a>
+ for details, though
+some options are defaulted differently here.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.cast</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>Defaults to true.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.columns</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>Defaults to true.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.trim</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>Defaults to true.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='gpx'>
+      gpx
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/gpx.mjs#L21-L26'>
+      <span>src/parsers/gpx.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>KML parser.  Uses <a href="https://github.com/mapbox/togeojson">togeojson</a> module.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>gpx</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>))</code>
+	    Data to parse.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    Options, see 
+<a href="https://github.com/mapbox/togeojson">togeojson</a>
+ for details.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='json'>
+      json
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/json.mjs#L20-L23'>
+      <span>src/parsers/json.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>JSON parser.  Uses <a href="https://www.npmjs.com/package/json5">json5</a> module.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>json</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>))</code>
+	    Data to parse.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>?)</code>
+	    Options, see 
+<a href="https://www.npmjs.com/package/json5#json5parse">parse</a>
+ method for details.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='kml'>
+      kml
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/kml.mjs#L21-L26'>
+      <span>src/parsers/kml.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>KML parser.  Uses <a href="https://github.com/mapbox/togeojson">togeojson</a> module.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>kml</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>))</code>
+	    Data to parse.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    Options, see 
+<a href="https://github.com/mapbox/togeojson">togeojson</a>
+ for details.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='reproject'>
+      reproject
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/reproject.mjs#L31-L60'>
+      <span>src/parsers/reproject.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Reproject GeoJSON.  Uses <a href="https://www.npmjs.com/package/reproject">reproject</a> module.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>reproject</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>))</code>
+	    Geojson input.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    Options to pass to the parser
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.sourceCrs</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?</code>
+  </td>
+  <td class='break-word'><span>Target CRS as EPSG definition.  Will try to find in
+geojson, but this is often not set.
+See 
+<a href="https://github.com/stevage/epsg/blob/master/crs-defs.json">epsg module defs</a>
+ for
+reference.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.targetCrs</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>&#39;EPSG:426&#39;</code>)
+  </td>
+  <td class='break-word'><span>Source CRS as EPSG definition.
+See 
+<a href="https://github.com/stevage/epsg/blob/master/crs-defs.json">epsg module defs</a>
+ for
+reference.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Reprojected geojson.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='shapefile'>
+      shapefile
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/shapefile.mjs#L20-L20'>
+      <span>src/parsers/shapefile.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Shapefile parser.  Uses <a href="https://github.com/calvinmetcalf/shapefile-js">shpjs</a> module
+as it supports using a .zip source.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>shapefile</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>))</code>
+	    Buffer or filename to parse.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    Options...
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='topojson'>
+      topojson
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/topojson.mjs#L36-L77'>
+      <span>src/parsers/topojson.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Converts GeoJSON to TopoJSON.  Uses <a href="https://github.com/topojson/topojson">topojson</a> module.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>topojson</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>!))</code>
+	    Geojson input.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    Options to pass to the parser
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.name</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>&#39;geojson&#39;</code>)
+  </td>
+  <td class='break-word'><span>Name/key for the geojson data.  This
+is the key to refer to when access the topology, like 
+<code>topojson.objects.KEY</code>
+.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.quantization</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
+  
+    (default <code>100000</code>)
+  </td>
+  <td class='break-word'><span>Quantization value.  See
+
+<a href="https://github.com/topojson/topojson-client/blob/master/README.md#quantize">topojson.quantize</a>
+.
+Use 
+<code>false</code>
+ to not do quantization.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.simplifyQuantile</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
+  
+    (default <code>0.85</code>)
+  </td>
+  <td class='break-word'><span>Will simplofy the topojson based on
+
+<a href="https://github.com/topojson/topojson-simplify/blob/master/README.md#quantile">topojson.quantile</a>
+.
+Should be a number between 0 and 1 that represents quantile of weighted points.  So, 1 would be
+no simplification (keeping 100%), while 0 is complete simplification (keeping 0% detail).
+Use instead of 
+<code>options.simplify</code>
+.  Use 
+<code>false</code>
+ to do not do simplification.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.simplify</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>?</code>
+  </td>
+  <td class='break-word'><span>If provided, will pass
+topology to 
+<a href="https://github.com/topojson/topojson-simplify#simplify">topojson.simplify</a>
+.
+Should be a minimum number value, depends on the values, but something like
+0.01 will really simplify the topology, while something like 0.00000000001 will
+not simplify it much.  Use instead of 
+<code>options.simplifyQuantile</code>
+.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='xlsx'>
+      xlsx
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/xlsx.mjs#L30-L59'>
+      <span>src/parsers/xlsx.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>XLSX (MS Excel) (and other format) parser.  Uses <a href="https://github.com/sheetjs/js-xlsx">xlsx</a> module.</p>
+<p>Supports other formats:
+<a href="https://docs.sheetjs.com/#file-formats">https://docs.sheetjs.com/#file-formats</a></p>
+<p>Reading options reference:
+<a href="https://docs.sheetjs.com/#parsing-options">https://docs.sheetjs.com/#parsing-options</a></p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>xlsx</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>(<a href="https://nodejs.org/api/buffer.html">Buffer</a>)</code>
+	    Data to parse.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</code>
+	    Options, see 
+<a href="https://docs.sheetjs.com/#parsing-options">parsing options</a>
+ for details, though
+some options are defaulted differently here.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.sheet</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?</code>
+  </td>
+  <td class='break-word'><span>Custom option to get a specific
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.jsonOptions</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?</code>
+  </td>
+  <td class='break-word'><span>Options to pass to the
+
+<a href="https://docs.sheetjs.com/#json">xlsx json parsing</a>
+.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='yaml'>
+      yaml
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/yaml.mjs#L20-L23'>
+      <span>src/parsers/yaml.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>YAML parser.  Uses <a href="https://www.npmjs.com/package/js-yaml">js-yaml</a> module.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>yaml</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>))</code>
+	    Data to parse.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>?)</code>
+	    Options, see 
+<a href="https://www.npmjs.com/package/js-yaml#safeload-string---options-">safeLoad</a>
+ method for details.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='zip'>
+      zip
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/zip.mjs#L24-L52'>
+      <span>src/parsers/zip.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Zip archiver.  Uses <a href="https://www.npmjs.com/package/adm-zip">adm-zip</a> module.  Produces
+an object, where each key is the file in the archive and each value is the text of
+that file.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>zip</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>input</span> <code class='quiet'>(<a href="https://nodejs.org/api/buffer.html">Buffer</a>)</code>
+	    Input buffer data.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Parsed data.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
+
+    <h2 id='other' class='mt0'>
+      Other
+    </h2>
+
+    
+      <p>Various other functions.</p>
+
+    
+  </section>
+</div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='other'>
+      Other
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Various other functions.</p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='googleauthenticate'>
+      googleAuthenticate
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/auth/google.mjs#L61-L162'>
+      <span>src/auth/google.mjs</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Authenticate to Google's API via OAuth on the command line.  Will
+write token to <code>~/.air-supply/google-auth.json</code> by default, and supply
+token.</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>googleAuthenticate(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?
+            = <code>{}</code>)</code>
+	    Options to pass.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.clientId</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>process.env.GOOGLE_OAUTH_CLIENT_ID</code>)
+  </td>
+  <td class='break-word'><span>The
+Google auth client ID; defaults to the environment variable:
+
+<code>GOOGLE_OAUTH_CLIENT_ID</code>
+.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.consumerSecret</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>process.env.GOOGLE_OAUTH_CONSUMER_SECRET</code>)
+  </td>
+  <td class='break-word'><span>The
+Google auth consumer secret; defaults to the environment variable:
+
+<code>GOOGLE_OAUTH_CLIENT_ID</code>
+.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.scope</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>
+  
+    (default <code>[&#39;https://www.googleapis.com/auth/drive&#39;,&#39;https://www.googleapis.com/auth/spreadsheets&#39;]</code>)
+  </td>
+  <td class='break-word'><span>The scope of the autentication.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.localPort</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
+  
+    (default <code>48080</code>)
+  </td>
+  <td class='break-word'><span>Port for local server.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.tokenLocation</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>~/.air-supply/google-auth.json</code>)
+  </td>
+  <td class='break-word'><span>Where
+to save the authentication token.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.forceReAuth</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>Force authentication even
+if tokens are available.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.timeout</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
+  
+    (default <code>300000</code>)
+  </td>
+  <td class='break-word'><span>Timeout (currently doen't work)
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.authenticatedMessage</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>&#39;..[[[LOCATION]]]..&#39;</code>)
+  </td>
+  <td class='break-word'><span>The message
+to send to the browser when successfully authenticated.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>options.openWait</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
+  
+    (default <code>1</code>)
+  </td>
+  <td class='break-word'><span>Milliseconds to wait to open authentication
+browser page.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        Authentication object from 
+<code>googleapis</code>
+ module.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
