@@ -6,8 +6,7 @@
     "air-supply": "bin/air-supply"
   },
   "main": "dist/air-supply.js",
-  "umd:main": "dist/air-supply.umd.js",
-  "module": "dist/air-supply.mjs",
+  "module": "index.mjs",
   "source": "index.mjs",
   "files": [
     "dist/**/*",
@@ -16,7 +15,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "microbundle -o dist -i index.mjs",
+    "build": "rollup index.mjs --format cjs --file dist/air-supply.js --sourcemap",
     "docs": "mkdir -p docs && documentation build -f html -c documentation.yml --github -o docs index.mjs",
     "docs:preview": "documentation serve -c documentation.yml --github -w index.mjs",
     "docs:publish": "npm run docs && gh-pages -d docs",
@@ -31,8 +30,8 @@
     "esm": "^3.0.84",
     "gh-pages": "^2.0.1",
     "jest": "^23.6.0",
-    "microbundle": "^0.9.0",
     "prettier": "^1.15.3",
+    "rollup": "^1.1.2",
     "sqlite3": "^4.0.6"
   },
   "dependencies": {

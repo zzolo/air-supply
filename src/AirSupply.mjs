@@ -23,7 +23,7 @@ import camelCase from 'lodash/camelCase';
 import * as debugWrapper from 'debug';
 import * as cosmiconfigWrapper from 'cosmiconfig';
 import * as jsonWrapper from 'json5';
-import packageTypes from './packages';
+import packageTypes from './packages/index';
 
 // Debug
 const debug = (debugWrapper.default || debugWrapper)('airsupply');
