@@ -9,6 +9,11 @@
   "umd:main": "dist/air-supply.umd.js",
   "module": "dist/air-supply.mjs",
   "source": "index.mjs",
+  "files": [
+    "dist/**/*",
+    "src/**/*",
+    "README.md"
+  ],
   "scripts": {
     "test": "jest",
     "build": "microbundle -o dist -i index.mjs",
