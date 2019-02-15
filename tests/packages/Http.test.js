@@ -40,7 +40,7 @@ describe('fetch method', () => {
   test('can fetch a URL', async () => {
     let f = new Http({
       cachePath: defaultCachePath,
-      source: 'http://example.com'
+      source: 'https://google.com'
     });
 
     let data = await f.fetch();
@@ -50,7 +50,7 @@ describe('fetch method', () => {
   test('can fetch a URL as buffer', async () => {
     let f = new Http({
       cachePath: defaultCachePath,
-      source: 'http://example.com',
+      source: 'https://google.com',
       fetchOptions: {
         type: 'buffer'
       }
