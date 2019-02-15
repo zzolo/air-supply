@@ -11,6 +11,7 @@
   "files": [
     "dist/**/*",
     "src/**/*",
+    "bin/**/*",
     "README.md"
   ],
   "scripts": {
