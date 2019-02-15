@@ -17,7 +17,7 @@ const debug = (debugWrapper.default || debugWrapper)('airsupply:zip');
  * @name zip
  * @export
  *
- * @param {Buffer!} input Input buffer data.
+ * @param {Buffer} input Input buffer data.
  *
  * @return {Object} Parsed data.
  */

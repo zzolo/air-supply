@@ -13,3 +13,15 @@ toc:
   - BasePackage
   - name: "Parsers"
   - archieml
+  - csv
+  - gpx
+  - json
+  - kml
+  - reproject
+  - shapefile
+  - topojson
+  - xlsx
+  - yaml
+  - zip
+  - name: "Other"
+  - googleAuthenticate

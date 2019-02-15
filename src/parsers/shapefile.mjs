@@ -12,7 +12,7 @@ import shp from 'shpjs';
  * @name shapefile
  * @export
  *
- * @param {String|Buffer!} input Buffer or filename to parse.
+ * @param {String|Buffer} input Buffer or filename to parse.
  * @param {Object} [options] Options...
  *
  * @return {Object} Parsed data.

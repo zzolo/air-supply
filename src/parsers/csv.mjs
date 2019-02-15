@@ -4,6 +4,7 @@
  * as it has many options.
  */
 
+import isString from 'lodash/isString';
 import merge from 'lodash/merge';
 import parse from 'csv-parse/lib/sync';
 
@@ -14,7 +15,7 @@ import parse from 'csv-parse/lib/sync';
  * @name csv
  * @export
  *
- * @param {String!} input Data to parse.
+ * @param {String|Buffer} input Data to parse.
  * @param {Object} [options] Options, see [csv-parse](https://csv.js.org/parse/options/) for details, though
  *   some options are defaulted differently here.
  * @param {Boolean} [options.cast=true] Defaults to true.
@@ -24,6 +25,9 @@ import parse from 'csv-parse/lib/sync';
  * @return {Object} Parsed data.
  */
 export default (input, options = {}) => {
+  input = isString(input) ? input : input.toString('utf-8');
+
+  // Default options
   options = merge(
     {},
     {

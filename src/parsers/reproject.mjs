@@ -16,7 +16,7 @@ import epsg from 'epsg';
  * @name reproject
  * @export
  *
- * @param {Object|String|Buffer!} input Geojson input.
+ * @param {Object|String|Buffer} input Geojson input.
  * @param {Object} [options] Options to pass to the parser
  * @param {String} [options.sourceCrs] Target CRS as EPSG definition.  Will try to find in
  *   geojson, but this is often not set.

@@ -18,7 +18,7 @@ import xlsx from 'xlsx';
  * @name xlsx
  * @export
  *
- * @param {String!} input Data to parse.
+ * @param {Buffer} input Data to parse.
  * @param {Object} [options] Options, see [parsing options](https://docs.sheetjs.com/#parsing-options) for details, though
  *   some options are defaulted differently here.
  * @param {Boolean} [options.sheet] Custom option to get a specific
