@@ -7,7 +7,7 @@
 import xlsx from 'xlsx';
 
 /**
- * XLSX (MS Excel) (and other format) parser.  Uses [[xlsx](https://github.com/sheetjs/js-xlsx) module.
+ * XLSX (MS Excel) (and other format) parser.  Uses [xlsx](https://github.com/sheetjs/js-xlsx) module.
  *
  * Supports other formats:
  * https://docs.sheetjs.com/#file-formats

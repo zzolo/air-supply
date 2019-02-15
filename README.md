@@ -2,26 +2,47 @@
 
 _You need data; Air Supply will get it to you._
 
-Air Supply is a versatile library to handle get data from multiple sources in a sane way to use in your application build, data analysis, and whatever else you need.
+Air Supply is a versatile library to handle getting data from multiple sources in a sane way to use in your application build, data analysis, or whatever else requires fetching some data.
 
 [![npm version](https://img.shields.io/npm/v/air-supply.svg?style=flat-square)](https://www.npmjs.com/package/air-supply)
 [![npm](https://img.shields.io/npm/dm/air-supply.svg?style=flat-square)](https://www.npmjs.com/package/air-supply)
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Examples](#examples)
-- [API Docs](#api)
-- [Contribute](#contribute)
+## Why
+
+The main reason Air Supply was made to fill the need of having to bring in various data sources when making small, self-contained projects (in journalism). Air Supply is simply a way to bring together and make a consistent interface for lots of one-off code.
+
+### Pros
+
+- Can handle many sources of data, such as local files and directories, HTTP(S) sources, Google Docs and Sheets, many SQL sources, AirTable, and more.
+- Can easily parse and transform data such as CSV-ish, MS Excel, YAML, Shapefiles, ArchieML, zip files, and more.
+- Caches by default.
+- Aimed at simple uses by just writing a JSON config, as well as more advanced transformations.
+
+### Cons
+
+- Not focused on performance (yet). The caching mitigates a lot of issues here, but the goal would be to use streams for everything where possible.
+- The kitchen sink. Currently does not utilize peer dependencies, so an install of Air Supply brings a lot of things you might not use in your project.
+
+### Similar projects
+
+These projects do roughly similar things, but not to the same degree:
+
+- [quaff](https://www.npmjs.com/package/quaff)
+- [indian-ocean](https://mhkeller.github.io/indian-ocean/)
 
 ## Installation
 
-`npm install air-supply --save`
+```sh
+npm install air-supply --save
+```
 
-If you just want to use the command-line version, install globally like: `npm install -g air-supply`
+If you just want to use the command-line tool, install globally like: `npm install -g air-supply`
 
 ## Usage
 
-Basic usage in Node:
+### Basics
+
+Basic usage in Node by defining the packages when using Air Supply.
 
 ```js
 const { AirSupply } = require("air-supply");
@@ -30,9 +51,9 @@ const { AirSupply } = require("air-supply");
 // the packages it needs
 let air = new AirSupply({
   packages: {
-    someData: "http://example.com/data.json",
-    otherData: {
-      source: "spreadsheet-id",
+    remoteJSONData: "http://example.com/data.json",
+    googleSheetData: {
+      source: "XXXXXXX",
       type: "google-sheet"
     }
   }
@@ -40,17 +61,30 @@ let air = new AirSupply({
 
 // Get the data, caching will happen by default
 let data = await air.supply();
+
+// Data will look something like this
+{
+  remoteJSONData: { ... },
+  googleSheetData: [
+    { column1: 'abc', column2: 234 },
+    ...
+  ]
+}
 ```
+
+### Command line
 
 Command line usage with a `air-supply.rc` file:
 
-```js
+```json
 {
-  packages: {
-    cliData: "some-file.yml";
+  "packages": {
+    "cliData": "some-file.yml"
   }
 }
 ```
+
+Then point the CLI tool to the config.
 
 ```bash
 air-supply -c air-supply.rc > data.json
@@ -60,183 +94,126 @@ air-supply -c air-supply.rc > data.json
 
 _TODO_
 
+## Configuration files
+
+Air Supply will look for a config files based on [cosmiconfig](https://www.npmjs.com/package/cosmiconfig) rules with a little customization. So, it will read the first of any of these files as it goes up the directory tree:
+
+```sh
+package.json # An 'air-supply' property
+.air-supply
+.air-supply.json
+.air-supply.json5
+.air-supply.yaml
+.air-supply.yml
+.air-supply.js
+air-supply.config.js
+```
+
+Note that any JSON will be read by the [json5](https://www.npmjs.com/package/json5) module.
+
+## Packages
+
+Packages are the methods that define how to get raw data from sources. The following are the available packages; see the full API documentation for all the specific options available.
+
+Packages will get passed any options from the AirSupply object that is using it, as well has some common options and usage.
+
+```js
+AirSupply({
+  ttl: 1000 * 60 * 10,
+  packages: {
+    things: {
+      // Type is the kebab case of the package class name, i.e.
+      // the package class name here would be PackageName.
+      //
+      // AirSupply will try to guess this given a source
+      type: "package-name",
+      // Almost all pcakages use the source option as it's
+      // main option to get data
+      source: "the main source option for this package",
+      // Depending on the package, any options for the
+      // fetching of data is ususally managed in fetchOptions
+      fetchOptions: {
+        fetchEverything: true
+      },
+      // Can override any defaults from the AirSupply object
+      ttl: 1000 * 60 * 60,
+      // Parsers are simple functions to transform the raw data.
+      // This can be a string definign which parser to use,
+      // an object of configuration, or an array of either if
+      // you want to do multiple parsers.  The package
+      // will guess what kind of parser is needed based on the source.
+      parsers: ["zip", { multiSource: true }],
+      // Custom transform function that will happen after parsing.
+      transform(data) {
+        return expensiveAlterFunction(data);
+      },
+      // Custom transform function that will happen after getting
+      // all packages.
+      bundle(allPackages) {
+        return alterPackages(data);
+      },
+      // By default, caching will happen after fetching the raw data and
+      // any of the built-in parsing.  But, you can cache after the 'transform'
+      // or after the 'bundle'.
+      //
+      // Overall, this is only needed if you have expensive transformations
+      cachePoint: "transform"
+    }
+  }
+});
+```
+
+| Package     | Description                                                                                                                                                                                        | Docs                                            |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| AirTable    | Get data from an [AirTable](https://airtable.com/) table.                                                                                                                                          | [API](https://zzolo.org/air-supply#airtable)    |
+| Data        | Just pass JS data through.                                                                                                                                                                         | [API](https://zzolo.org/air-supply#data)        |
+| Directory   | Read files from a directory and parse each one if can.                                                                                                                                             | [API](https://zzolo.org/air-supply#directory)   |
+| File        | Read oen file from the filesystem.                                                                                                                                                                 | [API](https://zzolo.org/air-supply#file)        |
+| Ftp         | Get a file from an FTP source.                                                                                                                                                                     | [API](https://zzolo.org/air-supply#ftp)         |
+| GoogleDoc   | Get plain text version of a Google Doc and by default parse with ArchieML. Can be a publich "Published to the web" URL, or if given an ID will use Google's authentication.                        | [API](https://zzolo.org/air-supply#googledoc)   |
+| GoogleSheet | Get tabular data from a Google Sheet and assumes first row is headers by default. Uses Google's authentication; if you want to use a public "Published to the web" CSV, just use the Http package. | [API](https://zzolo.org/air-supply#googlesheet) |
+| Http        | Get data from an HTTP source.                                                                                                                                                                      | [API](https://zzolo.org/air-supply#http)        |
+| Sql         | Get data from SQL sources as that are supported by [sequelize](https://www.npmjs.com/package/sequelize).                                                                                           | [API](https://zzolo.org/air-supply#sql)         |
+
+## Parsers
+
+Parsers are simple functions to transform common data; mostly these are used to transform the raw data to more meaningful JSON data.
+
+The `parsers` options can be defined a few different ways:
+
+- If it is `undefined`, the package will try to determine which parser to use by looking at the `source`.
+- If it is `false`, then no parsing will happen.
+- If it is a string, such as `'csv'`, then it will use that parser with any default options.
+- If it is a function, then it will simply run the data through that function.
+- If it is an object, it should have a `parser` key which is the is one of the above options, and optionally a `parserOptions` that will get passed the parser function. Or it can just be `{ multiSource: true }` which will assume the data coming in is an object where each key is a source.
+- If it is an array, it is assume to be multiple parsers with the above options.
+
+The following parsers are available by default.
+
+| Parser    | Description                                                                                             | Source match             | Docs                                          |
+| --------- | ------------------------------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------- |
+| archieml  | Uses [archieml](http://archieml.org/).                                                                  | `/aml$/i`                | [API](https://zzolo.org/air-supply#archieml)  |
+| csv       | Uses [csv-parse](https://csv.js.org/parse/api/). Can be used for any delimited data.                    | `/csv$/i`                | [API](https://zzolo.org/air-supply#csv)       |
+| gpx       | Uses [togeojson](https://github.com/mapbox/togeojson).                                                  | `/gpx$/i`                | [API](https://zzolo.org/air-supply#gpx)       |
+| json      | Uses [json5](https://www.npmjs.com/package/json5).                                                      | `/json5?$/i`             | [API](https://zzolo.org/air-supply#json)      |
+| kml       | Uses [togeojson](https://github.com/mapbox/togeojson).                                                  | `/kml$/i`                | [API](https://zzolo.org/air-supply#kml)       |
+| reproject | Reprojects GeoJSON using [reproject](https://www.npmjs.com/package/reproject).                          | NA                       | [API](https://zzolo.org/air-supply#reproject) |
+| shapefile | Parsers a Shapefile (as a .zip or .shp file) using [shpjs](https://www.npmjs.com/package/shpjs).        | `/(shp.*zip|shp)$/i`     | [API](https://zzolo.org/air-supply#shapefile) |
+| topojson  | Transforms GeoJSON to TopoJSON using [topojson](https://www.npmjs.com/package/topojson).                | `/geo.?json$/i`          | [API](https://zzolo.org/air-supply#topojson)  |
+| xlsx      | Parsers MS Excel and others (.xlsx, .xls, .dbf, .ods) using [xlsx](https://github.com/sheetjs/js-xlsx). | `/(xlsx|xls|dbf|ods)$/i` | [API](https://zzolo.org/air-supply#xlsx)      |
+| yaml      | Uses [js-yaml](https://www.npmjs.com/package/js-yaml).                                                  | `/(yml|yaml)$/i`         | [API](https://zzolo.org/air-supply#yaml)      |
+| zip       | Uses [adm-zip](https://www.npmjs.com/package/adm-zip).                                                  | `/zip$/i`                | [API](https://zzolo.org/air-supply#zip)       |
+
 ## API
 
-<!-- Generated by documentation.js. Update this documentation by updating the source code. -->
-
-#### Table of Contents
-
-- [AirSupply](#airsupply)
-  - [Parameters](#parameters)
-  - [supply](#supply)
-    - [Parameters](#parameters-1)
-  - [package](#package)
-    - [Parameters](#parameters-2)
-  - [guessPackageType](#guesspackagetype)
-    - [Parameters](#parameters-3)
-- [Packages](#packages)
-- [File](#file)
-  - [Parameters](#parameters-4)
-  - [fetch](#fetch)
-- [BasePackage](#basepackage)
-  - [Parameters](#parameters-5)
-  - [cachedFetch](#cachedfetch)
-  - [transform](#transform)
-  - [bundle](#bundle)
-    - [Parameters](#parameters-6)
-
-### AirSupply
-
-[src/AirSupply.mjs:45-240](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/AirSupply.mjs#L45-L240 "Source code on GitHub")
-
-The AirSupply class is the main way
-of collecting data via AirSupply.
-
-Any options given to AirSupply will be provided to packages
-as defaults before their own default or your specific options.
-
-#### Parameters
-
-- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** Options object.
-  - `options.ttl` **[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** The global length of cache in milliseconds
-  - `options.cachePath` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The location of the cache data, defaults
-    to the .air-supply/ directory in the current working path.
-  - `options.packages` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The object describing each package, in format:
-
-#### supply
-
-[src/AirSupply.mjs:70-120](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/AirSupply.mjs#L70-L120 "Source code on GitHub")
-
-Bundles all the package data. This will use the options.packages provided to AirSupply
-as well as any provided options.
-
-##### Parameters
-
-- `packages` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** An object describing packages. This is the same
-  as the constructor option, but will not get attached to the AirSupply object
-  for future reference. (optional, default `{}`)
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** The compiled data.
-
-#### package
-
-[src/AirSupply.mjs:134-181](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/AirSupply.mjs#L134-L181 "Source code on GitHub")
-
-Given a config, gets a package instance.
-
-##### Parameters
-
-- `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)!** An object for defining the package. This will be the options
-  passed to the package object, plus the following necessary properties.
-  - `config.type` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)!)** This is either the package class name as a string,
-    or directly passed the package class.
-  - `config.key` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)!** The package key that helps assign the package to the
-    bundled supply package.
-
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The instantiated package.
-
-#### guessPackageType
-
-[src/AirSupply.mjs:190-239](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/AirSupply.mjs#L190-L239 "Source code on GitHub")
-
-Given a pcakage config, guess what the type is.
-
-##### Parameters
-
-- `config` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)!** A package config. (optional, default `{}`)
-
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The altered package config.
-
-### Packages
-
-### File
-
-[src/packages/File.mjs:47-92](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/File.mjs#L47-L92 "Source code on GitHub")
-
-**Extends BasePackage**
-
-File package type. Gets data from local files. Utilizes [indian-ocean](https://mhkeller.github.io/indian-ocean/)
-to read multiple types of files and directories.
-
-#### Parameters
-
-- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)!** Options object to define options for this
-  specific package adn override any defaults. See the global AirSupply
-  options
-  - `options.source` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)!** The path to the file or directory to read data from.
-  - `options.noCache` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** Turn caching off or leave on. (optional, default `true`)
-  - `options.fetchOptions` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** Options object sent to [`re adDataSync`](https://mhkeller.github.io/indian-ocean/#readDataSync) or [`readdirFilterSync`](https://mhkeller.github.io/indian-ocean/#readdirFilterSync) if a directory.
-- `airSupply` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[AirSupply](#airsupply)>?** The AirSupply object useful for
-  referencial purposes.
-
-#### fetch
-
-[src/packages/File.mjs:62-91](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/File.mjs#L62-L91 "Source code on GitHub")
-
-Fetch implementation. Utilizes [indian-ocean](https://mhkeller.github.io/indian-ocean/)
-to read multiple types of files and directories.
-
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The fetched data.
-
-### BasePackage
-
-[src/packages/BasePackage.mjs:64-412](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/BasePackage.mjs#L64-L412 "Source code on GitHub")
-
-The base package class that is meant to be extended
-for each package type class.
-
-Do not use this class directly.
-
-#### Parameters
-
-- `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** Options object to define options for this
-  specific package adn override any defaults. See the global AirSupply
-  options, as well as the specific package type options.
-  - `options.keyIdentifiers` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)!** An array of properties in the options
-    that will get used to create the cache key (optional, default `['key','source']`)
-  - `options.cachePoint` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)!** A string the defines when caching will happen;
-    the options are:
-    \- fetch: Caching happens after fetch
-    \- transform: Caching happens after the transform function is performed
-    \- bundle: Caching happens after bundle function is preformed (optional, default `'fetch'`)
-- `airSupply` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)&lt;[AirSupply](#airsupply)>?** The AirSupply object useful for
-  referencial purposes.
-- `packageDefaults` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** This is used for classes that extend this class, so
-  that they can provid default options.
-
-#### cachedFetch
-
-[src/packages/BasePackage.mjs:118-138](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/BasePackage.mjs#L118-L138 "Source code on GitHub")
-
-Wrapper around the implemented fetch method. This will cache the result
-if needed, and perform the transform method if needed as well.
-
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The fetched data.
-
-#### transform
-
-[src/packages/BasePackage.mjs:145-175](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/BasePackage.mjs#L145-L175 "Source code on GitHub")
-
-Transform fetch data.
-
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The transformed (or fetched if no transform) data.
-
-#### bundle
-
-[src/packages/BasePackage.mjs:185-216](https://git@github.com/:zzolo/air-supply/blob/1144e7efac10144f63669d6e22ede50fddda7401/src/packages/BasePackage.mjs#L185-L216 "Source code on GitHub")
-
-Transform after all packages have been fetched and transformed. This should
-be passed the full supply package
-
-##### Parameters
-
-- `supplyPackage` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The full supply package object of transformed
-  packages.
-
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The bundled (or fetched or transformed) data.
+Full API documentation can be found at [zzolo.org/air-supply](https://zzolo.org/air-supply).
 
 ## Contribute
 
 ### Test
 
 Run tests with: `npm run test`
+
+```
+
+```

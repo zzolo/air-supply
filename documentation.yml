@@ -1,6 +1,13 @@
 toc:
+  - name: "About"
+    file: README.md
+    children:
+      - ""
+  - name: API Reference
   - AirSupply
-  - name: "Packages"
+  - name: Packages
+    description: |
+      Packages define ways to get raw data.
   - File
   - Directory
   - Http
@@ -11,7 +18,9 @@ toc:
   - Sql
   - Ftp
   - BasePackage
-  - name: "Parsers"
+  - name: Parsers
+    description: |
+      Parsers define how to transfrom raw data.
   - archieml
   - csv
   - gpx
@@ -23,5 +32,7 @@ toc:
   - xlsx
   - yaml
   - zip
-  - name: "Other"
+  - name: Other
+    description: |
+      Various other functions.
   - googleAuthenticate

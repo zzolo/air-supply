@@ -296,15 +296,18 @@ export default class AirSupply {
       // Update search places to allow for JSON5
       searchPlaces: [
         'package.json',
-        `.${moduleName}rc`,
-        `.${moduleName}rc.json`,
-        `.${moduleName}rc.json5`,
-        `.${moduleName}rc.yaml`,
-        `.${moduleName}rc.yml`,
-        `.${moduleName}rc.js`,
+        `.${moduleName}`,
+        `.${moduleName}.json`,
+        `.${moduleName}.json5`,
+        `.${moduleName}.yaml`,
+        `.${moduleName}.yml`,
+        `.${moduleName}.js`,
         `${moduleName}.config.js`
       ],
       loaders: {
+        noExt: (filePath, content) => {
+          return json.parse(content);
+        },
         '.json5': (filePath, content) => {
           return json.parse(content);
         },
