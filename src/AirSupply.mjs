@@ -47,6 +47,9 @@ const json = jsonWrapper.default || jsonWrapper;
  * @param {Number} [options.ttl] The global length of cache in milliseconds
  * @param {String} [options.cachePath] The location of the cache data, defaults
  *   to the .air-supply/ directory in the current working path.
+ * @param {String} [options.config] A specific configuration file
+ * @param {Boolean} [options.noConfig = false] If true, will ensure that
+ *   AirSupply will not look for or load a config file.
  * @param {Object} [options.parserMethods] The object describing available
  *   parsers in format:
  *   `{ parser: { match: /parser$/, parser: (data, options) => { ... }}}`

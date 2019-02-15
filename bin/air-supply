@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+// ESM
+require = require('esm')(module);
+
+// Dependencies
+// Note: mixing ESM module with .mjs files has odd results
+// when importing the same modules
+const jsonStringify = require('json5/lib/stringify');
+const yargs = require('yargs');
+const { AirSupply } = require('../index.mjs').default;
+const pkg = require('../package.json');
+
+// Yarg interface
+let argv = yargs
+  .usage(
+    '\nThe air-supply command line runs Air Supply based on a configuration file.  By default it will look up the directory tree until it finds a valid config file.  Outputs the data to the console.\n\nUsage: $0 [options]'
+  )
+  .version(pkg.version)
+  .example('$0 -c air-supply.config.json', 'Use a specific configuration file.')
+  .alias('c', 'config')
+  .describe('c', 'Load a specific config file')
+  .help('h')
+  .alias('h', 'help').argv;
+
+// Run air supply
+async function getSupply() {
+  let a = new AirSupply({
+    config: argv.c
+  });
+  let data = await a.supply();
+
+  process.stdout.write(jsonStringify(data));
+  process.stdout.write('\n');
+}
+
+getSupply();

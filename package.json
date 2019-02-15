@@ -2,6 +2,9 @@
   "name": "air-supply",
   "version": "0.0.1",
   "description": "You need data; Air Supply will get it to you.",
+  "bin": {
+    "air-supply": "bin/air-supply"
+  },
   "main": "dist/air-supply.js",
   "umd:main": "dist/air-supply.umd.js",
   "module": "dist/air-supply.mjs",
@@ -53,7 +56,8 @@
     "shpjs": "^3.4.3",
     "topojson": "^3.0.2",
     "xlsx": "^0.14.1",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.1.27",
+    "yargs": "^13.2.0"
   },
   "repository": {
     "type": "git",
