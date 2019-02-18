@@ -13,6 +13,8 @@ let argv = yargs
   )
   .version(pkg.version)
   .example('$0 -c air-supply.config.json', 'Use a specific configuration file.')
+  .alias('j', 'json5')
+  .describe('j', 'Output as JSON5')
   .alias('c', 'config')
   .describe('c', 'Load a specific config file')
   .help('h')
@@ -26,7 +28,7 @@ async function getSupply() {
     });
     let data = await a.supply();
 
-    process.stdout.write(jsonStringify(data));
+    process.stdout.write(argv.j ? jsonStringify(data) : JSON.stringify(data));
     process.stdout.write('\n');
   } catch (e) {
     console.error('Error running Air Supply.\n');
