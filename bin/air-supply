@@ -1,14 +1,9 @@
 #!/usr/bin/env node
 
-// ESM
-require = require('esm')(module);
-
-// Dependencies
-// Note: mixing ESM module with .mjs files has odd results
-// when importing the same modules
+// Depends on the CJS version in dist
 const jsonStringify = require('json5/lib/stringify');
 const yargs = require('yargs');
-const { AirSupply } = require('../index.mjs').default;
+const { AirSupply } = require('../dist/air-supply.js');
 const pkg = require('../package.json');
 
 // Yarg interface
@@ -25,13 +20,18 @@ let argv = yargs
 
 // Run air supply
 async function getSupply() {
-  let a = new AirSupply({
-    config: argv.c
-  });
-  let data = await a.supply();
+  try {
+    let a = new AirSupply({
+      config: argv.c
+    });
+    let data = await a.supply();
 
-  process.stdout.write(jsonStringify(data));
-  process.stdout.write('\n');
+    process.stdout.write(jsonStringify(data));
+    process.stdout.write('\n');
+  } catch (e) {
+    console.error('Error running Air Supply.\n');
+    console.error(e);
+  }
 }
 
 getSupply();
