@@ -12,7 +12,8 @@
     "dist/**/*",
     "src/**/*",
     "bin/**/*",
-    "README.md"
+    "README.md",
+    "index.mjs"
   ],
   "scripts": {
     "test": "jest",
