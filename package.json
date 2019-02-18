@@ -1,6 +1,6 @@
 {
   "name": "air-supply",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "You need data; Air Supply will get it to you.",
   "bin": {
     "air-supply": "bin/air-supply"
@@ -16,11 +16,11 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "rollup index.mjs --format cjs --file dist/air-supply.js --sourcemap",
+    "build": "rollup -c",
     "docs": "mkdir -p docs && documentation build -f html -c documentation.yml --github -o docs index.mjs",
     "docs:preview": "documentation serve -c documentation.yml --github -w index.mjs",
     "docs:publish": "npm run docs && gh-pages -d docs",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run test && npm run build"
   },
   "author": "Alan Palazzolo",
   "license": "MIT",
@@ -33,6 +33,8 @@
     "jest": "^23.6.0",
     "prettier": "^1.15.3",
     "rollup": "^1.1.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
     "sqlite3": "^4.0.6"
   },
   "dependencies": {

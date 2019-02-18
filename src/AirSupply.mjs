@@ -44,18 +44,21 @@ const json = jsonWrapper.default || jsonWrapper;
  * @param {Object} options Options object.
  * @param {Object} options.packages The object describing each package,
  *   in format:
- * @param {Number} [options.ttl] The global length of cache in milliseconds
- * @param {String} [options.cachePath] The location of the cache data, defaults
- *   to the .air-supply/ directory in the current working path.
+ * @param {Number} [options.ttl=300000] The global length of cache in milliseconds
+ * @param {String} [options.cachePath='.air-supply-cache'] The location of the
+ *   cache data, defaults to the .air-supply-cache/ directory in the current
+ *   working path.
  * @param {String} [options.config] A specific configuration file
  * @param {Boolean} [options.noConfig = false] If true, will ensure that
  *   AirSupply will not look for or load a config file.
  * @param {Object} [options.parserMethods] The object describing available
- *   parsers in format:
- *   `{ parser: { match: /parser$/, parser: (data, options) => { ... }}}`
+ *   parsers.  This is the default built-in parsers by default.  To override
+ *   use format:
+ *     `{ parser: { match: /parser$/, parser: (data, options) => { ... }}}`
  * @param {Object} [options.sharedProtocols] The object that will map
- *   protocols to other protocols, similar to:
- *   `{ https: 'http'}`
+ *   protocols to other protocols; protocols translate to package
+ *   classes (i.e. http -> Http package class).  Should be similar to:
+ *     `{ https: 'http'}`
  *
  * @return {<AirSupply>} The new AirSupply object.
  */
@@ -69,7 +72,7 @@ export default class AirSupply {
     this.options = merge(
       {
         ttl: 5 * 60 * 1000,
-        cachePath: join(process.cwd(), '.air-supply'),
+        cachePath: join(process.cwd(), '.air-supply-cache'),
         // This option name is :/
         parserMethods: defaultParsers,
         sharedProtocols: {
