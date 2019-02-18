@@ -22,7 +22,7 @@ afterAll(() => {
 describe('AirSupply class explicit config file', () => {
   test('loads config', () => {
     let a = new AirSupply({
-      config: path.join(__dirname, '.air-supplyrc.json5')
+      config: path.join(__dirname, '.air-supply.json5')
     });
     expect(a.options.packages).toBeTruthy();
   });

@@ -38,6 +38,7 @@ describe('AirSupply integration test with directory', () => {
     });
 
     let data = await a.supply();
+    // For some reason the paths that get loaded here are inconsistent
     expect(a.options.packages).toBeTruthy();
     expect(typeof data).toBe('object');
     expect(typeof data.directory).toBe('object');

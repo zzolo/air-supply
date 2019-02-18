@@ -13,25 +13,22 @@
  */
 
 // Depenendencies
-import merge from 'lodash/merge';
-import path from 'path';
-import os from 'os';
-import fsWrapper from 'fs-extra';
-import find from 'lodash/find';
-import { fork } from 'child_process';
-import * as googleapisWrapper from 'googleapis';
-import * as debugWrapper from 'debug';
+// Using regular .js module, as __dirname is not available in .mjs,
+// and using import is not consistent.
+const merge = require('lodash/merge');
+const path = require('path');
+const os = require('os');
+const fs = require('fs-extra');
+const find = require('lodash/find');
+const { fork } = require('child_process');
+const { google } = require('googleapis');
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:auth:google');
-
-// Deal with import defaults
-const fs = fsWrapper.default || fsWrapper;
-const { google } = googleapisWrapper.default || googleapisWrapper;
+const debug = require('debug')('airsupply:auth:google');
 
 /**
  * Authenticate to Google's API via OAuth on the command line.  Will
- * write token to `~/.air-supply/google-auth.json` by default, and supply
+ * write token to `~/.config/air-supply/google-auth.json` by default, and supply
  * token.
  *
  * @export
@@ -46,7 +43,7 @@ const { google } = googleapisWrapper.default || googleapisWrapper;
  * @param {Array} [options.scope=['https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/spreadsheets']]
  *   The scope of the autentication.
  * @param {Number} [options.localPort=48080] Port for local server.
- * @param {String} [options.tokenLocation=~/.air-supply/google-auth.json] Where
+ * @param {String} [options.tokenLocation=~/.config/air-supply/google-auth.json] Where
  *   to save the authentication token.
  * @param {Boolean} [options.forceReAuth=false] Force authentication even
  *   if tokens are available.
@@ -58,11 +55,16 @@ const { google } = googleapisWrapper.default || googleapisWrapper;
  *
  * @return {Object} Authentication object from `googleapis` module.
  */
-export default async function googleAuthenticate(options = {}) {
+async function googleAuthenticate(options = {}) {
   // Default options
   options = merge({}, options, {
     forceReAuth: false,
-    tokenLocation: path.join(os.homedir(), '.air-supply', 'google-auth.json'),
+    tokenLocation: path.join(
+      os.homedir(),
+      '.config',
+      'air-supply',
+      'google-auth.json'
+    ),
     clientId: process.env.GOOGLE_OAUTH_CLIENT_ID,
     consumerSecret: process.env.GOOGLE_OAUTH_CONSUMER_SECRET,
     scope: [
@@ -138,7 +140,7 @@ export default async function googleAuthenticate(options = {}) {
   // Async
   return new Promise((resolve, reject) => {
     // Using sub process so that we can very-forcefully kill it when needed
-    let f = fork('./google.subprocess.js');
+    let f = fork(path.join(__dirname, 'google.subprocess.js'));
     f.send(options);
     f.on('message', m => {
       if (m && m.error) {
@@ -184,3 +186,6 @@ async function googleCheckAuthentication(auth, options = {}) {
     return false;
   }
 }
+
+// Export
+module.exports = googleAuthenticate;
