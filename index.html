@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>air-supply 0.0.1 | Documentation</title>
+  <title>air-supply 0.0.3 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>air-supply</h3>
-          <div class='mb1'><code>0.0.1</code></div>
+          <div class='mb1'><code>0.0.3</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -931,8 +931,16 @@ air-supply.config.js</pre>
 <h3>Test</h3>
 <p>Run tests with: <code>npm run test</code></p>
 <h2>Publish</h2>
+<h3>NPM</h3>
+<ol>
+<li>Bump version in <code>package.json</code> and run <code>npm install</code> and <code>npm run build</code>.</li>
+<li>Commit.</li>
+<li>Tag: <code>git tag X.X.X</code></li>
+<li>Push up: <code>git push origin master --tags</code></li>
+<li>Run <code>npm publish</code></li>
+</ol>
 <h3>Docs</h3>
-<p>Build and publish to Github Pages: <code>npm run docs:publish</code></p>
+<p>Build and publish to Github Pages (after NPM publish): <code>npm run docs:publish</code></p>
 
  
    
@@ -1087,7 +1095,7 @@ air-supply.config.js</pre>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L62-L335'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/AirSupply.mjs#L65-L338'>
       <span>src/AirSupply.mjs</span>
       </a>
     
@@ -1148,7 +1156,9 @@ in format:
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>options.ttl</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>?</code>
+  <td class='break-word'><span class='code bold'>options.ttl</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>
+  
+    (default <code>300000</code>)
   </td>
   <td class='break-word'><span>The global length of cache in milliseconds
 </span></td>
@@ -1157,10 +1167,13 @@ in format:
 
               
                 <tr>
-  <td class='break-word'><span class='code bold'>options.cachePath</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?</code>
+  <td class='break-word'><span class='code bold'>options.cachePath</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
+  
+    (default <code>&#39;.air-supply-cache&#39;</code>)
   </td>
-  <td class='break-word'><span>The location of the cache data, defaults
-to the .air-supply/ directory in the current working path.
+  <td class='break-word'><span>The location of the
+cache data, defaults to the .air-supply-cache/ directory in the current
+working path.
 </span></td>
 </tr>
 
@@ -1191,7 +1204,8 @@ AirSupply will not look for or load a config file.
   <td class='break-word'><span class='code bold'>options.parserMethods</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
   </td>
   <td class='break-word'><span>The object describing available
-parsers in format:
+parsers.  This is the default built-in parsers by default.  To override
+use format:
 
 <code>{ parser: { match: /parser$/, parser: (data, options) => { ... }}}</code>
 </span></td>
@@ -1203,7 +1217,8 @@ parsers in format:
   <td class='break-word'><span class='code bold'>options.sharedProtocols</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?</code>
   </td>
   <td class='break-word'><span>The object that will map
-protocols to other protocols, similar to:
+protocols to other protocols; protocols translate to package
+classes (i.e. http -> Http package class).  Should be similar to:
 
 <code>{ https: 'http'}</code>
 </span></td>
@@ -1247,7 +1262,7 @@ protocols to other protocols, similar to:
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L103-L151'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/AirSupply.mjs#L106-L154'>
       <span>src/AirSupply.mjs</span>
       </a>
     
@@ -1330,7 +1345,7 @@ for future reference.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L165-L215'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/AirSupply.mjs#L168-L218'>
       <span>src/AirSupply.mjs</span>
       </a>
     
@@ -1454,7 +1469,7 @@ bundled supply package.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L224-L277'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/AirSupply.mjs#L227-L280'>
       <span>src/AirSupply.mjs</span>
       </a>
     
@@ -1534,7 +1549,7 @@ bundled supply package.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/AirSupply.mjs#L287-L334'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/AirSupply.mjs#L290-L337'>
       <span>src/AirSupply.mjs</span>
       </a>
     
@@ -1706,7 +1721,7 @@ following properties
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/File.mjs#L45-L82'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/File.mjs#L45-L82'>
       <span>src/packages/File.mjs</span>
       </a>
     
@@ -1854,7 +1869,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/File.mjs#L61-L81'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/File.mjs#L61-L81'>
       <span>src/packages/File.mjs</span>
       </a>
     
@@ -1924,7 +1939,7 @@ referencial purposes.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Directory.mjs#L54-L125'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Directory.mjs#L54-L125'>
       <span>src/packages/Directory.mjs</span>
       </a>
     
@@ -2100,7 +2115,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Directory.mjs#L73-L124'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Directory.mjs#L73-L124'>
       <span>src/packages/Directory.mjs</span>
       </a>
     
@@ -2171,7 +2186,7 @@ to search directory.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Http.mjs#L43-L85'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Http.mjs#L43-L85'>
       <span>src/packages/Http.mjs</span>
       </a>
     
@@ -2326,7 +2341,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Http.mjs#L54-L84'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Http.mjs#L54-L84'>
       <span>src/packages/Http.mjs</span>
       </a>
     
@@ -2396,7 +2411,7 @@ referencial purposes.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Data.mjs#L33-L50'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Data.mjs#L33-L50'>
       <span>src/packages/Data.mjs</span>
       </a>
     
@@ -2529,7 +2544,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Data.mjs#L47-L49'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Data.mjs#L47-L49'>
       <span>src/packages/Data.mjs</span>
       </a>
     
@@ -2599,7 +2614,7 @@ referencial purposes.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L55-L257'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/GoogleDoc.mjs#L55-L257'>
       <span>src/packages/GoogleDoc.mjs</span>
       </a>
     
@@ -2746,7 +2761,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L68-L77'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/GoogleDoc.mjs#L68-L77'>
       <span>src/packages/GoogleDoc.mjs</span>
       </a>
     
@@ -2811,7 +2826,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L90-L114'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/GoogleDoc.mjs#L90-L114'>
       <span>src/packages/GoogleDoc.mjs</span>
       </a>
     
@@ -2901,7 +2916,7 @@ version of a Google Doc.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L126-L156'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/GoogleDoc.mjs#L126-L156'>
       <span>src/packages/GoogleDoc.mjs</span>
       </a>
     
@@ -2981,7 +2996,7 @@ any authentication.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleDoc.mjs#L168-L256'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/GoogleDoc.mjs#L168-L256'>
       <span>src/packages/GoogleDoc.mjs</span>
       </a>
     
@@ -3066,7 +3081,7 @@ From: <a href="https://github.com/bradoyler/googledoc-to-json/blob/master/index.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleSheet.mjs#L61-L191'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/GoogleSheet.mjs#L61-L191'>
       <span>src/packages/GoogleSheet.mjs</span>
       </a>
     
@@ -3277,7 +3292,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleSheet.mjs#L79-L115'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/GoogleSheet.mjs#L79-L115'>
       <span>src/packages/GoogleSheet.mjs</span>
       </a>
     
@@ -3342,7 +3357,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/GoogleSheet.mjs#L131-L190'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/GoogleSheet.mjs#L131-L190'>
       <span>src/packages/GoogleSheet.mjs</span>
       </a>
     
@@ -3464,7 +3479,7 @@ or
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Airtable.mjs#L56-L144'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Airtable.mjs#L56-L144'>
       <span>src/packages/Airtable.mjs</span>
       </a>
     
@@ -3660,7 +3675,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Airtable.mjs#L70-L143'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Airtable.mjs#L70-L143'>
       <span>src/packages/Airtable.mjs</span>
       </a>
     
@@ -3731,7 +3746,7 @@ to read data from Airtable.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Sql.mjs#L59-L112'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Sql.mjs#L59-L112'>
       <span>src/packages/Sql.mjs</span>
       </a>
     
@@ -3901,7 +3916,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Sql.mjs#L73-L111'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Sql.mjs#L73-L111'>
       <span>src/packages/Sql.mjs</span>
       </a>
     
@@ -3971,7 +3986,7 @@ referencial purposes.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Ftp.mjs#L50-L119'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Ftp.mjs#L50-L119'>
       <span>src/packages/Ftp.mjs</span>
       </a>
     
@@ -4142,7 +4157,7 @@ referencial purposes.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/Ftp.mjs#L61-L118'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/Ftp.mjs#L61-L118'>
       <span>src/packages/Ftp.mjs</span>
       </a>
     
@@ -4212,7 +4227,7 @@ referencial purposes.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L68-L596'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L68-L596'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -4346,7 +4361,7 @@ that they can provid default options.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L123-L161'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L123-L161'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -4412,7 +4427,7 @@ if needed, and perform the transform method if needed as well.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L168-L175'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L168-L175'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -4498,7 +4513,7 @@ if needed, and perform the transform method if needed as well.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L182-L255'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L182-L255'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -4585,7 +4600,7 @@ if needed, and perform the transform method if needed as well.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L263-L276'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L263-L276'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -4673,7 +4688,7 @@ key as the <code>source</code> property.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L283-L313'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L283-L313'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -4738,7 +4753,7 @@ key as the <code>source</code> property.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L323-L354'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L323-L354'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -4819,7 +4834,7 @@ packages.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L364-L370'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L364-L370'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -4900,7 +4915,7 @@ that function.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L379-L390'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L379-L390'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -4967,7 +4982,7 @@ of properties in the <code>options</code> as defined by
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L402-L450'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L402-L450'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -5039,7 +5054,7 @@ the followig properties:</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L460-L513'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L460-L513'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -5125,7 +5140,7 @@ defined in <code>this.cacheFiles</code>.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L523-L570'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L523-L570'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -5211,7 +5226,7 @@ in <code>this.cacheData</code> if the cache data is still valid.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/packages/BasePackage.mjs#L579-L595'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/packages/BasePackage.mjs#L579-L595'>
       <span>src/packages/BasePackage.mjs</span>
       </a>
     
@@ -5357,7 +5372,7 @@ to call this directly.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/archieml.mjs#L20-L23'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/archieml.mjs#L20-L23'>
       <span>src/parsers/archieml.mjs</span>
       </a>
     
@@ -5442,7 +5457,7 @@ to call this directly.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/csv.mjs#L27-L42'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/csv.mjs#L27-L42'>
       <span>src/parsers/csv.mjs</span>
       </a>
     
@@ -5578,7 +5593,7 @@ some options are defaulted differently here.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/gpx.mjs#L21-L26'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/gpx.mjs#L21-L26'>
       <span>src/parsers/gpx.mjs</span>
       </a>
     
@@ -5663,7 +5678,7 @@ some options are defaulted differently here.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/json.mjs#L20-L23'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/json.mjs#L20-L23'>
       <span>src/parsers/json.mjs</span>
       </a>
     
@@ -5748,7 +5763,7 @@ some options are defaulted differently here.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/kml.mjs#L21-L26'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/kml.mjs#L21-L26'>
       <span>src/parsers/kml.mjs</span>
       </a>
     
@@ -5833,7 +5848,7 @@ some options are defaulted differently here.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/reproject.mjs#L31-L60'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/reproject.mjs#L31-L60'>
       <span>src/parsers/reproject.mjs</span>
       </a>
     
@@ -5961,7 +5976,7 @@ reference.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/shapefile.mjs#L20-L20'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/shapefile.mjs#L20-L20'>
       <span>src/parsers/shapefile.mjs</span>
       </a>
     
@@ -6045,7 +6060,7 @@ as it supports using a .zip source.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/topojson.mjs#L36-L77'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/topojson.mjs#L36-L77'>
       <span>src/parsers/topojson.mjs</span>
       </a>
     
@@ -6213,7 +6228,7 @@ not simplify it much.  Use instead of
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/xlsx.mjs#L30-L59'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/xlsx.mjs#L30-L59'>
       <span>src/parsers/xlsx.mjs</span>
       </a>
     
@@ -6340,7 +6355,7 @@ some options are defaulted differently here.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/yaml.mjs#L20-L23'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/yaml.mjs#L20-L23'>
       <span>src/parsers/yaml.mjs</span>
       </a>
     
@@ -6425,7 +6440,7 @@ some options are defaulted differently here.
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/parsers/zip.mjs#L24-L52'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/parsers/zip.mjs#L24-L52'>
       <span>src/parsers/zip.mjs</span>
       </a>
     
@@ -6561,15 +6576,15 @@ that file.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/7cbcee035d1894e20eb1f9ddf48965268beb4519/src/auth/google.mjs#L61-L162'>
-      <span>src/auth/google.mjs</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://git@github.com/:zzolo/air-supply/blob/72263c705ab55ea86154a103b4a2adf12d8e3557/src/auth/google.js#L58-L164'>
+      <span>src/auth/google.js</span>
       </a>
     
   </div>
   
 
   <p>Authenticate to Google's API via OAuth on the command line.  Will
-write token to <code>~/.air-supply/google-auth.json</code> by default, and supply
+write token to <code>~/.config/air-supply/google-auth.json</code> by default, and supply
 token.</p>
 
  
@@ -6666,7 +6681,7 @@ Google auth consumer secret; defaults to the environment variable:
                 <tr>
   <td class='break-word'><span class='code bold'>options.tokenLocation</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>
   
-    (default <code>~/.air-supply/google-auth.json</code>)
+    (default <code>~/.config/air-supply/google-auth.json</code>)
   </td>
   <td class='break-word'><span>Where
 to save the authentication token.
