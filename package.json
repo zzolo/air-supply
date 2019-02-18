@@ -34,7 +34,6 @@
     "prettier": "^1.15.3",
     "rollup": "^1.1.2",
     "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^4.0.0",
     "sqlite3": "^4.0.6"
   },
   "dependencies": {
