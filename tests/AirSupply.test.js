@@ -2,15 +2,11 @@
  * Test core AirSupply class
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const path = require('path');
 
 // Get module
-const { AirSupply, airSupply } = require('../index.mjs').default;
+const { AirSupply, airSupply } = require('../index');
 
 // AirSupply
 describe('AirSupply class', () => {
