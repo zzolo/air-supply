@@ -22,7 +22,6 @@ const upperFirst = require('lodash/upperFirst');
 const camelCase = require('lodash/camelCase');
 const cosmiconfig = require('cosmiconfig');
 const json = require('json5');
-const packageTypes = require('./packages/index');
 
 // Debug
 const debug = require('debug')('airsupply');
@@ -193,11 +192,20 @@ class AirSupply {
     }
 
     // Try to match up a string type
-    if (
-      isString(config.type) &&
-      packageTypes[upperFirst(camelCase(config.type))]
-    ) {
-      config.type = packageTypes[upperFirst(camelCase(config.type))];
+    if (isString(config.type)) {
+      try {
+        let packageType = require(`./packages/${upperFirst(
+          camelCase(config.type)
+        )}`);
+        config.type = packageType;
+      }
+      catch (e) {
+        throw new Error(
+          `AirSupply package "${
+            config.key
+          }" unable to find Package class for type "${config.type}".`
+        );
+      }
     }
 
     // Look for type. Not a real way to test for Classes
