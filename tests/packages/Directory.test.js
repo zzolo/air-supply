@@ -2,17 +2,13 @@
  * Test Directory class
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const { removeSync } = require('fs-extra/lib/remove');
 const path = require('path');
 
 // Get module
-const Directory = require('../../src/packages/Directory.mjs').default;
-const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
+const Directory = require('../../src/packages/Directory');
+const parserMethods = require('../../src/parsers/default-parsers');
 
 // Default cache path
 const defaultCachePath = path.join(

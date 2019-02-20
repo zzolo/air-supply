@@ -2,16 +2,12 @@
  * Test GPX parser
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const { readFileSync } = require('fs');
 const path = require('path');
 
 // Get module
-const gpxParser = require('../../src/parsers/gpx.mjs').default;
+const gpxParser = require('../../src/parsers/gpx');
 
 // json
 describe('gpx parser', () => {

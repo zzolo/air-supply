@@ -2,17 +2,13 @@
  * Test GoogleSheet class
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const { removeSync } = require('fs-extra/lib/remove');
 const path = require('path');
 
 // Get module
-const GoogleSheet = require('../../src/packages/GoogleSheet.mjs').default;
-//const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
+const GoogleSheet = require('../../src/packages/GoogleSheet');
+//const parserMethods = require('../../src/parsers/default-parsers');
 
 // Default cache path
 const defaultCachePath = path.join(

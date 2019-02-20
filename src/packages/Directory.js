@@ -7,18 +7,14 @@
  */
 
 // Dependencies
-import BasePackage from './BasePackage';
-import merge from 'lodash/merge';
-import { statSync, readFileSync } from 'fs';
-import { relative } from 'path';
-import * as globWrapper from 'glob';
-//import * as debugWrapper from 'debug';
+const BasePackage = require('./BasePackage');
+const merge = require('lodash/merge');
+const { statSync, readFileSync } = require('fs');
+const { relative } = require('path');
+const glob = require('glob');
 
 // Debug
-//const debug = (debugWrapper.default || debugWrapper)('airsupply:directory');
-
-// Deal with import defaults
-const glob = globWrapper.default || globWrapper;
+//const debug = require('debug')('airsupply:directory');
 
 /**
  * Directory package type.  Gets data from local files in a directory
@@ -51,7 +47,7 @@ const glob = globWrapper.default || globWrapper;
  *
  * @return {<Directory>} The new Directory object.
  */
-export default class Directory extends BasePackage {
+class Directory extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       // Default to no caching.
@@ -123,3 +119,6 @@ export default class Directory extends BasePackage {
     return files;
   }
 }
+
+// Export
+module.exports = Directory;

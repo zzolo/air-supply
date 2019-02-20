@@ -6,22 +6,18 @@
  */
 
 // Dependencies
-import find from 'lodash/find';
-import isString from 'lodash/isString';
-import isEmpty from 'lodash/isEmpty';
-import BasePackage from './BasePackage';
-import googleAuthenticate from '../auth/google';
-//import * as debugWrapper from 'debug';
-import * as googleapisWrapper from 'googleapis';
+const find = require('lodash/find');
+const isString = require('lodash/isString');
+const isEmpty = require('lodash/isEmpty');
+const BasePackage = require('./BasePackage');
+const googleAuthenticate = require('../auth/google');
+const { google } = require('googleapis');
 
 // Debug
-//const debug = (debugWrapper.default || debugWrapper)('airsupply:google-doc');
-
-// Deal with import defaults
-const { google } = googleapisWrapper.default || googleapisWrapper;
+//const debug = require('debug')('airsupply:google-doc'));
 
 /**
- * GoogleSheet package type.  Gets data from a Google Sheet source via
+ * GoogleSheet package type.  Gets data = require(a Google Sheet source via
  * [googleapis](https://www.npmjs.com/package/googleapis) module.
  *
  * If you want to get the published CSV version, use the HTTP package
@@ -32,12 +28,12 @@ const { google } = googleapisWrapper.default || googleapisWrapper;
  * @extends BasePackage
  *
  * @example
- * import GoogleSheet from 'air-supply/src/packages/GoogleSheet';
+ * const GoogleSheet = require('air-supply/src/packages/GoogleSheet';
  * let f = new GoogleSheet({ source: 'GOOGLE-SHEET-ID' });
  * let data = f.cachedFetch();
  *
  * @param {Object!} options Options for package that will override
- *   any defaults from the <AirSupply> or <BasePackage>.
+ *   any defaults = require(the <AirSupply> or <BasePackage>.
  * @param {String!} options.source The Google Doc ID (can be found in the URL).
  * @param {Object} [options.fetchOptions] Options for getting sheet data.
  * @param {Boolean} [options.fetchOptions.headers=true] Assumes
@@ -47,7 +43,7 @@ const { google } = googleapisWrapper.default || googleapisWrapper;
  * @param {String|Boolean} [options.fetchOptions.sheet=false] The ID of the
  *   specific sheet in the Google Sheet.  False to use the first/default.
  * @param {String} [options.fetchOptions.fieldType='userEnteredValue']
- *   The type of value to get from each field; can be `userEnteredValue`,
+ *   The type of value to get = require(each field); can be `userEnteredValue`,
  *   `effectiveValue`, or `formattedValue`
  * @param {Object} [options.authOptions] Options to pass to the Google authentication
  *   function.
@@ -58,7 +54,7 @@ const { google } = googleapisWrapper.default || googleapisWrapper;
  *
  * @return {<GoogleSheet>} The new GoogleSheet object.
  */
-export default class GoogleSheet extends BasePackage {
+class GoogleSheet extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       parsers: false,
@@ -115,7 +111,7 @@ export default class GoogleSheet extends BasePackage {
   }
 
   /**
-   * Get the basic grid content from the sheet.
+   * Get the basic grid content = require(the sheet.
    * Reference: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#SheetProperties
    *
    * @async
@@ -123,7 +119,7 @@ export default class GoogleSheet extends BasePackage {
    * @param {String} source The Google Sheet ID.
    * @param {String|Boolean} [sheet=false] The sheet ID, false for the default.
    * @param {String} [fieldType='userEnteredValue'] The type of value to
-   *   get from each field; can be `userEnteredValue`, `effectiveValue`,
+   *   get = require(each field); can be `userEnteredValue`, `effectiveValue`,
    *   or `formattedValue`.
    *
    * @return {Object} Sheet content.
@@ -159,7 +155,7 @@ export default class GoogleSheet extends BasePackage {
 
     // Check for sheet
     if (!s) {
-      throw new Error(`Unable to locate sheet from ID: ${sheet}`);
+      throw new Error(`Unable to locate sheet = require(ID: ${sheet}`);
     }
 
     // Get data into simple format
@@ -189,3 +185,6 @@ export default class GoogleSheet extends BasePackage {
     return data;
   }
 }
+
+// Export
+module.exports = GoogleSheet;

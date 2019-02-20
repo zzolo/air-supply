@@ -13,31 +13,25 @@
  */
 
 // Dependencies
-import { join } from 'path';
-import merge from 'lodash/merge';
-import omit from 'lodash/omit';
-import pick from 'lodash/pick';
-import find from 'lodash/find';
-import mapValues from 'lodash/mapValues';
-import kebabCase from 'lodash/kebabCase';
-import isArray from 'lodash/isArray';
-import isObject from 'lodash/isObject';
-import isPlainObject from 'lodash/isPlainObject';
-import isString from 'lodash/isString';
-import isFunction from 'lodash/isFunction';
-import bind from 'lodash/bind';
-import * as fsWrapper from 'fs-extra';
-import * as objectHashWrapper from 'object-hash';
-import * as debugWrapper from 'debug';
-import * as jsonWrapper from 'json5';
+const { join } = require('path');
+const merge = require('lodash/merge');
+const omit = require('lodash/omit');
+const pick = require('lodash/pick');
+const find = require('lodash/find');
+const mapValues = require('lodash/mapValues');
+const kebabCase = require('lodash/kebabCase');
+const isArray = require('lodash/isArray');
+const isObject = require('lodash/isObject');
+const isPlainObject = require('lodash/isPlainObject');
+const isString = require('lodash/isString');
+const isFunction = require('lodash/isFunction');
+const bind = require('lodash/bind');
+const fs = require('fs-extra');
+const objectHash = require('object-hash');
+const json = require('json5');
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:basepackage');
-
-// Deal with import defaults
-const objectHash = objectHashWrapper.default || objectHashWrapper;
-const json = jsonWrapper.default || jsonWrapper;
-const fs = fsWrapper.default || fsWrapper;
+const debug = require('debug')('airsupply:basepackage');
 
 /**
  * The base package class that is meant to be extended
@@ -65,7 +59,7 @@ const fs = fsWrapper.default || fsWrapper;
  *
  * @return {<BasePackage>} The new BasePackage object.
  */
-export default class BasePackage {
+class BasePackage {
   // Constructor
   constructor(options = {}, airSupply, packageDefaults) {
     // 1. AirSupply class default options,
@@ -594,3 +588,6 @@ export default class BasePackage {
     return this;
   }
 }
+
+// Export
+module.exports = BasePackage;

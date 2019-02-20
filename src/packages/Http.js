@@ -6,15 +6,11 @@
  */
 
 // Dependencies
-import BasePackage from './BasePackage';
-import * as fetchWrapper from 'node-fetch';
-import * as debugWrapper from 'debug';
+const BasePackage = require('./BasePackage');
+const fetch = require('node-fetch');
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:http');
-
-// Deal with import defaults
-const fetch = fetchWrapper.default || fetchWrapper;
+const debug = require('debug')('airsupply:http');
 
 /**
  * Http package type.  Gets data from an "http://" source via [node-fetch](https://www.npmjs.com/package/node-fetch).
@@ -40,7 +36,7 @@ const fetch = fetchWrapper.default || fetchWrapper;
  *
  * @return {<Http>} The new Http object.
  */
-export default class Http extends BasePackage {
+class Http extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {});
   }
@@ -83,3 +79,6 @@ export default class Http extends BasePackage {
         : r.text());
   }
 }
+
+// Export
+module.exports = Http;

@@ -7,15 +7,11 @@
  */
 
 // Dependencies
-import BasePackage from './BasePackage';
-import * as fsWrapper from 'fs-extra';
-import * as debugWrapper from 'debug';
+const BasePackage = require('./BasePackage');
+const fs = require('fs-extra');
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:file');
-
-// Deal with import defaults
-const fs = fsWrapper.default || fsWrapper;
+const debug = require('debug')('airsupply:file');
 
 /**
  * File package type.  Gets data from local files.
@@ -42,7 +38,7 @@ const fs = fsWrapper.default || fsWrapper;
  *
  * @return {<File>} The new File object.
  */
-export default class File extends BasePackage {
+class File extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       // Default to no caching.
@@ -80,3 +76,6 @@ export default class File extends BasePackage {
     return fs.readFileSync(source, this.options.fetchOptions);
   }
 }
+
+// Export
+module.exports = File;

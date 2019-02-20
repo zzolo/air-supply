@@ -2,17 +2,13 @@
  * Test Http class
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const { removeSync } = require('fs-extra/lib/remove');
 const path = require('path');
 
 // Get module
-const Http = require('../../src/packages/Http.mjs').default;
-const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
+const Http = require('../../src/packages/Http');
+const parserMethods = require('../../src/parsers/default-parsers');
 
 // Default cache path
 const defaultCachePath = path.join(

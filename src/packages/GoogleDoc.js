@@ -7,23 +7,16 @@
  */
 
 // Dependencies
-import url from 'url';
-import BasePackage from './BasePackage';
-import googleAuthenticate from '../auth/google';
-import * as fetchWrapper from 'node-fetch';
-import * as debugWrapper from 'debug';
-import * as googleapisWrapper from 'googleapis';
-import * as htmlEntitiesWrapper from 'html-entities';
-import * as htmlparser2Wrapper from 'htmlparser2';
+const url = require('url');
+const BasePackage = require('./BasePackage');
+const googleAuthenticate = require('../auth/google');
+const fetch = require('node-fetch');
+const { google } = require('googleapis');
+const { AllHtmlEntities } = require('html-entities');
+const htmlparser = require('htmlparser2');
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:google-doc');
-
-// Deal with import defaults
-const fetch = fetchWrapper.default || fetchWrapper;
-const htmlparser = htmlparser2Wrapper.default || htmlparser2Wrapper;
-const { google } = googleapisWrapper.default || googleapisWrapper;
-const { AllHtmlEntities } = htmlEntitiesWrapper.default || htmlEntitiesWrapper;
+const debug = require('debug')('airsupply:google-doc');
 
 /**
  * GoogleDoc package type.  Gets data from a Google Doc source via
@@ -52,7 +45,7 @@ const { AllHtmlEntities } = htmlEntitiesWrapper.default || htmlEntitiesWrapper;
  *
  * @return {<GoogleDoc>} The new GoogleDoc object.
  */
-export default class GoogleDoc extends BasePackage {
+class GoogleDoc extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       parsers: 'archieml'
@@ -255,3 +248,6 @@ export default class GoogleDoc extends BasePackage {
     });
   }
 }
+
+// Export
+module.exports = GoogleDoc;

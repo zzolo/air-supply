@@ -2,16 +2,12 @@
  * Test xlsx parser
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const { readFileSync } = require('fs');
 const path = require('path');
 
 // Get module
-const xlsxParser = require('../../src/parsers/xlsx.mjs').default;
+const xlsxParser = require('../../src/parsers/xlsx');
 
 // xlsx
 describe('xlsx parser', () => {

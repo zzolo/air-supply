@@ -2,14 +2,10 @@
  * Test File class
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 
 // Get module
-const yamlParser = require('../../src/parsers/yaml.mjs').default;
+const yamlParser = require('../../src/parsers/yaml');
 
 // json
 describe('yaml parser', () => {

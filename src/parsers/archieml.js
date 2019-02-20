@@ -3,8 +3,8 @@
  * ArchieML parser, just use archieml.
  */
 
-import isString from 'lodash/isString';
-import archieml from 'archieml';
+const isString = require('lodash/isString');
+const archieml = require('archieml');
 
 /**
  * ArchieML parser.  Uses [archieml](https://www.npmjs.com/package/archieml) module.
@@ -17,7 +17,7 @@ import archieml from 'archieml';
  *
  * @return {Object} Parsed data.
  */
-export default (input, ...args) => {
+module.exports = (input, ...args) => {
   input = isString(input) ? input : input.toString('utf-8');
   return archieml.load(input, ...args);
 };

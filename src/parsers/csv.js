@@ -4,9 +4,9 @@
  * as it has many options.
  */
 
-import isString from 'lodash/isString';
-import merge from 'lodash/merge';
-import parse from 'csv-parse/lib/sync';
+const isString = require('lodash/isString');
+const merge = require('lodash/merge');
+const parse = require('csv-parse/lib/sync');
 
 /**
  * CSV (or any delimiter) parser.  Uses [csv-parse](https://www.npmjs.com/package/csv-parse) module,
@@ -24,7 +24,7 @@ import parse from 'csv-parse/lib/sync';
  *
  * @return {Object} Parsed data.
  */
-export default (input, options = {}) => {
+module.exports = (input, options = {}) => {
   input = isString(input) ? input : input.toString('utf-8');
 
   // Default options

@@ -222,7 +222,7 @@ Run tests with: `npm run test`
 
 ### NPM
 
-1. Bump version in `package.json` and run `npm install` and `npm run build`.
+1. Bump version in `package.json` and run `npm install`.
 1. Commit.
 1. Tag: `git tag X.X.X`
 1. Push up: `git push origin master --tags`

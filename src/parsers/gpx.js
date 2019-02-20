@@ -3,9 +3,9 @@
  * GPX parser, uses [togeojson](https://github.com/mapbox/togeojson).
  */
 
-import isString from 'lodash/isString';
-import togeojson from '@mapbox/togeojson';
-import xmldom from 'xmldom';
+const isString = require('lodash/isString');
+const { gpx } = require('@mapbox/togeojson');
+const { DOMParser } = require('xmldom');
 
 /**
  * KML parser.  Uses [togeojson](https://github.com/mapbox/togeojson) module.
@@ -18,9 +18,9 @@ import xmldom from 'xmldom';
  *
  * @return {Object} Parsed data.
  */
-export default (input, ...args) => {
+module.exports = (input, ...args) => {
   input = isString(input) ? input : input.toString('utf-8');
-  let kml = new xmldom.DOMParser().parseFromString(input);
+  let parsed = new DOMParser().parseFromString(input);
 
-  return togeojson.gpx(kml, ...args);
+  return gpx(parsed, ...args);
 };

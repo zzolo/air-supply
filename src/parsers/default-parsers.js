@@ -9,17 +9,17 @@
  */
 
 // Get parsers
-import jsonParser from './json';
-import csvParser from './csv';
-import yamlParser from './yaml';
-import archiemlParser from './archieml';
-import zipParser from './zip';
-import xlsxParser from './xlsx';
-import shapefileParser from './shapefile';
-import kmlParser from './kml';
-import gpxParser from './gpx';
-import topojsonParser from './topojson';
-import reprojectParser from './reproject';
+const jsonParser = require('./json');
+const csvParser = require('./csv');
+const yamlParser = require('./yaml');
+const archiemlParser = require('./archieml');
+const zipParser = require('./zip');
+const xlsxParser = require('./xlsx');
+const shapefileParser = require('./shapefile');
+const kmlParser = require('./kml');
+const gpxParser = require('./gpx');
+const topojsonParser = require('./topojson');
+const reprojectParser = require('./reproject');
 
 /**
  * @ignore
@@ -59,7 +59,7 @@ import reprojectParser from './reproject';
  */
 
 // Export default
-export default {
+module.exports = {
   json: {
     match: /json5?$/i,
     parser: jsonParser

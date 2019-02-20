@@ -13,10 +13,10 @@
  * @module air-supply
  */
 
-import AirSupply from './src/AirSupply';
+const AirSupply = require('./src/AirSupply');
 
 // Exports
-export default {
+module.exports = {
   AirSupply,
   // Create a wrapper function
   airSupply: options => {

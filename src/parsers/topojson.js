@@ -3,9 +3,9 @@
  * TopoJSON parser, uses [topojson](https://github.com/topojson/topojson).
  */
 
-import isString from 'lodash/isString';
-import merge from 'lodash/merge';
-import topojson from 'topojson';
+const isString = require('lodash/isString');
+const merge = require('lodash/merge');
+const topojson = require('topojson');
 
 /**
  * Converts GeoJSON to TopoJSON.  Uses [topojson](https://github.com/topojson/topojson) module.
@@ -33,7 +33,7 @@ import topojson from 'topojson';
  *
  * @return {Object} Parsed data.
  */
-export default (input, options = {}) => {
+module.exports = (input, options = {}) => {
   options = merge(
     {},
     {

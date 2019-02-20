@@ -6,15 +6,11 @@
  */
 
 // Dependencies
-import BasePackage from './BasePackage';
-import * as sequelizeWrapper from 'sequelize';
-import * as debugWrapper from 'debug';
+const BasePackage = require('./BasePackage');
+const Sequelize = require('sequelize');
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:sql');
-
-// Deal with import defaults
-const Sequelize = sequelizeWrapper.default || sequelizeWrapper;
+const debug = require('debug')('airsupply:sql');
 
 /**
  * SQL package type.  Gets data from an SQL database source via [sequelize](http://docs.sequelizejs.com/).
@@ -56,7 +52,7 @@ const Sequelize = sequelizeWrapper.default || sequelizeWrapper;
  *
  * @return {<Sql>} The new Sql object.
  */
-export default class Sql extends BasePackage {
+class Sql extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       // Don't need parser
@@ -110,3 +106,6 @@ export default class Sql extends BasePackage {
     }
   }
 }
+
+// Export
+module.exports = Sql;

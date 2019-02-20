@@ -6,17 +6,13 @@
  */
 
 // Dependencies
-import { parse as parseUrl } from 'url';
-import merge from 'lodash/merge';
-import BasePackage from './BasePackage';
-import * as ftpWrapper from 'ftp';
-//import * as debugWrapper from 'debug';
+const { parse: parseUrl } = require('url');
+const merge = require('lodash/merge');
+const BasePackage = require('./BasePackage');
+const FtpClient = require('ftp');
 
 // Debug
-//const debug = (debugWrapper.default || debugWrapper)('airsupply:ftp');
-
-// Deal with import defaults
-const FtpClient = ftpWrapper.default || ftpWrapper;
+//const debug = require('debug')('airsupply:ftp');
 
 /**
  * Ftp package type.  Gets data from an "ftp://" source via [ftp](https://www.npmjs.com/package/ftp) module.
@@ -47,7 +43,7 @@ const FtpClient = ftpWrapper.default || ftpWrapper;
  *
  * @return {<Ftp>} The new Ftp object.
  */
-export default class Ftp extends BasePackage {
+class Ftp extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {});
   }
@@ -117,3 +113,6 @@ export default class Ftp extends BasePackage {
     });
   }
 }
+
+// Export
+module.exports = Ftp;

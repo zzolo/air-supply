@@ -6,18 +6,14 @@
  */
 
 // Dependencies
-import isEmpty from 'lodash/isEmpty';
-import filter from 'lodash/filter';
-import omit from 'lodash/omit';
-import BasePackage from './BasePackage';
-import * as airtableWrapper from 'airtable';
-import * as debugWrapper from 'debug';
+const isEmpty = require('lodash/isEmpty');
+const filter = require('lodash/filter');
+const omit = require('lodash/omit');
+const BasePackage = require('./BasePackage');
+const AirtableApi = require('airtable');
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:file');
-
-// Deal with import defaults
-const AirtableApi = airtableWrapper.default || airtableWrapper;
+const debug = require('debug')('airsupply:file');
 
 /**
  * Airtable package type.  Gets data from Airtable.
@@ -53,7 +49,7 @@ const AirtableApi = airtableWrapper.default || airtableWrapper;
  *
  * @return {<Airtable>} The new Airtable object.
  */
-export default class Airtable extends BasePackage {
+class Airtable extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       parsers: false
@@ -142,3 +138,6 @@ export default class Airtable extends BasePackage {
     });
   }
 }
+
+// Export
+module.exports = Airtable;

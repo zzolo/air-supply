@@ -2,19 +2,15 @@
  * Test BasePackage class
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const { removeSync } = require('fs-extra/lib/remove');
 const { statSync, readFileSync } = require('fs-extra/lib/fs');
 const jsonParse = require('json5/lib/parse');
 const path = require('path');
 
 // Get module
-const BasePackage = require('../../src/packages/BasePackage.mjs').default;
-const parserMethods = require('../../src/parsers/default-parsers.mjs').default;
+const BasePackage = require('../../src/packages/BasePackage');
+const parserMethods = require('../../src/parsers/default-parsers');
 
 // Default cache path
 const defaultCachePath = path.join(

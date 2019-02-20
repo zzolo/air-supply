@@ -2,16 +2,12 @@
  * Test integrations with local files
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const { removeSync } = require('fs-extra/lib/remove');
 const path = require('path');
 
 // Get module
-const { AirSupply } = require('../../index.mjs').default;
+const { AirSupply } = require('../../index');
 
 // Default cache path
 const defaultCachePath = path.join(

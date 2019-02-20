@@ -4,7 +4,7 @@
  * which supports multiple formats.
  */
 
-import xlsx from 'xlsx';
+const xlsx = require('xlsx');
 
 /**
  * XLSX (MS Excel) (and other format) parser.  Uses [xlsx](https://github.com/sheetjs/js-xlsx) module.
@@ -27,7 +27,7 @@ import xlsx from 'xlsx';
  *
  * @return {Object} Parsed data.
  */
-export default (input, options = {}) => {
+module.exports = (input, options = {}) => {
   // Connect to worksheet
   const workSheet = xlsx.read(input, options);
 

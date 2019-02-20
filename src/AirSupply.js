@@ -9,28 +9,23 @@
  */
 
 // Dependencies
-import { statSync } from 'fs';
-import { join, dirname } from 'path';
-import { parse as parseUrl } from 'url';
-import defaultParsers from './parsers/default-parsers';
-import merge from 'lodash/merge';
-import size from 'lodash/size';
-import isString from 'lodash/isString';
-import isFunction from 'lodash/isFunction';
-import isPlainObject from 'lodash/isPlainObject';
-import upperFirst from 'lodash/upperFirst';
-import camelCase from 'lodash/camelCase';
-import * as debugWrapper from 'debug';
-import * as cosmiconfigWrapper from 'cosmiconfig';
-import * as jsonWrapper from 'json5';
-import packageTypes from './packages/index';
+const { statSync } = require('fs');
+const { join, dirname } = require('path');
+const { parse: parseUrl } = require('url');
+const defaultParsers = require('./parsers/default-parsers');
+const merge = require('lodash/merge');
+const size = require('lodash/size');
+const isString = require('lodash/isString');
+const isFunction = require('lodash/isFunction');
+const isPlainObject = require('lodash/isPlainObject');
+const upperFirst = require('lodash/upperFirst');
+const camelCase = require('lodash/camelCase');
+const cosmiconfig = require('cosmiconfig');
+const json = require('json5');
+const packageTypes = require('./packages/index');
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply');
-
-// ESM wrapper
-const cosmiconfig = cosmiconfigWrapper.default || cosmiconfigWrapper;
-const json = jsonWrapper.default || jsonWrapper;
+const debug = require('debug')('airsupply');
 
 /**
  * The AirSupply class is the main way
@@ -62,7 +57,7 @@ const json = jsonWrapper.default || jsonWrapper;
  *
  * @return {<AirSupply>} The new AirSupply object.
  */
-export default class AirSupply {
+class AirSupply {
   // Constructor
   constructor(options = {}) {
     // Get configuration from a config file
@@ -336,3 +331,6 @@ export default class AirSupply {
     }
   }
 }
+
+// Export
+module.exports = AirSupply;

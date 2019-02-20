@@ -3,11 +3,10 @@
  * Zip archive parser.
  */
 
-import AdmZip from 'adm-zip';
-import * as debugWrapper from 'debug';
+const AdmZip = require('adm-zip');
 
 // Debug
-const debug = (debugWrapper.default || debugWrapper)('airsupply:zip');
+const debug = require('debug')('airsupply:zip');
 
 /**
  * Zip archiver.  Uses [adm-zip](https://www.npmjs.com/package/adm-zip) module.  Produces
@@ -21,7 +20,7 @@ const debug = (debugWrapper.default || debugWrapper)('airsupply:zip');
  *
  * @return {Object} Parsed data.
  */
-export default input => {
+module.exports = input => {
   let entries;
   let zip;
 

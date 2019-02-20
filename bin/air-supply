@@ -3,7 +3,7 @@
 // Depends on the CJS version in dist
 const jsonStringify = require('json5/lib/stringify');
 const yargs = require('yargs');
-const { AirSupply } = require('../dist/air-supply.js');
+const { AirSupply } = require('../index.js');
 const pkg = require('../package.json');
 
 // Yarg interface

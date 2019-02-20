@@ -6,7 +6,7 @@
  */
 
 // Dependencies
-import BasePackage from './BasePackage';
+const BasePackage = require('./BasePackage');
 
 /**
  * Data package type.  Just passes through "source" property.
@@ -30,7 +30,7 @@ import BasePackage from './BasePackage';
  *
  * @return {<Data>} The new Data object.
  */
-export default class Data extends BasePackage {
+class Data extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
       // Default, assume no parsing is needed
@@ -48,3 +48,6 @@ export default class Data extends BasePackage {
     return await this.option('source');
   }
 }
+
+// Export
+module.exports = Data;

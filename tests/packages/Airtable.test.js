@@ -2,16 +2,12 @@
  * Test Airtable class
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const { removeSync } = require('fs-extra/lib/remove');
 const path = require('path');
 
 // Get module
-const Airtable = require('../../src/packages/Airtable.mjs').default;
+const Airtable = require('../../src/packages/Airtable');
 
 // Default cache path
 const defaultCachePath = path.join(

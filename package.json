@@ -5,23 +5,20 @@
   "bin": {
     "air-supply": "bin/air-supply"
   },
-  "main": "dist/air-supply.js",
-  "module": "index.mjs",
-  "source": "index.mjs",
+  "main": "index.js",
   "files": [
     "dist/**/*",
     "src/**/*",
     "bin/**/*",
     "README.md",
-    "index.mjs"
+    "index.*"
   ],
   "scripts": {
     "test": "jest",
-    "build": "rollup -c",
     "docs": "mkdir -p docs && documentation build -f html -c documentation.yml --github -o docs index.mjs",
     "docs:preview": "documentation serve -c documentation.yml --github -w index.mjs",
     "docs:publish": "npm run docs && gh-pages -d docs",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "npm run test"
   },
   "author": "Alan Palazzolo",
   "license": "MIT",
@@ -29,12 +26,9 @@
     "documentation": "^9.1.1",
     "dotenv": "^6.2.0",
     "eslint": "^5.11.1",
-    "esm": "^3.0.84",
     "gh-pages": "^2.0.1",
     "jest": "^23.6.0",
     "prettier": "^1.15.3",
-    "rollup": "^1.1.2",
-    "rollup-plugin-commonjs": "^9.2.0",
     "sqlite3": "^4.0.6"
   },
   "dependencies": {

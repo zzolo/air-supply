@@ -2,16 +2,12 @@
  * Test Topojson parser
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 const { readFileSync } = require('fs');
 const path = require('path');
 
 // Get module
-const topojsonParser = require('../../src/parsers/topojson.mjs').default;
+const topojsonParser = require('../../src/parsers/topojson');
 
 // json
 describe('topojson parser', () => {

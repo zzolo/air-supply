@@ -2,14 +2,10 @@
  * Test File class
  */
 
-// Allow ESM support
-require = require('esm')(module);
-
 // Dependencies for testing.
-// NOTE: there is a problem if you use the same require here and in the ESM module
 
 // Get module
-const csvParser = require('../../src/parsers/csv.mjs').default;
+const csvParser = require('../../src/parsers/csv');
 
 // json
 describe('csv parser', () => {

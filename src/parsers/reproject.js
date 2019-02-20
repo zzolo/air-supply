@@ -5,10 +5,10 @@
  * This isn't really a parser...
  */
 
-import isString from 'lodash/isString';
-import merge from 'lodash/merge';
-import reproject from 'reproject';
-import epsg from 'epsg';
+const isString = require('lodash/isString');
+const merge = require('lodash/merge');
+const { reproject } = require('reproject');
+const epsg = require('epsg');
 
 /**
  * Reproject GeoJSON.  Uses [reproject](https://www.npmjs.com/package/reproject) module.
@@ -28,7 +28,7 @@ import epsg from 'epsg';
  *
  * @return {Object} Reprojected geojson.
  */
-export default (input, options = {}) => {
+module.exports = (input, options = {}) => {
   options = merge(
     {},
     {
@@ -56,5 +56,5 @@ export default (input, options = {}) => {
     }
   }
 
-  return reproject.reproject(input, options.sourceCrs, options.targetCrs, epsg);
+  return reproject(input, options.sourceCrs, options.targetCrs, epsg);
 };

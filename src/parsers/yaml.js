@@ -3,8 +3,8 @@
  * YAML parser, just use js-yaml safeLoad.
  */
 
-import isString from 'lodash/isString';
-import yaml from 'js-yaml';
+const isString = require('lodash/isString');
+const { safeLoad } = require('js-yaml');
 
 /**
  * YAML parser.  Uses [js-yaml](https://www.npmjs.com/package/js-yaml) module.
@@ -17,7 +17,7 @@ import yaml from 'js-yaml';
  *
  * @return {Object} Parsed data.
  */
-export default (input, ...args) => {
+module.exports = (input, ...args) => {
   input = isString(input) ? input : input.toString('utf-8');
-  return yaml.safeLoad(input, ...args);
+  return safeLoad(input, ...args);
 };

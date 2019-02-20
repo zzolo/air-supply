@@ -3,7 +3,7 @@
  * Shapefile .zip parsing with shpjs
  */
 
-import shp from 'shpjs';
+const shp = require('shpjs');
 
 /**
  * Shapefile parser.  Uses [shpjs](https://github.com/calvinmetcalf/shapefile-js) module
@@ -17,4 +17,4 @@ import shp from 'shpjs';
  *
  * @return {Object} Parsed data.
  */
-export default shp;
+module.exports = shp;
