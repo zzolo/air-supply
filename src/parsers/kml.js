@@ -4,11 +4,23 @@
  */
 
 const isString = require('lodash/isString');
-const { kml } = require('@mapbox/togeojson');
 const { DOMParser } = require('xmldom');
 
 /**
  * KML parser.  Uses [togeojson](https://github.com/mapbox/togeojson) module.
+ * togeojson module is not installed by default, if you need this parser,
+ * install separately:
+ *
+ * ```sh
+ * npm install @mapbox/togeojson
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install togeojson globally:
+ *
+ * ```sh
+ * npm install -g @mapbox/togeojson
+ * ```
  *
  * @name kml
  * @export
@@ -19,6 +31,7 @@ const { DOMParser } = require('xmldom');
  * @return {Object} Parsed data.
  */
 module.exports = (input, ...args) => {
+  const { kml } = require('@mapbox/togeojson');
   input = isString(input) ? input : input.toString('utf-8');
   let parsed = new DOMParser().parseFromString(input);
 
