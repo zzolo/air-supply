@@ -5,10 +5,23 @@
 
 const isString = require('lodash/isString');
 const merge = require('lodash/merge');
-const topojson = require('topojson');
 
 /**
- * Converts GeoJSON to TopoJSON.  Uses [topojson](https://github.com/topojson/topojson) module.
+ * Converts GeoJSON to TopoJSON.  Uses
+ * [topojson](https://github.com/topojson/topojson) module.
+ * TopoJSON module is not installed
+ * by default, if you need this parser, install separately:
+ *
+ * ```sh
+ * npm install topojson
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install TopoJSON globally:
+ *
+ * ```sh
+ * npm install -g topojson
+ * ```
  *
  * @name topojson
  * @export
@@ -34,6 +47,7 @@ const topojson = require('topojson');
  * @return {Object} Parsed data.
  */
 module.exports = (input, options = {}) => {
+  const topojson = require('topojson');
   options = merge(
     {},
     {
