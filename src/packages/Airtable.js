@@ -44,7 +44,7 @@ const debug = require('debug')('airsupply:file');
  *   `fields`, `filterByFormula`, `maxRecords`, `pageSize`, `view`,
  *   `sort` (ex. `[{field: "ID", direction: "desc"}]`), `cellFormat`
  *   (ex. `json` or `string`)
- * @param {Boolean} [options.Airtable=require('airtable')] The
+ * @param {Object|Function} [options.Airtable=require('airtable')] The
  *   [airtable](https://www.npmjs.com/package/airtable) module is not
  *   installed by default.  You can either install it normally,
  *   i.e. `npm install airtable`, or you can provided the module with

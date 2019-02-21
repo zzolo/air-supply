@@ -9,10 +9,9 @@
 const { parse: parseUrl } = require('url');
 const merge = require('lodash/merge');
 const BasePackage = require('./BasePackage');
-const FtpClient = require('ftp');
 
 // Debug
-//const debug = require('debug')('airsupply:ftp');
+const debug = require('debug')('airsupply:ftp');
 
 /**
  * Ftp package type.  Gets data from an "ftp://" source via [ftp](https://www.npmjs.com/package/ftp) module.
@@ -38,6 +37,11 @@ const FtpClient = require('ftp');
  *   `buffer` or `string`; defaults to `string`.
  * @param {String} [options.fetchOptions.path] Custom option for the
  *   path to get from the FTP server, if not used in the `source` URI.
+ * @param {Object|Function} [options.Ftp=require('ftp')] The
+ *   [ftp](https://www.npmjs.com/package/ftp) module is not
+ *   installed by default.  You can either install it normally,
+ *   i.e. `npm install ftp`, or you can provided the module with
+ *   this option if you need some sort of customization.
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
  *
@@ -46,6 +50,17 @@ const FtpClient = require('ftp');
 class Ftp extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {});
+
+    // Attach dependency
+    try {
+      this.Ftp = this.options.Ftp || require('ftp');
+    }
+    catch (e) {
+      debug(e);
+      throw new Error(
+        'The Air Supply Airtable package was not provided an "options.Airtable" dependency, or could not find the "airtable" module itself.  Trying installing the "airtable" module: `npm install airtable`'
+      );
+    }
   }
 
   /**
@@ -83,7 +98,7 @@ class Ftp extends BasePackage {
 
     // Wrap in Promise
     return new Promise((resolve, reject) => {
-      const client = new FtpClient();
+      const client = new this.Ftp();
 
       // When connected
       client.on('ready', () => {

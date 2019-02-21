@@ -38,8 +38,6 @@ const glob = require('glob');
  *   if there is a lot of transforming.
  * @param {Object} [options.parsers={ multiSource: true }] Parser
  *   options to default to multiple sources.
- * @param {Boolean} [options.parsers.multiSource=true] Defaults
- *   to multiple sources as an object.
  * @param {Object} [options.fetchOptions] Options given to
  *   [glob](https://github.com/isaacs/node-glob#options)
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
