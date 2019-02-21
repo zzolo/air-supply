@@ -453,9 +453,9 @@ class BasePackage {
    */
   setCache(cachePoint) {
     // If no cache, ignore
-    if (this.options.noCache) {
-      return;
-    }
+    // if (this.options.noCache) {
+    //   return;
+    // }
 
     // If we don't have data, then no reason to do anything
     if (!this.data || !this.data[cachePoint]) {
