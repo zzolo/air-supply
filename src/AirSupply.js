@@ -35,6 +35,7 @@ const debug = require('debug')('airsupply');
  *
  * @export
  * @class AirSupply
+ *
  * @param {Object} options Options object.
  * @param {Object} options.packages The object describing each package,
  *   in format:

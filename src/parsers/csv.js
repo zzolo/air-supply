@@ -6,11 +6,23 @@
 
 const isString = require('lodash/isString');
 const merge = require('lodash/merge');
-const parse = require('csv-parse/lib/sync');
 
 /**
- * CSV (or any delimiter) parser.  Uses [csv-parse](https://www.npmjs.com/package/csv-parse) module,
- * specifically the `sync` method.
+ * CSV (or any delimiter) parser.  Uses
+ * [csv-parse](https://www.npmjs.com/package/csv-parse) module,
+ * specifically the `sync` method.  CSV Parse module is not
+ * installed by default, if you need this parser, install separately:
+ *
+ * ```sh
+ * npm install csv-parse
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install CSV Parse globally:
+ *
+ * ```sh
+ * npm install -g csv-parse
+ * ```
  *
  * @name csv
  * @export
@@ -25,6 +37,10 @@ const parse = require('csv-parse/lib/sync');
  * @return {Object} Parsed data.
  */
 module.exports = (input, options = {}) => {
+  // Load parser here so that it can be on-demand
+  const parse = require('csv-parse/lib/sync');
+
+  // Handle input
   input = isString(input) ? input : input.toString('utf-8');
 
   // Default options

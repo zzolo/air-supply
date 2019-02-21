@@ -15,8 +15,8 @@
   ],
   "scripts": {
     "test": "jest",
-    "docs": "mkdir -p docs && documentation build -f html -c documentation.yml --github -o docs index.mjs",
-    "docs:preview": "documentation serve -c documentation.yml --github -w index.mjs",
+    "docs": "mkdir -p docs && documentation build -f html -c documentation.yml --github -o docs index.js",
+    "docs:preview": "documentation serve -c documentation.yml --github -w src/**/* index.js",
     "docs:publish": "npm run docs && gh-pages -d docs",
     "prepublishOnly": "npm run test"
   },
@@ -29,15 +29,15 @@
     "gh-pages": "^2.0.1",
     "jest": "^23.6.0",
     "prettier": "^1.15.3",
-    "sqlite3": "^4.0.6"
+    "sqlite3": "^4.0.6",
+    "archieml": "^0.4.2",
+    "csv-parse": "^4.3.1"
   },
   "dependencies": {
     "@mapbox/togeojson": "^0.16.0",
     "adm-zip": "^0.4.13",
     "airtable": "^0.5.8",
-    "archieml": "^0.4.2",
     "cosmiconfig": "^5.0.7",
-    "csv-parse": "^4.3.1",
     "debug": "^4.1.1",
     "epsg": "^0.5.0",
     "express": "^4.16.4",
