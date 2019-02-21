@@ -7,7 +7,6 @@
 
 // Dependencies
 const BasePackage = require('./BasePackage');
-const fetch = require('node-fetch');
 
 // Debug
 const debug = require('debug')('airsupply:http');
@@ -31,6 +30,10 @@ const debug = require('debug')('airsupply:http');
  * @param {String} [options.fetchOptions.type='string'] Custom option to
  *   handle what kind of response we want from the fetch, can be
  *   either `buffer`, `json`, or `string`; defaults to `string`.
+ * @param {Object|Function} [options.nodeFetch=require('node-fetch')] The
+ *   [node-fetch](https://www.npmjs.com/package/node-fetch) module is
+ *   installed by default, but you may want to use a specific version
+ *   or otherwise customize it.
  * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
  *   referencial purposes.
  *
@@ -39,6 +42,17 @@ const debug = require('debug')('airsupply:http');
 class Http extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {});
+
+    // Attach dependencies
+    try {
+      this.nodeFetch = this.options.nodeFetch || require('node-fetch');
+    }
+    catch (e) {
+      debug(e);
+      throw new Error(
+        'The Air Supply GoogleDoc package was not provided an "options.nodeFetch" dependency, or could not find the "node-fetch" module itself.'
+      );
+    }
   }
 
   /**
@@ -53,7 +67,7 @@ class Http extends BasePackage {
     let options = this.option('fetchOptions') || {};
 
     try {
-      r = await fetch(source, options);
+      r = await this.nodeFetch(source, options);
     }
     catch (e) {
       debug(e);
