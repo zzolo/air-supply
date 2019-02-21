@@ -4,8 +4,6 @@
  * which supports multiple formats.
  */
 
-const xlsx = require('xlsx');
-
 /**
  * XLSX (MS Excel) (and other format) parser.  Uses [xlsx](https://github.com/sheetjs/js-xlsx) module.
  *
@@ -14,6 +12,20 @@ const xlsx = require('xlsx');
  *
  * Reading options reference:
  * https://docs.sheetjs.com/#parsing-options
+ *
+ * XLSX module is not installed
+ * by default, if you need this parser, install separately:
+ *
+ * ```sh
+ * npm install xlsx
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install XLSX globally:
+ *
+ * ```sh
+ * npm install -g xlsx
+ * ```
  *
  * @name xlsx
  * @export
@@ -28,6 +40,8 @@ const xlsx = require('xlsx');
  * @return {Object} Parsed data.
  */
 module.exports = (input, options = {}) => {
+  const xlsx = require('xlsx');
+
   // Connect to worksheet
   const workSheet = xlsx.read(input, options);
 
