@@ -8,10 +8,9 @@
 
 // Dependencies
 const url = require('url');
+const merge = require('lodash/merge');
 const BasePackage = require('./BasePackage');
 const googleAuthenticate = require('../auth/google');
-const fetch = require('node-fetch');
-const { google } = require('googleapis');
 const { AllHtmlEntities } = require('html-entities');
 const htmlparser = require('htmlparser2');
 
@@ -22,12 +21,26 @@ const debug = require('debug')('airsupply:google-doc');
  * GoogleDoc package type.  Gets data from a Google Doc source via
  * [googleapis](https://www.npmjs.com/package/googleapis) module.
  * Defaults parser to ArchieML, but if no parser, it will return HTML.
+ * The `googleapis` module is not installed by default, if you need
+ * this package, install separately:
+ *
+ * ```sh
+ * npm install googleapis
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install `googleapis` globally:
+ *
+ * ```sh
+ * npm install -g googleapis
+ * ```
  *
  * @export
  * @class GoogleDoc
  * @extends BasePackage
  *
  * @example
+ * // Ensure googleapis module is installed: `npm install googleapis`
  * import GoogleDoc from 'air-supply/src/packages/GoogleDoc';
  * let f = new GoogleDoc({ source: 'GOOGLE-DOC-ID' });
  * let data = f.cachedFetch();
@@ -40,6 +53,15 @@ const debug = require('debug')('airsupply:google-doc');
  * @param {String} [options.parsers='archieml'] Defaults to use ArchieML parser.
  * @param {Object} [options.authOptions] Options to pass to the Google authentication
  *   function.
+ * @param {Object|Function} [options.googleapis=require('googleapis')] The
+ *   [googleapis](https://www.npmjs.com/package/googleapis) module is not
+ *   installed by default.  You can either install it normally,
+ *   i.e. `npm install googleapis`, or you can provide the module with
+ *   this option if you need some sort of customization.
+ * @param {Object|Function} [options.nodeFetch=require('node-fetch')] The
+ *   [node-fetch](https://www.npmjs.com/package/node-fetch) module is
+ *   installed by default, but you may want to use a specific version
+ *   or otherwise customize it.
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
  *
@@ -50,6 +72,27 @@ class GoogleDoc extends BasePackage {
     super(options, airSupply, {
       parsers: 'archieml'
     });
+
+    // Attach dependencies
+    try {
+      this.googleapis = this.options.googleapis || require('googleapis');
+    }
+    catch (e) {
+      debug(e);
+      throw new Error(
+        'The Air Supply GoogleDoc package was not provided an "options.googleapis" dependency, or could not find the "googleapis" module itself.  Trying installing the "googleapis" module: `npm install googleapis`'
+      );
+    }
+
+    try {
+      this.nodeFetch = this.options.nodeFetch || require('node-fetch');
+    }
+    catch (e) {
+      debug(e);
+      throw new Error(
+        'The Air Supply GoogleDoc package was not provided an "options.nodeFetch" dependency, or could not find the "node-fetch" module itself.'
+      );
+    }
   }
 
   /**
@@ -60,7 +103,9 @@ class GoogleDoc extends BasePackage {
    */
   async fetch() {
     let source = this.option('source');
-    let authOptions = this.option('authOptions') || {};
+    let authOptions = merge({}, this.option('authOptions') || {}, {
+      googleapis: this.googleapis
+    });
 
     // Get the HTML content
     let contents = await this.getHTMLContents(source, authOptions);
@@ -96,7 +141,7 @@ class GoogleDoc extends BasePackage {
     let auth = await googleAuthenticate(authOptions);
 
     // Get file contests as HTML
-    let drive = google.drive('v3');
+    let drive = this.googleapis.google.drive('v3');
     return await drive.files
       .export({
         fileId: source,
@@ -126,7 +171,7 @@ class GoogleDoc extends BasePackage {
     // Fetch
     let r;
     try {
-      r = await fetch(url);
+      r = await this.nodeFetch(url);
     }
     catch (e) {
       debug(e);

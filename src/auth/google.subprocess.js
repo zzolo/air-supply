@@ -7,9 +7,6 @@
  * killable, something about the oauth redirect keeps the process
  * open and thus does not allow for a method that can be ended.
  *
- * Note that this is a .js file, as the .mjs spec is still
- * experimental at the moment.
- *
  * Code and inspiration taken from:
  * https://github.com/nprapps/google-login
  *
@@ -21,6 +18,8 @@
  */
 
 // Dependencies
+// TODO: googleapis dependency should be passed from the parent process, but unsure best
+// way to do this.
 const { google } = require('googleapis');
 const url = require('url');
 const express = require('express');

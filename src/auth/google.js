@@ -21,7 +21,6 @@ const os = require('os');
 const fs = require('fs-extra');
 const find = require('lodash/find');
 const { fork } = require('child_process');
-const { google } = require('googleapis');
 
 // Debug
 const debug = require('debug')('airsupply:auth:google');
@@ -30,6 +29,20 @@ const debug = require('debug')('airsupply:auth:google');
  * Authenticate to Google's API via OAuth on the command line.  Will
  * write token to `~/.config/air-supply/google-auth.json` by default, and supply
  * token.
+ *
+ * The `googleapis` module is not installed by default, if you need
+ * this package, install separately:
+ *
+ * ```sh
+ * npm install googleapis
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install `googleapis` globally:
+ *
+ * ```sh
+ * npm install -g googleapis
+ * ```
  *
  * @export
  *
@@ -52,6 +65,11 @@ const debug = require('debug')('airsupply:auth:google');
  *   to send to the browser when successfully authenticated.
  * @param {Number} [options.openWait=1] Milliseconds to wait to open authentication
  *   browser page.
+ * @param {Object|Function} [options.googleapis=require('googleapis')] The
+ *   [googleapis](https://www.npmjs.com/package/googleapis) module is not
+ *   installed by default.  You can either install it normally,
+ *   i.e. `npm install googleapis`, or you can provide the module with
+ *   this option if you need some sort of customization.
  *
  * @return {Object} Authentication object from `googleapis` module.
  */
@@ -74,7 +92,8 @@ async function googleAuthenticate(options = {}) {
     localPort: 48080,
     timeout: 1000 * 60 * 2,
     authenticatedMessage:
-      'Authenticated, saving token locally to: "[[[LOCATION]]]".  It is ok to close this window now.'
+      'Authenticated, saving token locally to: "[[[LOCATION]]]".  It is ok to close this window now.',
+    googleapis: options.googleapis || require('googleapis')
   });
 
   // Local URL.  Note that it is important to leave off the trailing slash
@@ -98,7 +117,7 @@ async function googleAuthenticate(options = {}) {
   }
 
   // Create auth object
-  let auth = new google.auth.OAuth2(
+  let auth = new options.googleapis.google.auth.OAuth2(
     options.clientId,
     options.consumerSecret,
     localUrl
@@ -173,7 +192,7 @@ async function googleCheckAuthentication(auth, options = {}) {
   }
 
   try {
-    let drive = google.drive('v3');
+    let drive = options.googleapis.google.drive('v3');
     let result = await drive.about.get({
       fields: ['user'],
       auth

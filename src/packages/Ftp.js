@@ -14,13 +14,28 @@ const BasePackage = require('./BasePackage');
 const debug = require('debug')('airsupply:ftp');
 
 /**
- * Ftp package type.  Gets data from an "ftp://" source via [ftp](https://www.npmjs.com/package/ftp) module.
+ * Ftp package type.  Gets data from an "ftp://" source via
+ * [ftp](https://www.npmjs.com/package/ftp) module.
+ * The `ftp` module is not installed by default, if you need
+ * this package, install separately:
+ *
+ * ```sh
+ * npm install ftp
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install `ftp` globally:
+ *
+ * ```sh
+ * npm install -g ftp
+ * ```
  *
  * @export
  * @class Ftp
  * @extends BasePackage
  *
  * @example
+ * // Ensure ftp module is installed: `npm install ftp`
  * import Ftp from 'air-supply/src/packages/Ftp';
  * let f = new Ftp({ source: 'ftp://example.com/data.json' });
  * let data = f.cachedFetch();
@@ -40,7 +55,7 @@ const debug = require('debug')('airsupply:ftp');
  * @param {Object|Function} [options.Ftp=require('ftp')] The
  *   [ftp](https://www.npmjs.com/package/ftp) module is not
  *   installed by default.  You can either install it normally,
- *   i.e. `npm install ftp`, or you can provided the module with
+ *   i.e. `npm install ftp`, or you can provide the module with
  *   this option if you need some sort of customization.
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
@@ -58,7 +73,7 @@ class Ftp extends BasePackage {
     catch (e) {
       debug(e);
       throw new Error(
-        'The Air Supply Airtable package was not provided an "options.Airtable" dependency, or could not find the "airtable" module itself.  Trying installing the "airtable" module: `npm install airtable`'
+        'The Air Supply Ftp package was not provided an "options.Ftp" dependency, or could not find the "ftp" module itself.  Try installing the "ftp" module: `npm install ftp`'
       );
     }
   }

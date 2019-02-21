@@ -16,13 +16,26 @@ const debug = require('debug')('airsupply:file');
 
 /**
  * Airtable package type.  Gets data from Airtable.
+ * The `airtable` module is not installed by default, if you need
+ * this package, install separately:
+ *
+ * ```sh
+ * npm install airtable
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install `airtable` globally:
+ *
+ * ```sh
+ * npm install -g airtable
+ * ```
  *
  * @export
  * @class Airtable
  * @extends BasePackage
  *
  * @example
- * // Make sure airtable module is installed: `npm install airtable`
+ * // Ensure airtable module is installed: `npm install airtable`
  * import Airtable from 'air-supply/src/packages/Airtable';
  * let f = new Airtable({
  *   source: 'BASE-ID-XXXX',
@@ -47,7 +60,7 @@ const debug = require('debug')('airsupply:file');
  * @param {Object|Function} [options.Airtable=require('airtable')] The
  *   [airtable](https://www.npmjs.com/package/airtable) module is not
  *   installed by default.  You can either install it normally,
- *   i.e. `npm install airtable`, or you can provided the module with
+ *   i.e. `npm install airtable`, or you can provide the module with
  *   this option if you need some sort of customization.
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
@@ -67,7 +80,7 @@ class Airtable extends BasePackage {
     catch (e) {
       debug(e);
       throw new Error(
-        'The Air Supply Airtable package was not provided an "options.Airtable" dependency, or could not find the "airtable" module itself.  Trying installing the "airtable" module: `npm install airtable`'
+        'The Air Supply Airtable package was not provided an "options.Airtable" dependency, or could not find the "airtable" module itself.  Try installing the "airtable" module: `npm install airtable`'
       );
     }
   }
