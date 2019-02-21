@@ -155,7 +155,26 @@ class BasePackage {
   }
 
   /**
-   * Parse
+   * Run data through multiple parsers.
+   *
+   * @param data The data to parse.
+   * @param {Array|Object|String|Boolean} [options] The options for each
+   *   parser.  Can be a number of things:
+   *
+   *   - `undefined`: The package will try to determine which parser to
+   *      use by looking at the source.
+   *   - `false`: No parsing will happen.
+   *   - `{String}`: Example 'csv'. It will use that parser with any
+   *      default options.
+   *   - `{Function}`: It will simply run the data through that function.
+   *   - `{Object}`: Should have a "parser" key which is the is one of
+   *      the above options, and optionally a "parserOptions" that will
+   *      get passed the parser function. Or it can just be
+   *      `{ multiSource: true }` which will assume the data coming in is
+   *      an object where each key is a source.
+   *      See {@link BasePackage#parseObject}
+   *   - `{Array}`: For multiple parsers, use an array with any
+   *       of the above options.
    *
    * @return The parsed data.
    */
@@ -169,7 +188,11 @@ class BasePackage {
   }
 
   /**
-   * Parse some data
+   * Run data through single parser
+   *
+   * @param data The data to parse.
+   * @param {Array|Object|String|Boolean} [options] The options for each
+   *   parser.  Can be a number of things.  See: {@link BasePackage#parse}
    *
    * @return The parsed data.
    */
@@ -251,6 +274,20 @@ class BasePackage {
   /**
    * Goes through an object and runs `this.parse` on each one, using the
    * key as the `source` property.
+   *
+   * @param {Object} data The to parse; should be an Object.
+   * @param {Object} [options] An object where each key matches the
+   *   key from the data, and the value is passed to `this.parse`.
+   *   See: {@link BasePackage#parse}
+   *
+   * @example
+   * parseObject({
+   *   'yaml-file.yaml': 'yaml: "data"',
+   *   'json-file.json': '{ "yaml": "data" }'
+   * }, {
+   *   'yaml-file.yaml': "yaml",
+   *   'json-file.json': ["json", customParserFunction]
+   * });
    *
    * @return The parsed data.
    */
