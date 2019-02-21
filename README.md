@@ -9,19 +9,19 @@ Air Supply is a versatile library to handle getting data from multiple sources i
 
 ## Why
 
-The main reason Air Supply was made to fill the need of having to bring in various data sources when making small, self-contained projects (in journalism). Air Supply is simply a way to bring together and make a consistent interface for lots of one-off code.
+Air Supply aims to address the need of having to bring in various data sources when making small, self-contained projects (in journalism). Air Supply is simply a way to bring together and make a consistent interface for lots of one-off code around getting and parsing data.
 
 ### Pros
 
-- Can handle many sources of data, such as local files and directories, HTTP(S) sources, Google Docs and Sheets, many SQL sources, AirTable, and more.
-- Can easily parse and transform data such as CSV-ish, MS Excel, YAML, Shapefiles, ArchieML, zip files, and more.
+- Can handle many sources of data, such as local files and directories, HTTP(S) sources, Google Docs and Sheets, many SQL sources, AirTable, and more. See [Packages](#packages).
+- Can easily parse and transform data such as CSV-ish, MS Excel, YAML, Shapefiles, ArchieML, zip files, and more. See [parsers](#parsers)
 - Caches by default.
 - Aimed at simple uses by just writing a JSON config, as well as more advanced transformations.
+- Loads dependency modules as needed and allows for overriding.
 
 ### Cons
 
 - Not focused on performance (yet). The caching mitigates a lot of issues here, but the goal would be to use streams for everything where possible.
-- The kitchen sink. Currently does not utilize peer dependencies, so an install of Air Supply brings a lot of things you might not use in your project.
 
 ### Similar projects
 
@@ -36,7 +36,25 @@ These projects do roughly similar things, but not to the same degree:
 npm install air-supply --save
 ```
 
-If you just want to use the command-line tool, install globally like: `npm install -g air-supply`
+By default Air Supply only installs the most common dependencies for its [packages](#packages) and [parsers](#parsers). This means, if you need specific more parsers and packages, you will need to install them as well. For instance:
+
+```sh
+npm install googleapis archieml
+```
+
+### Command line use (global)
+
+If you just want to use the command-line tool, install globally like:
+
+```sh
+npm install -g air-supply
+```
+
+If you plan to use a number of the packages and parsers, it could be easier (though uses more disk-space), to install all the "dev dependencies" which includes all the packages and parser dependences:
+
+```sh
+NODE_ENV=dev npm install -g air-supply
+```
 
 ## Usage
 
@@ -52,6 +70,9 @@ const { AirSupply } = require("air-supply");
 let air = new AirSupply({
   packages: {
     remoteJSONData: "http://example.com/data.json",
+    // To use Google Sheet package, make sure to install
+    // the googleapis module:
+    // npm install googleapis
     googleSheetData: {
       source: "XXXXXXX",
       type: "google-sheet"
@@ -117,6 +138,8 @@ Packages are the methods that define how to get raw data from sources. The follo
 
 Packages will get passed any options from the AirSupply object that is using it, as well has some common options and usage.
 
+Note that many packages require specific modules to be installed separately.
+
 ```js
 AirSupply({
   ttl: 1000 * 60 * 10,
@@ -163,21 +186,23 @@ AirSupply({
 });
 ```
 
-| Package     | Description                                                                                                                                                                                        | Docs                                            |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| AirTable    | Get data from an [AirTable](https://airtable.com/) table.                                                                                                                                          | [API](https://zzolo.org/air-supply#airtable)    |
-| Data        | Just pass JS data through.                                                                                                                                                                         | [API](https://zzolo.org/air-supply#data)        |
-| Directory   | Read files from a directory and parse each one if can.                                                                                                                                             | [API](https://zzolo.org/air-supply#directory)   |
-| File        | Read oen file from the filesystem.                                                                                                                                                                 | [API](https://zzolo.org/air-supply#file)        |
-| Ftp         | Get a file from an FTP source.                                                                                                                                                                     | [API](https://zzolo.org/air-supply#ftp)         |
-| GoogleDoc   | Get plain text version of a Google Doc and by default parse with ArchieML. Can be a publich "Published to the web" URL, or if given an ID will use Google's authentication.                        | [API](https://zzolo.org/air-supply#googledoc)   |
-| GoogleSheet | Get tabular data from a Google Sheet and assumes first row is headers by default. Uses Google's authentication; if you want to use a public "Published to the web" CSV, just use the Http package. | [API](https://zzolo.org/air-supply#googlesheet) |
-| Http        | Get data from an HTTP source.                                                                                                                                                                      | [API](https://zzolo.org/air-supply#http)        |
-| Sql         | Get data from SQL sources as that are supported by [sequelize](https://www.npmjs.com/package/sequelize).                                                                                           | [API](https://zzolo.org/air-supply#sql)         |
+| Package     | Description                                                                                                                                                                                                          | Docs                                            | Dependencies             |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------ |
+| AirTable    | Get data from an [AirTable](https://airtable.com/) table.                                                                                                                                                            | [API](https://zzolo.org/air-supply#airtable)    | `npm install airtable`   |
+| Data        | Just pass JS data through.                                                                                                                                                                                           | [API](https://zzolo.org/air-supply#data)        |
+| Directory   | Read files from a directory and parse each one if can.                                                                                                                                                               | [API](https://zzolo.org/air-supply#directory)   |
+| File        | Read a file from the filesystem.                                                                                                                                                                                     | [API](https://zzolo.org/air-supply#file)        |
+| Ftp         | Get a file from an FTP source.                                                                                                                                                                                       | [API](https://zzolo.org/air-supply#ftp)         | `npm install ftp`        |
+| GoogleDoc   | Get plain text version of a Google Doc and by default parse with ArchieML. Can be a "Published to the web" URL, or if given an ID will use Google's authentication.                                                  | [API](https://zzolo.org/air-supply#googledoc)   | `npm install googleapis` |
+| GoogleSheet | Get tabular data from a Google Sheet and assumes first row is headers by default. Uses Google's authentication; if you want to use a public "Published to the web" CSV, just use the Http package with a CSV parser. | [API](https://zzolo.org/air-supply#googlesheet) | `npm install googleapis` |
+| Http        | Get data from an HTTP source.                                                                                                                                                                                        | [API](https://zzolo.org/air-supply#http)        |
+| Sql         | Get data from SQL sources as that are supported by [sequelize](https://www.npmjs.com/package/sequelize).                                                                                                             | [API](https://zzolo.org/air-supply#sql)         | `npm install sequelize`  |
 
 ## Parsers
 
 Parsers are simple functions to transform common data; mostly these are used to transform the raw data to more meaningful JSON data.
+
+Note that most parsers require specific modules to be installed separately.
 
 The `parsers` options can be defined a few different ways:
 
@@ -190,19 +215,19 @@ The `parsers` options can be defined a few different ways:
 
 The following parsers are available by default.
 
-| Parser    | Description                                                                                             | Source match             | Docs                                          |
-| --------- | ------------------------------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------- |
-| archieml  | Uses [archieml](http://archieml.org/).                                                                  | `/aml$/i`                | [API](https://zzolo.org/air-supply#archieml)  |
-| csv       | Uses [csv-parse](https://csv.js.org/parse/api/). Can be used for any delimited data.                    | `/csv$/i`                | [API](https://zzolo.org/air-supply#csv)       |
-| gpx       | Uses [togeojson](https://github.com/mapbox/togeojson).                                                  | `/gpx$/i`                | [API](https://zzolo.org/air-supply#gpx)       |
+| Parser    | Description                                                                                             | Source match             | Docs                                          | Dependencies                    |
+| --------- | ------------------------------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------- | ------------------------------- |
+| archieml  | Uses [archieml](http://archieml.org/).                                                                  | `/aml$/i`                | [API](https://zzolo.org/air-supply#archieml)  | `npm install archieml`          |
+| csv       | Uses [csv-parse](https://csv.js.org/parse/api/). Can be used for any delimited data.                    | `/csv$/i`                | [API](https://zzolo.org/air-supply#csv)       | `npm install csv-parse`         |
+| gpx       | Uses [togeojson](https://github.com/mapbox/togeojson).                                                  | `/gpx$/i`                | [API](https://zzolo.org/air-supply#gpx)       | `npm install @mapbox/togeojson` |
 | json      | Uses [json5](https://www.npmjs.com/package/json5).                                                      | `/json5?$/i`             | [API](https://zzolo.org/air-supply#json)      |
-| kml       | Uses [togeojson](https://github.com/mapbox/togeojson).                                                  | `/kml$/i`                | [API](https://zzolo.org/air-supply#kml)       |
-| reproject | Reprojects GeoJSON using [reproject](https://www.npmjs.com/package/reproject).                          | NA                       | [API](https://zzolo.org/air-supply#reproject) |
-| shapefile | Parsers a Shapefile (as a .zip or .shp file) using [shpjs](https://www.npmjs.com/package/shpjs).        | `/(shp.*zip|shp)$/i`     | [API](https://zzolo.org/air-supply#shapefile) |
-| topojson  | Transforms GeoJSON to TopoJSON using [topojson](https://www.npmjs.com/package/topojson).                | `/geo.?json$/i`          | [API](https://zzolo.org/air-supply#topojson)  |
-| xlsx      | Parsers MS Excel and others (.xlsx, .xls, .dbf, .ods) using [xlsx](https://github.com/sheetjs/js-xlsx). | `/(xlsx|xls|dbf|ods)$/i` | [API](https://zzolo.org/air-supply#xlsx)      |
-| yaml      | Uses [js-yaml](https://www.npmjs.com/package/js-yaml).                                                  | `/(yml|yaml)$/i`         | [API](https://zzolo.org/air-supply#yaml)      |
-| zip       | Uses [adm-zip](https://www.npmjs.com/package/adm-zip).                                                  | `/zip$/i`                | [API](https://zzolo.org/air-supply#zip)       |
+| kml       | Uses [togeojson](https://github.com/mapbox/togeojson).                                                  | `/kml$/i`                | [API](https://zzolo.org/air-supply#kml)       | `npm install @mapbox/togeojson` |
+| reproject | Reprojects GeoJSON using [reproject](https://www.npmjs.com/package/reproject).                          | NA                       | [API](https://zzolo.org/air-supply#reproject) | `npm install reproject epsg`    |
+| shapefile | Parsers a Shapefile (as a .zip or .shp file) using [shpjs](https://www.npmjs.com/package/shpjs).        | `/(shp.*zip|shp)$/i`     | [API](https://zzolo.org/air-supply#shapefile) | `npm install shpjs`             |
+| topojson  | Transforms GeoJSON to TopoJSON using [topojson](https://www.npmjs.com/package/topojson).                | `/geo.?json$/i`          | [API](https://zzolo.org/air-supply#topojson)  | `npm install topojson`          |
+| xlsx      | Parsers MS Excel and others (.xlsx, .xls, .dbf, .ods) using [xlsx](https://github.com/sheetjs/js-xlsx). | `/(xlsx|xls|dbf|ods)$/i` | [API](https://zzolo.org/air-supply#xlsx)      | `npm install xlsx`              |
+| yaml      | Uses [js-yaml](https://www.npmjs.com/package/js-yaml).                                                  | `/(yml|yaml)$/i`         | [API](https://zzolo.org/air-supply#yaml)      | `npm install js-yaml`           |
+| zip       | Uses [adm-zip](https://www.npmjs.com/package/adm-zip).                                                  | `/zip$/i`                | [API](https://zzolo.org/air-supply#zip)       | `npm install adm-zip`           |
 
 ## API
 
