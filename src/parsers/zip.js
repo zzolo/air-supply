@@ -3,15 +3,26 @@
  * Zip archive parser.
  */
 
-const AdmZip = require('adm-zip');
-
 // Debug
 const debug = require('debug')('airsupply:zip');
 
 /**
- * Zip archiver.  Uses [adm-zip](https://www.npmjs.com/package/adm-zip) module.  Produces
- * an object, where each key is the file in the archive and each value is the text of
- * that file.
+ * Zip archiver.  Uses [adm-zip](https://www.npmjs.com/package/adm-zip) module.
+ * Produces an object, where each key is the file in the archive and each
+ * value is the text of that file.
+ * ADM Zip module is not installed by default, if you need this parser,
+ * install separately:
+ *
+ * ```sh
+ * npm install adm-zip
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install ADM Zip globally:
+ *
+ * ```sh
+ * npm install -g adm-zip
+ * ```
  *
  * @name zip
  * @export
@@ -21,6 +32,7 @@ const debug = require('debug')('airsupply:zip');
  * @return {Object} Parsed data.
  */
 module.exports = input => {
+  const AdmZip = require('adm-zip');
   let entries;
   let zip;
 
