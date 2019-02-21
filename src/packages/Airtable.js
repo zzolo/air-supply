@@ -10,7 +10,6 @@ const isEmpty = require('lodash/isEmpty');
 const filter = require('lodash/filter');
 const omit = require('lodash/omit');
 const BasePackage = require('./BasePackage');
-const AirtableApi = require('airtable');
 
 // Debug
 const debug = require('debug')('airsupply:file');
@@ -23,6 +22,7 @@ const debug = require('debug')('airsupply:file');
  * @extends BasePackage
  *
  * @example
+ * // Make sure airtable module is installed: `npm install airtable`
  * import Airtable from 'air-supply/src/packages/Airtable';
  * let f = new Airtable({
  *   source: 'BASE-ID-XXXX',
@@ -44,6 +44,11 @@ const debug = require('debug')('airsupply:file');
  *   `fields`, `filterByFormula`, `maxRecords`, `pageSize`, `view`,
  *   `sort` (ex. `[{field: "ID", direction: "desc"}]`), `cellFormat`
  *   (ex. `json` or `string`)
+ * @param {Boolean} [options.Airtable=require('airtable')] The
+ *   [airtable](https://www.npmjs.com/package/airtable) module is not
+ *   installed by default.  You can either install it normally,
+ *   i.e. `npm install airtable`, or you can provided the module with
+ *   this option if you need some sort of customization.
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
  *
@@ -54,6 +59,17 @@ class Airtable extends BasePackage {
     super(options, airSupply, {
       parsers: false
     });
+
+    // Attach dependency
+    try {
+      this.Airtable = this.options.Airtable || require('airtable');
+    }
+    catch (e) {
+      debug(e);
+      throw new Error(
+        'The Air Supply Airtable package was not provided an "options.Airtable" dependency, or could not find the "airtable" module itself.  Trying installing the "airtable" module: `npm install airtable`'
+      );
+    }
   }
 
   /**
@@ -96,7 +112,7 @@ class Airtable extends BasePackage {
     }
 
     // Create Airtable connector
-    this.airtable = new AirtableApi({
+    this.airtable = new this.Airtable({
       apiKey: process.env.AIRTABLE_API_KEY
     });
 
