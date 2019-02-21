@@ -4,10 +4,22 @@
  */
 
 const isString = require('lodash/isString');
-const { safeLoad } = require('js-yaml');
 
 /**
  * YAML parser.  Uses [js-yaml](https://www.npmjs.com/package/js-yaml) module.
+ * YAML module is not installed by default, if you need this parser,
+ * install separately:
+ *
+ * ```sh
+ * npm install js-yaml
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install YAML globally:
+ *
+ * ```sh
+ * npm install -g js-yaml
+ * ```
  *
  * @name yaml
  * @export
@@ -18,6 +30,7 @@ const { safeLoad } = require('js-yaml');
  * @return {Object} Parsed data.
  */
 module.exports = (input, ...args) => {
+  const { safeLoad } = require('js-yaml');
   input = isString(input) ? input : input.toString('utf-8');
   return safeLoad(input, ...args);
 };
