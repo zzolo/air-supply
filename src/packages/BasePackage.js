@@ -42,19 +42,19 @@ const debug = require('debug')('airsupply:basepackage');
  * @export
  * @class BasePackage
  *
- * @param {Object?} options Options object to define options for this
+ * @param {Object} [options={}] Options object to define options for this
  *   specific package adn override any defaults.  See the global AirSupply
  *   options, as well as the specific package type options.
- * @param {Array!} [options.keyIdentifiers=['key', 'source']] An array of properties in the options
+ * @param {Array} [options.keyIdentifiers=['key', 'source']] An array of properties in the options
  *   that will get used to create the cache key
- * @param {String!} [options.cachePoint='fetch'] A string the defines when caching will happen;
+ * @param {String} [options.cachePoint='fetch'] A string the defines when caching will happen;
  *   the options are:
  *     - fetch: Caching happens after fetch
  *     - transform: Caching happens after the transform function is performed
  *     - bundle: Caching happens after bundle function is preformed
- * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
+ * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
- * @param {Object?} packageDefaults This is used for classes that extend this class, so
+ * @param {Object} [packageDefaults] This is used for classes that extend this class, so
  *   that they can provid default options.
  *
  * @return {<BasePackage>} The new BasePackage object.
