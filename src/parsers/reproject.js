@@ -7,11 +7,23 @@
 
 const isString = require('lodash/isString');
 const merge = require('lodash/merge');
-const { reproject } = require('reproject');
-const epsg = require('epsg');
 
 /**
- * Reproject GeoJSON.  Uses [reproject](https://www.npmjs.com/package/reproject) module.
+ * Reproject GeoJSON.  Uses
+ * [reproject](https://www.npmjs.com/package/reproject) module.
+ * The Reproject and EPSG modules are not installed by default, if
+ * you need this parser, install separately:
+ *
+ * ```sh
+ * npm install reproject epsg
+ * ```
+ *
+ * If you are using Air Supply via the command line, it may make
+ * sense to install Reproject and EPSG globally:
+ *
+ * ```sh
+ * npm install -g reproject epsg
+ * ```
  *
  * @name reproject
  * @export
@@ -29,6 +41,9 @@ const epsg = require('epsg');
  * @return {Object} Reprojected geojson.
  */
 module.exports = (input, options = {}) => {
+  const { reproject } = require('reproject');
+  const epsg = require('epsg');
+
   options = merge(
     {},
     {
