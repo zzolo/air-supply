@@ -7,7 +7,6 @@
 
 // Dependencies
 const BasePackage = require('./BasePackage');
-const Sequelize = require('sequelize');
 
 // Debug
 const debug = require('debug')('airsupply:sql');
@@ -21,17 +20,28 @@ const debug = require('debug')('airsupply:sql');
  *   - `mysql://username:password@localhost/my-database`
  *   - `postgres://username:@localhost:1234/my-database`
  *
- * Requires installing the database specific module.
- *   - `npm install --save pg pg-hstore`
- *   - `npm install --save mysql2`
- *   - `npm install --save sqlite3`
- *   - `npm install --save tedious`
+ * The `sequelize` module is not installed by default, if you need
+ * this package, install separately:
+ *
+ * ```sh
+ * npm install sequelize
+ * ```
+ *
+ * You will also need a module to connect to your database, which will
+ * depend on what kind of database it is.  You will need one of the
+ * following:
+ *   - `npm install pg pg-hstore`
+ *   - `npm install mysql2`
+ *   - `npm install sqlite3`
+ *   - `npm install tedious` (MSSQL)
  *
  * @export
  * @class Sql
  * @extends BasePackage
  *
  * @example
+ * // Ensure that the "sequelize" module is installed: npm install sequelize
+ * // and at your appropriate database module, for instance: npm install mysql2
  * import Sql from 'air-supply/src/packages/Sql';
  * let f = new Sql({
  *   source: 'mysql://user:name@host/database',
@@ -39,14 +49,18 @@ const debug = require('debug')('airsupply:sql');
  * });
  * let data = f.cachedFetch();
  *
- * @param {Object!} options Options for package that will override
+ * @param {Object} options Options for package that will override
  *   any defaults from the <AirSupply> or <BasePackage>.
- * @param {String!} options.source The URI to the the database.
+ * @param {String} options.source The URI to the the database.
+ * @param {String} options.query The SQL select query to run, such
+ *   as: "SELECT * FROM table".
  * @param {Boolean} [options.parsers=false] Turn parsing off by default.
  * @param {Object} [options.fetchOptions] `sequelize` connection options.
- * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
- *   referencial purposes.
- *
+ * @param {Object|Function} [options.Sequelize=require('sequelize')] The
+ *   [sequelize](https://www.npmjs.com/package/sequelize) module is not
+ *   installed by default.  You can either install it normally,
+ *   i.e. `npm install sequelize`, or you can provide the module with
+ *   this option if you need some sort of customization.
  * @param {Object<AirSupply>?} airSupply The AirSupply object useful for
  *   referencial purposes.
  *
@@ -58,6 +72,17 @@ class Sql extends BasePackage {
       // Don't need parser
       parsers: false
     });
+
+    // Attach dependencies
+    try {
+      this.Sequelize = this.options.Sequelize || require('sequelize');
+    }
+    catch (e) {
+      debug(e);
+      throw new Error(
+        'The Air Supply Sql package was not provided an "options.Sequelize" dependency, or could not find the "sequelize" module itself.  Trying installing the "sequelize" module: `npm install sequelize`'
+      );
+    }
   }
 
   /**
@@ -71,7 +96,7 @@ class Sql extends BasePackage {
     let options = this.option('fetchOptions') || {};
 
     // Create connection
-    let connection = new Sequelize(source, options);
+    let connection = new this.Sequelize(source, options);
 
     // Check authentication
     try {
