@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "docs": "mkdir -p docs && documentation build -f html -c documentation.yml --github -o docs index.js",
+    "docs": "mkdir -p docs && documentation build -f html -c documentation.yml --github -o docs src/**/* index.js",
     "docs:preview": "documentation serve -c documentation.yml --github -w src/**/* index.js",
     "docs:publish": "npm run docs && gh-pages -d docs",
     "prepublishOnly": "npm run test"
