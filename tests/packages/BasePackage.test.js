@@ -67,59 +67,61 @@ describe('BasePackage class', () => {
 });
 
 describe('parse method', () => {
-  test('returns blank when empty', () => {
+  test('returns blank when empty', async () => {
     let b = new BasePackage({
       cachePath: defaultCachePath
     });
 
-    expect(b.parse(null)).toBe(undefined);
+    expect(await b.parse(null)).toBe(undefined);
   });
 
-  test('handle parser function', () => {
+  test('handle parser function', async () => {
     let b = new BasePackage({
       cachePath: defaultCachePath
     });
 
-    expect(b.parse('a', { parser: a => a + 'a' })).toBe('aa');
+    expect(await b.parse('a', { parser: a => a + 'a' })).toBe('aa');
   });
 
-  test('handle match', () => {
+  test('handle match', async () => {
     let b = new BasePackage({
       cachePath: defaultCachePath,
       parserMethods
     });
 
-    expect(b.parse('{ a: 1 }', { source: 'file.json' })).toEqual({ a: 1 });
+    expect(await b.parse('{ a: 1 }', { source: 'file.json' })).toEqual({
+      a: 1
+    });
   });
 
-  test('multi parse', () => {
+  test('multi parse', async () => {
     let b = new BasePackage({
       cachePath: defaultCachePath,
       parserMethods
     });
 
     expect(
-      b.parse('{ a: 1 }', [{ parser: () => 'a' }, { parser: () => 'b' }])
+      await b.parse('{ a: 1 }', [{ parser: () => 'a' }, { parser: () => 'b' }])
     ).toEqual('b');
   });
 
-  test('specific parser', () => {
+  test('specific parser', async () => {
     let b = new BasePackage({
       cachePath: defaultCachePath,
       parserMethods
     });
 
-    expect(b.parse('{ a: 1 }', 'json')).toEqual({ a: 1 });
+    expect(await b.parse('{ a: 1 }', 'json')).toEqual({ a: 1 });
   });
 
-  test('mixed', () => {
+  test('mixed', async () => {
     let b = new BasePackage({
       cachePath: defaultCachePath,
       parserMethods
     });
 
     expect(
-      b.parse('{ a: 1 }', [
+      await b.parse('{ a: 1 }', [
         'json',
         undefined,
         {
@@ -132,14 +134,14 @@ describe('parse method', () => {
     ).toEqual({ a: 3 });
   });
 
-  test('multiSource', () => {
+  test('multiSource', async () => {
     let b = new BasePackage({
       cachePath: defaultCachePath,
       parserMethods
     });
 
     expect(
-      b.parse(
+      await b.parse(
         {
           'file.json': '{ a: 1 }',
           csv: 'a,b\n1,2'

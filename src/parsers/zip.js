@@ -54,6 +54,7 @@ module.exports = input => {
   }
 
   // Turn into information
+  // TODO: Handle different types of data (not just text)
   let data = {};
   entries.map(z => {
     data[z.entryName] = zip.readAsText(z);

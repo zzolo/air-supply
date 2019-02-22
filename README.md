@@ -241,6 +241,49 @@ let air = new AirSupply({
 await air.supply();
 ```
 
+Here is an example that gets a shapefile from an FTP source, reprojects and turns it to Topojson:
+
+```js
+const { AirSupply } = require("air-supply");
+
+let air = new AirSupply({
+  cachePath: defaultCachePath,
+  packages: {
+    mnCounties: {
+      // The FTP Package require the ftp module
+      // npm install ftp
+      source:
+        "ftp://ftp.commissions.leg.state.mn.us/pub/gis/shape/county2010.zip",
+      // We need to ensure that the Package will pass the data as a buffer
+      fetchOptions: {
+        type: "buffer"
+      },
+      parsers: [
+        // The shapefile parser require specific modules
+        // npm install shapefile adm-zip
+        "shapefile",
+        // We then reproject the geo data and need some more modules
+        // npm install reproject epsg
+        {
+          parser: "reproject",
+          parserOptions: {
+            sourceCrs: "EPSG:26915",
+            targetCrs: "EPSG:4326"
+          }
+        },
+        // Finally, we make the data more compact with topojson
+        // npm install topojson
+        {
+          parser: "topojson",
+          name: "mnCounties"
+        }
+      ]
+    }
+  }
+});
+await air.supply();
+```
+
 ## Configuration files
 
 Air Supply will look for a config files based on [cosmiconfig](https://www.npmjs.com/package/cosmiconfig) rules with a little customization. So, it will read the first of any of these files as it goes up the directory tree:
@@ -353,7 +396,7 @@ The following parsers are available by default.
 | json      | Uses [json5](https://www.npmjs.com/package/json5).                                                      | `/json5?$/i`             | [API](https://zzolo.org/air-supply#json)      |
 | kml       | Uses [togeojson](https://github.com/mapbox/togeojson).                                                  | `/kml$/i`                | [API](https://zzolo.org/air-supply#kml)       | `npm install @mapbox/togeojson` |
 | reproject | Reprojects GeoJSON using [reproject](https://www.npmjs.com/package/reproject).                          | NA                       | [API](https://zzolo.org/air-supply#reproject) | `npm install reproject epsg`    |
-| shapefile | Parsers a Shapefile (as a .zip or .shp file) using [shpjs](https://www.npmjs.com/package/shpjs).        | `/(shp.*zip|shp)$/i`     | [API](https://zzolo.org/air-supply#shapefile) | `npm install shpjs`             |
+| shapefile | Parsers a Shapefile as a zip file using [shapefile](https://www.npmjs.com/package/shapefile).           | `/(shp.*zip|shp)$/i`     | [API](https://zzolo.org/air-supply#shapefile) | `npm install shapefile`         |
 | topojson  | Transforms GeoJSON to TopoJSON using [topojson](https://www.npmjs.com/package/topojson).                | `/geo.?json$/i`          | [API](https://zzolo.org/air-supply#topojson)  | `npm install topojson`          |
 | xlsx      | Parsers MS Excel and others (.xlsx, .xls, .dbf, .ods) using [xlsx](https://github.com/sheetjs/js-xlsx). | `/(xlsx|xls|dbf|ods)$/i` | [API](https://zzolo.org/air-supply#xlsx)      | `npm install xlsx`              |
 | yaml      | Uses [js-yaml](https://www.npmjs.com/package/js-yaml).                                                  | `/(yml|yaml)$/i`         | [API](https://zzolo.org/air-supply#yaml)      | `npm install js-yaml`           |

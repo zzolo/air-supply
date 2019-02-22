@@ -37,12 +37,19 @@ const merge = require('lodash/merge');
  * @param {String} [options.targetCrs='EPSG:426'] Source CRS as EPSG definition.
  *   See [epsg module defs](https://github.com/stevage/epsg/blob/master/crs-defs.json) for
  *   reference.
+ * @param {Object} [epsgSet=require('epsg')] An object of EPSG lookups, in the format:
+ *
+ * ```js
+ * {
+ *   'EPSG:4326': 'proj4 def ...'
+ * }
+ * ```
  *
  * @return {Object} Reprojected geojson.
  */
 module.exports = (input, options = {}) => {
   const { reproject } = require('reproject');
-  const epsg = require('epsg');
+  const epsg = options.epsgSet || require('epsg');
 
   options = merge(
     {},
@@ -69,6 +76,22 @@ module.exports = (input, options = {}) => {
         'Reproject parser not given "sourceCrs" option, or unable to determine from geojson input; should be something like "EPSG:1234".'
       );
     }
+  }
+
+  // Check to see if EPSG
+  if (!epsg[options.sourceCrs]) {
+    throw new Error(
+      `In reproject parser, unable to find the "sourceCrs" option "${
+        options.sourceCrs
+      }" in the EPSG set.  Try using a different EPSG code, such as "EPSG:4326", or using a custom EPSG set with the "epsgSet" option.`
+    );
+  }
+  if (!epsg[options.targetCrs]) {
+    throw new Error(
+      `In reproject parser, unable to find the "targetCrs" option "${
+        options.targetCrs
+      }" in the EPSG set.  Try using a different EPSG code, such as "EPSG:4326", or using a custom EPSG set with the "epsgSet" option.`
+    );
   }
 
   return reproject(input, options.sourceCrs, options.targetCrs, epsg);

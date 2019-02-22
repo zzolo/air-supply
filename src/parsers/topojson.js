@@ -33,7 +33,7 @@ const merge = require('lodash/merge');
  * @param {Number} [options.quantization=100000] Quantization value.  See
  *   [topojson.quantize](https://github.com/topojson/topojson-client/blob/master/README.md#quantize).
  *   Use `false` to not do quantization.
- * @param {Number} [options.simplifyQuantile=0.85] Will simplofy the topojson based on
+ * @param {Number} [options.simplifyQuantile=0.85] Will simplify the topojson based on
  *  [topojson.quantile](https://github.com/topojson/topojson-simplify/blob/master/README.md#quantile).
  *   Should be a number between 0 and 1 that represents quantile of weighted points.  So, 1 would be
  *   no simplification (keeping 100%), while 0 is complete simplification (keeping 0% detail).

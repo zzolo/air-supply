@@ -18,7 +18,6 @@ const merge = require('lodash/merge');
 const omit = require('lodash/omit');
 const pick = require('lodash/pick');
 const find = require('lodash/find');
-const mapValues = require('lodash/mapValues');
 const kebabCase = require('lodash/kebabCase');
 const isArray = require('lodash/isArray');
 const isObject = require('lodash/isObject');
@@ -152,7 +151,7 @@ class BasePackage {
 
       // Parse data
       // Add source.  This seems off.  :/
-      if (isObject(this.options.parsers)) {
+      if (isPlainObject(this.options.parsers)) {
         this.options.parsers.source =
           this.options.parsers.source || this.options.source;
       }
@@ -166,7 +165,7 @@ class BasePackage {
       else if (!this.options.parsers) {
         this.options.parsers = { source: this.options.source };
       }
-      this.data.fetch = this.parse(this.data.fetch, this.options.parsers);
+      this.data.fetch = await this.parse(this.data.fetch, this.options.parsers);
 
       // Cache fetch data
       if (this.data.fetch && this.option('cachePoint') === 'fetch') {
@@ -201,13 +200,16 @@ class BasePackage {
    *
    * @return The parsed data.
    */
-  parse(data, options) {
+  async parse(data, options) {
     options = isArray(options) ? options : [options];
 
     // Go through each parser
-    return options.reduce((parsed, p) => {
-      return this.parseData(parsed, p);
-    }, data);
+    let parsed = data;
+    for (let oi in options) {
+      parsed = await this.parseData(parsed, options[oi]);
+    }
+
+    return parsed;
   }
 
   /**
@@ -219,7 +221,7 @@ class BasePackage {
    *
    * @return The parsed data.
    */
-  parseData(data, options = {}) {
+  async parseData(data, options = {}) {
     if (!data) {
       // TODO: Should this be a warning or error?
       return;
@@ -239,7 +241,7 @@ class BasePackage {
 
     // Treat as multiple file
     if (options.multiSource) {
-      return this.parseObject(data, options);
+      return await this.parseObject(data, options);
     }
 
     // For parser options, we will spread if an array
@@ -249,7 +251,7 @@ class BasePackage {
 
     // Function
     if (isFunction(options.parser)) {
-      return options.parser(data, ...options.parserOptions);
+      return await options.parser(data, ...options.parserOptions);
     }
 
     // Parser methods
@@ -257,7 +259,7 @@ class BasePackage {
 
     // Specific parsing
     if (isString(options.parser) && parserMethods[options.parser]) {
-      return parserMethods[options.parser].parser(
+      return await parserMethods[options.parser].parser(
         data,
         ...options.parserOptions
       );
@@ -287,7 +289,7 @@ class BasePackage {
       );
     }
     else {
-      return matched.parser(data, ...options.parserOptions);
+      return await matched.parser(data, ...options.parserOptions);
     }
 
     debug('Unable to determine how to parse.', options);
@@ -314,19 +316,23 @@ class BasePackage {
    *
    * @return The parsed data.
    */
-  parseObject(data, options = {}) {
+  async parseObject(data, options = {}) {
     // Check for object
     if (!isObject(data)) {
       throw new Error('Data passed to "parseObject" is not an object.');
     }
 
-    return mapValues(data, (d, s) => {
-      let o =
-        options && options[s]
-          ? merge(options[s], { source: s })
-          : { source: s };
-      return this.parse(d, o);
-    });
+    for (let di in data) {
+      if (data.hasOwnProperty(di)) {
+        let o =
+          options && options[di]
+            ? merge(options[di], { source: di })
+            : { source: di };
+        data[di] = await this.parse(data[di], o);
+      }
+    }
+
+    return data;
   }
 
   /**
