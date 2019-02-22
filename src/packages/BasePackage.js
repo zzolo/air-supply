@@ -52,6 +52,21 @@ const debug = require('debug')('airsupply:basepackage');
  *     - fetch: Caching happens after fetch
  *     - transform: Caching happens after the transform function is performed
  *     - bundle: Caching happens after bundle function is preformed
+ * @param {Function} [options.transform] A function to transform data after
+ *   it has been fetched and parsed.  The only argument is the data, and `this`
+ *   will refer to this package instance.  Should return the altered data.
+ * @param {Function} [options.bundle] A function to alter the data once all
+ *   packages have been transformed.  This is useful if data should be altered
+ *   based on other packages.  The only argument is all transformed
+ *   package data (not just this one) in the Air Supply bundle, and `this`
+ *   will refer to this package instance.  Should return only this package data.
+ * @param {String} [options.output] A file path to save the package data locally.
+ *   This is the data after any transform or bundle.  This is useful if you need
+ *   your data an asynchronous client call or something.
+ * @param {Function|String} [options.outputJsonStringify=JSON.stringify] The
+ *   JSON stringify function to use if the output will be treated like JSON.
+ *   Defaults to Node's implementation, otherwise a function can be passed, or
+ *   `'json5'` which will use the json5 module's stringify function.
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
  *   referencial purposes.
  * @param {Object} [packageDefaults] This is used for classes that extend this class, so
@@ -74,6 +89,7 @@ class BasePackage {
         keyIdentifiers: ['key', 'source'],
         // When to cache: ['fetch', 'transform', 'bundle']
         cachePoint: 'fetch',
+        outputJsonStringify: JSON.stringify,
         // To make sure it's defined
         type: 'base-no-fetch'
       },
@@ -385,6 +401,40 @@ class BasePackage {
   }
 
   /**
+   * Save fully bundle(d) output to disk if `options.output`
+   * is provided.
+   *
+   * @return Self
+   */
+  output() {
+    if (!this.options.output) {
+      return this;
+    }
+
+    // If function, simply call function
+    if (isFunction(this.options.output)) {
+      bind(this.options.output, this)();
+      return this;
+    }
+
+    // If string
+    if (isString(this.options.output)) {
+      this.writeFile(
+        this.options.output,
+        this.data.bundle || this.data.transform || this.data.fetch,
+        undefined,
+        this.options.outputJsonStringify === 'json5'
+          ? json.stringify
+          : isFunction(this.options.outputJsonStringify)
+            ? this.options.outputJsonStringify
+            : JSON.stringify
+      );
+    }
+
+    return this;
+  }
+
+  /**
    * Wrapper to get an option, and if a function, calling that
    * with context of this instance.
    *
@@ -503,8 +553,7 @@ class BasePackage {
     let d = this.data[cachePoint];
 
     // Determine data format
-    // TODO: Handle different types of data
-    let format = isObject(d) || isArray(d) ? 'json' : 'string';
+    let format = this.dataFileEncoding(d);
 
     // Update cache data
     this.cacheData[cachePoint] = {
@@ -513,12 +562,9 @@ class BasePackage {
       format
     };
 
-    // Format data for saving
-    let formatted = format === 'json' ? json.stringify(d) : d.toString();
-
     // Save data
     try {
-      fs.writeFileSync(this.cacheFiles[cachePoint], formatted);
+      this.writeFile(this.cacheFiles[cachePoint], d, format);
     }
     catch (e) {
       debug(e);
@@ -623,6 +669,69 @@ class BasePackage {
     }
 
     return this;
+  }
+
+  /**
+   * Determines data type for writing to the file system.
+   *
+   * @param data Data to look at
+   *
+   * @return {String|Boolean} Returns `'buffer'` if is a buffer,
+   *   `'json'` if it is an Object or Array, `'string'` for things
+   *   that have a `toString()` method, and `false` for undefined
+   *   or null and everything else.
+   */
+  dataFileEncoding(data) {
+    if (data === undefined || data === null) {
+      return false;
+    }
+    else if (Buffer.isBuffer(data)) {
+      return 'buffer';
+    }
+    else if (isArray(data) || isPlainObject(data)) {
+      return 'json';
+    }
+    else if (data && data.toString) {
+      return 'string';
+    }
+
+    return false;
+  }
+
+  /**
+   * Wrapper around writeFileSync that looks at what
+   * kind of data it is and sets appropriately.
+   *
+   * @param {String} filePath The path to the file
+   * @param data Data to save
+   * @param {String} [fileEncoding] Specific string to determine
+   *   how to encode this data.  Will use `dataFileEncoding` if
+   *   not specified.
+   *   See {@link BasePackage#dataFileEncoding}
+   * @param {Function} [jsonStringify=json5.stringify] Function
+   *   to use when encoding json data.  Defaults to json5 module.
+   *
+   * @return {String} The type of formatting that was used,
+   *   can be `string`, `json`, or `buffer`
+   */
+  writeFile(filePath, data, fileEncoding, jsonStringify = json.stringify) {
+    if (!fileEncoding) {
+      fileEncoding = this.dataFileEncoding(data);
+    }
+
+    // TODO: What to do if fileEncoding is false?
+
+    // Write file
+    fs.writeFileSync(
+      filePath,
+      fileEncoding === 'buffer'
+        ? data
+        : fileEncoding === 'json'
+          ? jsonStringify(data)
+          : data && data.toString
+            ? data.toString()
+            : data
+    );
   }
 }
 

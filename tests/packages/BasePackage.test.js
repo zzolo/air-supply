@@ -3,8 +3,7 @@
  */
 
 // Dependencies for testing.
-const { removeSync } = require('fs-extra/lib/remove');
-const { statSync, readFileSync } = require('fs-extra/lib/fs');
+const { statSync, readFileSync, existsSync, removeSync } = require('fs-extra');
 const jsonParse = require('json5/lib/parse');
 const path = require('path');
 
@@ -333,5 +332,29 @@ describe('transform method', () => {
     expect(() => {
       b.transform();
     }).toThrow();
+  });
+});
+
+describe('output method', () => {
+  const testOutputFile = path.join(__dirname, 'output.test-file');
+
+  afterEach(() => {
+    removeSync(testOutputFile);
+  });
+
+  test('should save output locally', () => {
+    let options = {
+      cachePath: defaultCachePath,
+      id: 'test-local-output',
+      output: testOutputFile
+    };
+
+    let b = new BasePackage(options);
+    b.data.fetch = { thing: 1 };
+    b.output();
+    expect(existsSync(testOutputFile)).toBeTruthy();
+    expect(JSON.parse(readFileSync(testOutputFile, 'utf-8'))).toEqual({
+      thing: 1
+    });
   });
 });
