@@ -46,14 +46,39 @@ const debug = require('debug')('airsupply');
  * @param {String} [options.config] A specific configuration file
  * @param {Boolean} [options.noConfig = false] If true, will ensure that
  *   AirSupply will not look for or load a config file.
- * @param {Object} [options.parserMethods] The object describing available
- *   parsers.  This is the default built-in parsers by default.  To override
- *   use format:
- *     `{ parser: { match: /parser$/, parser: (data, options) => { ... }}}`
+ * @param {Object} [options.parserMethods] The object describing parsers.
+ *   This will merge with the default parser configuration.  This should be in
+ *   the format like:
+ *
+ *   ```js
+ *   {
+ *     parserName: {
+ *       match: /parser$/,
+ *       parser: (data, options) => { ... }
+ *     }
+ *   }
+ *   ```
+ *
+ *   You can also override, specific things, such as changing
+ *   the matching for a parser:
+ *
+ *   ```js
+ *   {
+ *     json: {
+ *       match: /(json|json5|custom-json-ext)$/i
+ *     }
+ *   }
+ *   ```
  * @param {Object} [options.sharedProtocols] The object that will map
  *   protocols to other protocols; protocols translate to package
  *   classes (i.e. http -> Http package class).  Should be similar to:
- *     `{ https: 'http'}`
+ *
+ *   ```js
+ *   {
+ *     https: 'http',
+ *     mysql: 'sql'
+ *   }
+ *   ```
  *
  * @return {<AirSupply>} The new AirSupply object.
  */

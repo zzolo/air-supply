@@ -9,7 +9,7 @@ Air Supply is a versatile library to handle getting data from multiple sources i
 
 ## Why
 
-Air Supply aims to address the need of having to bring in various data sources when making small, self-contained projects (in journalism). Air Supply is simply a way to bring together and make a consistent interface for lots of one-off code around getting and parsing data.
+Air Supply aims to address the need of having to bring in various data sources when making small or mid-size, self-contained projects. Air Supply was originally conceived while working at the Star Tribune where we often create small projects and different, non-dynamic data sources are needed for most of them. Air Supply is essentailly putting together and making a consistent interface for lots of one-off code around getting and parsing data that was written and used for many years.
 
 ### Pros
 
@@ -22,6 +22,7 @@ Air Supply aims to address the need of having to bring in various data sources w
 ### Cons
 
 - Not focused on performance (yet). The caching mitigates a lot of issues here, but the goal would be to use streams for everything where possible.
+- Not meant for very complex data pipelines. For instance, if you have to scrape a thousand pages, Air Supply doesn't currently fit well, but could still be used to pull the processed data into your application.
 
 ### Similar projects
 
@@ -58,24 +59,26 @@ NODE_ENV=dev npm install -g air-supply
 
 ## Usage
 
+Air Supply can be used as a regular Node library, or it can utilize config files that can be run via a command-line tool or as well as through Node.
+
 ### Basics
 
-Basic usage in Node by defining the packages when using Air Supply.
+Basic usage in Node by defining the Packages when using Air Supply.
 
 ```js
-const { AirSupply } = require("air-supply");
+const { AirSupply } = require('air-supply');
 
 // Create new AirSupply object and tell it about
 // the packages it needs
 let air = new AirSupply({
   packages: {
-    remoteJSONData: "http://example.com/data.json",
+    remoteJSONData: 'http://example.com/data.json',
     // To use Google Sheet package, make sure to install
     // the googleapis module:
     // npm install googleapis
     googleSheetData: {
-      source: "XXXXXXX",
-      type: "google-sheet"
+      source: 'XXXXXXX',
+      type: 'google-sheet'
     }
   }
 });
@@ -95,7 +98,13 @@ let data = await air.supply();
 
 ### Command line
 
-Command line usage with a `air-supply.rc` file:
+The command line tool will look for configuration in multiple places. See [Configuration files](#configuration-files) below. You can simply call it with:
+
+```sh
+air-supply
+```
+
+A configuration file, such as a `.air-supply.json`, will be loaded and run through Air Supply, outputting the fetched and transformed data to the command line (stdout).:
 
 ```json
 {
@@ -105,15 +114,132 @@ Command line usage with a `air-supply.rc` file:
 }
 ```
 
-Then point the CLI tool to the config.
+You can also point the comand-line tool to a specific file if you want:
 
-```bash
+```sh
 air-supply -c air-supply.rc > data.json
 ```
 
 ## Examples
 
-_TODO_
+Any AirSupply options are passed down to each Package, so we can define a custom `ttl` (cache time) to AirSupply and then override for each package.
+
+```js
+const { AirSupply } = require("air-supply");
+// Since we are using the YAML parser, make sure module is installed
+// npm install js-yaml
+
+let air = new AirSupply({
+  ttl: 1000 * 60 * 60,
+  packages: {
+    // This data will probably not change during our project
+    unchanging: {
+      ttl: 1000 * 60 * 60 * 24 * 30,
+      source: "http://example.com/data.json"
+    },
+    defaultChanging: "https://example/data.yml"
+  }
+});
+await air.supply();
+```
+
+Each Package can be given a transform function to transform data. We can also alter when the caching happens. this can be helpful in this instance so that we don't do an expensive task like parsing HTML.
+
+```js
+// Cheerio: https://cheerio.js.org/
+const cheerio = require("cheerio");
+const { AirSupply } = require("air-supply");
+
+let air = new AirSupply({
+  packages: {
+    htmlData: {
+      // Turn off any parsing, since we will be using cheerio
+      parser: false,
+      source: "http://example.com/html-table.html",
+      // Transform function
+      transform(htmlData) {
+        $ = cheerio.load(htmlData);
+        let data = [];
+        $("table.example tbody tr").each(function(i, $tr) {
+          data.push({
+            column1: $tr.find("td.col1").text(),
+            columnNumber: parseInteger($tr.find("td.col2").text(), 10)
+          });
+        });
+
+        return data;
+      },
+      // Alter the cachePoint so that AirSupply will cache this
+      // after the transform
+      cachePoint: "transform"
+    }
+  }
+});
+await air.supply();
+```
+
+You can easily read a directory of files. If you just give it a path to a directory, it will assume you mean a [glob](https://github.com/isaacs/node-glob) of `**/*` in that directory.
+
+```js
+const { AirSupply } = require("air-supply");
+
+let air = new AirSupply({
+  packages: {
+    directoryData: "path/to/directory/"
+  }
+});
+await air.supply();
+```
+
+This might cause problems or otherwise be an issue as it will read every file recursively in that directory. So, it may be helpful to be more specific and define a glob to use. This requires being explicit about the type of Package. We can also use specific `parserOptions` to define how to parse files.
+
+```js
+// In this example we are using the csv and yaml parsers, so make sure to:
+// npm install js-yaml csv-parse
+const { AirSupply } = require("air-supply");
+
+let air = new AirSupply({
+  packages: {
+    directoryData: {
+      source: "path/to/directory/**/*.{json|yml|csv|custom-ext}",
+      type: "directory"
+      // The Directory Package type will define the `parser` option as
+      // { multiSource: true } which will tell the parser to treat it
+      // as an object where each key is a source.  This means, we can
+      // define specific options for specific files.
+      parserOptions: {
+        "file.custom-ext": {
+          parser: "yaml"
+        }
+      }
+    }
+  }
+});
+await air.supply();
+```
+
+You can also achieve something similar by just overriding the parser configuration to handle other extensions. Here we will update the YAML matching for another extension.
+
+```js
+// In this example we are using the csv and yaml parsers, so make sure to:
+// npm install js-yaml csv-parse
+const { AirSupply } = require("air-supply");
+
+let air = new AirSupply({
+  parserMethods: {
+    yaml: {
+      match: /(yaml|yml|custom-ext)$/i
+    }
+  },
+  packages: {
+    directoryData: {
+      source: "path/to/directory/**/*.{json|yml|csv|custom-ext}",
+      type: "directory"
+    }
+  }
+});
+await air.supply();
+```
 
 ## Configuration files
 
@@ -180,7 +306,11 @@ AirSupply({
       // or after the 'bundle'.
       //
       // Overall, this is only needed if you have expensive transformations
-      cachePoint: "transform"
+      cachePoint: "transform",
+      // Use the output option to save the fully loaded data
+      // to the filesystem.  This is useful if you need to save files
+      // that will get loaded into the client (asynchronously).
+      output: "things.json"
     }
   }
 });
