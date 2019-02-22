@@ -1,0 +1,4 @@
+thing: 1
+nested:
+  - thing1: 2
+  - thing2: 3
