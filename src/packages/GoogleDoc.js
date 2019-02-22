@@ -70,6 +70,7 @@ const debug = require('debug')('airsupply:google-doc');
 class GoogleDoc extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
+      type: 'google-doc',
       parsers: 'archieml'
     });
 

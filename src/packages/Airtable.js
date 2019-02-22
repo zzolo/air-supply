@@ -70,6 +70,7 @@ const debug = require('debug')('airsupply:file');
 class Airtable extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
+      type: 'airtable',
       parsers: false
     });
 

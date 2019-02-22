@@ -77,6 +77,7 @@ const debug = require('debug')('airsupply:google-sheet');
 class GoogleSheet extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
+      type: 'google-sheet',
       parsers: false,
       fetchOptions: {
         headers: true,

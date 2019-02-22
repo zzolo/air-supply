@@ -33,6 +33,7 @@ const BasePackage = require('./BasePackage');
 class Data extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
+      type: 'data',
       // Default, assume no parsing is needed
       parsers: false
     });

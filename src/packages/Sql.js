@@ -69,6 +69,7 @@ const debug = require('debug')('airsupply:sql');
 class Sql extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
+      type: 'sql',
       // Don't need parser
       parsers: false
     });

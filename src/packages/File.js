@@ -41,6 +41,7 @@ const debug = require('debug')('airsupply:file');
 class File extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
+      type: 'file',
       // Default to no caching.
       noCache: true,
       // Default, assume string data

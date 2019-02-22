@@ -34,19 +34,21 @@ const json = require('json5');
 const debug = require('debug')('airsupply:basepackage');
 
 /**
- * The base package class that is meant to be extended
- * for each package type class.
+ * The base Package class that is meant to be extended
+ * for each Package type class.
  *
  * Do not use this class directly.
  *
  * @export
  * @class BasePackage
  *
- * @param {Object} [options={}] Options object to define options for this
- *   specific package adn override any defaults.  See the global AirSupply
- *   options, as well as the specific package type options.
+ * @param {Object} [options={}] Options for this package.  These options are true for every
+ *   Package type, though a Package defaults may override these defaults.
+ *
+ *   More options defaults come in from the AirSupply object, for example `options.ttl`.
+ *   See {@link AirSupply}.
  * @param {Array} [options.keyIdentifiers=['key', 'source']] An array of properties in the options
- *   that will get used to create the cache key
+ *   that will get used to create the cache key.
  * @param {String} [options.cachePoint='fetch'] A string the defines when caching will happen;
  *   the options are:
  *     - fetch: Caching happens after fetch
@@ -67,8 +69,12 @@ const debug = require('debug')('airsupply:basepackage');
  *   JSON stringify function to use if the output will be treated like JSON.
  *   Defaults to Node's implementation, otherwise a function can be passed, or
  *   `'json5'` which will use the json5 module's stringify function.
+ * @param {String} [type] This describes the type of package and used in
+ *   creating the cache path.  This is also automatically set by each
+ *   Package type and should not need to be set manually.  For instance
+ *   the GoogleSheet Package uses `'google-sheet'`.
  * @param {Object<AirSupply>} [airSupply] The AirSupply object useful for
- *   referencial purposes.
+ *   referencial purposes and defining defaults.
  * @param {Object} [packageDefaults] This is used for classes that extend this class, so
  *   that they can provid default options.
  *
@@ -78,8 +84,9 @@ class BasePackage {
   // Constructor
   constructor(options = {}, airSupply, packageDefaults) {
     // 1. AirSupply class default options,
-    // 2. Default options for package, and
-    // 3. The actual options sent through
+    // 2. Default options from BasePackage, and
+    // 3. Default options for package, and
+    // 4. The actual options sent through
     this.options = merge(
       {},
       airSupply ? omit(airSupply.options, ['packages']) : {},

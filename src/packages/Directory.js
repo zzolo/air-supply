@@ -48,6 +48,7 @@ const glob = require('glob');
 class Directory extends BasePackage {
   constructor(options, airSupply) {
     super(options, airSupply, {
+      type: 'directory',
       // Default to no caching.
       noCache: true,
       // Will be an multi-source object

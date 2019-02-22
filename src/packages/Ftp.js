@@ -64,7 +64,9 @@ const debug = require('debug')('airsupply:ftp');
  */
 class Ftp extends BasePackage {
   constructor(options, airSupply) {
-    super(options, airSupply, {});
+    super(options, airSupply, {
+      type: 'ftp'
+    });
 
     // Attach dependency
     try {

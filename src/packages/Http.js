@@ -41,7 +41,9 @@ const debug = require('debug')('airsupply:http');
  */
 class Http extends BasePackage {
   constructor(options, airSupply) {
-    super(options, airSupply, {});
+    super(options, airSupply, {
+      type: 'http'
+    });
 
     // Attach dependencies
     try {
