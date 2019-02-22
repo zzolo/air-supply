@@ -34,28 +34,77 @@ const debug = require('debug')('airsupply:shapefile');
  * @name shapefile
  * @export
  *
- * @param {String|Buffer} input Buffer or filename to parse.
+ * @param {Buffer} data Buffer to parse; should be either a .zip file or a .shp file.
+ * @param {Object} [options] Options object.
+ * @param {Buffer|String} [options.dbf] An optional specific .dbf file to use.  Useful
+ *   if providing shapefile as .shp file.  This should be a buffer or file path.
  *
  * @return {Object} Parsed data.
  */
-module.exports = async data => {
+module.exports = async (data, options = {}) => {
   const AdmZip = require('adm-zip');
-  const shapefile = require('shapefile');
 
-  // setup places to put entries and zips
-  let entries;
-  let zip;
+  // Check that we are
+  if (!Buffer.isBuffer(data)) {
+    throw new Error(
+      'Data given to shapefile parser was not a buffer.  Some Packages in Air Supply require you to set the type of data to "buffer" explicitly.'
+    );
+  }
 
+  // Try to do zip first
   try {
-    zip = new AdmZip(data);
-    entries = zip.getEntries();
+    let zip = new AdmZip(data);
+    let entries = zip.getEntries();
+    return await parseZipShapefile(zip, entries);
   }
   catch (e) {
     debug(e);
-    throw new Error(
-      'In Shapefile parser, unable to read zip data.  Use DEBUG for more information.'
-    );
+
+    // Try to do file
+    try {
+      return await parseShpFile(data, options);
+    }
+    catch (e) {
+      debug(e);
+      throw new Error(
+        'Air Supply Shapefile parser was unable to parse the input.'
+      );
+    }
   }
+};
+
+// Parse a shapefile
+async function parseShpFile(data, options) {
+  const shapefile = require('shapefile');
+
+  // Get reader
+  let shpReader = await shapefile.open(data, options.dbf);
+
+  // Start geojson
+  let g = {
+    type: 'FeatureCollection',
+    bbox: shpReader.bbox,
+    features: []
+  };
+
+  // Go through each property
+  let hasFeatures = true;
+  while (hasFeatures) {
+    let feature = await shpReader.read();
+    if (feature.done) {
+      hasFeatures = false;
+      continue;
+    }
+
+    g.features.push(feature.value);
+  }
+
+  return g;
+}
+
+// Parse a zip file
+async function parseZipShapefile(zip, entries) {
+  const shapefile = require('shapefile');
 
   // Check data
   if (!entries || !entries.length) {
@@ -107,4 +156,4 @@ module.exports = async data => {
 
   // If only one .shp, just return that.
   return size(parsed) === 1 ? map(parsed, p => p)[0] : parsed;
-};
+}
