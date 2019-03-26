@@ -169,6 +169,11 @@ class AirSupply {
       }
     }
 
+    // Output if necessary
+    for (let si in packages) {
+      this.packages[si].output();
+    }
+
     // Return supply package
     return this.supplyPackages;
   }
