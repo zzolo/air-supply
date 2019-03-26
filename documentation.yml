@@ -30,6 +30,7 @@ toc:
   - shapefile
   - topojson
   - xlsx
+  - xml
   - yaml
   - zip
   - name: Other

@@ -43,7 +43,8 @@
     "shapefile": "^0.6.6",
     "sqlite3": "^4.0.6",
     "topojson": "^3.0.2",
-    "xlsx": "^0.14.1"
+    "xlsx": "^0.14.1",
+    "xml2js": "^0.4.19"
   },
   "dependencies": {
     "cosmiconfig": "^5.0.7",

@@ -12,6 +12,7 @@
 const jsonParser = require('./json');
 const csvParser = require('./csv');
 const yamlParser = require('./yaml');
+const xmlParser = require('./xml');
 const archiemlParser = require('./archieml');
 const zipParser = require('./zip');
 const xlsxParser = require('./xlsx');
@@ -71,6 +72,10 @@ module.exports = {
   yaml: {
     match: /(yml|yaml)$/i,
     parser: yamlParser
+  },
+  xml: {
+    match: /xml$/i,
+    parser: xmlParser
   },
   archieml: {
     match: /aml$/i,
