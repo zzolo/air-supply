@@ -162,6 +162,9 @@ class BasePackage {
         this.options.parsers[0].source =
           this.options.parsers[0].source || this.options.source;
       }
+      else if (this.options.parsers === false) {
+        this.options.parsers = { parser: false, source: this.options.source };
+      }
       else if (!this.options.parsers) {
         this.options.parsers = { source: this.options.source };
       }
